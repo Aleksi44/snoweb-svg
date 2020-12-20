@@ -1,0 +1,8 @@
+{% extends 'snowebsvg/collections/separator_bottom/polygon/4.html' %}
+{% load svg_utils %}
+
+{% block svg_content %}
+    <g transform="{% scale 1 -1 x=960 y=84.59 %}">
+        {{ block.super }}
+    </g>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'snowebsvg/common/builders/basic.html' %}
+
+{% load svg_utils %}
+
+{% block svg_content %}
+    {% include 'snowebsvg/common/builders/_circle.html' %}
+    <g transform="{% scale 0.6 %}">
+        {{ block.super }}
+    </g>
+{% endblock %}

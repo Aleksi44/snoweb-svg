@@ -1,0 +1,14 @@
+{% extends 'snowebsvg/common/svg.html' %}
+{% load svg_utils %}
+
+{% block svg_class %}{{ block.super }} svg-builder-basic{% endblock %}
+
+{% block svg_content %}
+    {% unique_id as id %}
+    <g id="svg-basic-{{ id }}-on-start">
+        {% block builder_base %}{% endblock %}
+    </g>
+    <g id="svg-basic-{{ id }}-on-hover">
+        {% block builder_hover %}{% endblock %}
+    </g>
+{% endblock %}

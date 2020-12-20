@@ -1,0 +1,20 @@
+{% block css %}<!--Themes (not required) : manage dark and light mode with class-->
+<link rel="stylesheet" href="{{ settings.BASE_URL_CSS }}themes-{{ settings.VERSION }}.css">
+
+<!--Themes auto (not required) : manage dark and light mode with prefers-color-scheme-->
+<link rel="stylesheet" href="{{ settings.BASE_URL_CSS }}themesauto-{{ settings.VERSION }}.css">
+
+<!--Core (required)-->
+<link rel="stylesheet" href="{{ settings.BASE_URL_CSS }}core-{{ settings.VERSION }}.css">
+{% endblock %}
+<style>
+    :root {
+        --svg-theme-light-primary: #14253A;
+        --svg-theme-light-secondary: #E63946;
+        --svg-theme-light-tertiary: #f7f7f7;
+
+        --svg-theme-dark-primary: #F7F7F7;
+        --svg-theme-dark-secondary: #E63946;
+        --svg-theme-dark-tertiary: #112032;
+    }
+</style>

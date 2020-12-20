@@ -1,0 +1,17 @@
+{% extends 'snowebsvg/common/svg.html' %}
+{% load svg_utils %}
+
+{% block svg_viewbox %}0 0 480 480{% endblock %}
+{% block svg_aspect_ratio %}xMidYMid slice{% endblock %}
+
+{% block svg_content %}
+    {% unique_id as id %}
+    <defs>
+        <pattern id="unit-{{ id }}" x="0" y="0" width="24" height="24"
+                 patternUnits="userSpaceOnUse">
+            <polygon class="svg-fill-primary" fill-rule="evenodd"
+                     points="8 4 12 6 8 8 6 12 4 8 0 6 4 4 6 0 8 4"/>
+        </pattern>
+    </defs>
+    <rect width="480" height="480" fill="url(#unit-{{ id }})"></rect>
+{% endblock %}
