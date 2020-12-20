@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Collection</h2>
+<ul>
+    {% for collection in object_list %}
+        <li><a href="{% url 'app:group' collection.key %}">{{ collection.key }}</a></li>
+    {% endfor %}
+</ul>
+</body>
+</html>

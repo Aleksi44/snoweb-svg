@@ -1,0 +1,11 @@
+[flake8]
+exclude =
+    .git,
+    __pycache__,
+    node_modules,
+    settings.py,
+    manage.py,
+    build,
+    dist,
+    mediafiles,
+    *migrations*

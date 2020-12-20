@@ -1,0 +1,5 @@
+include *.rst
+include AUTHORS
+include LICENSE
+recursive-include snowebsvg/templates *.svg
+recursive-include snowebsvg/static *
