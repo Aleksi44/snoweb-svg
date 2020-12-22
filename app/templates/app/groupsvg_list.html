@@ -1,15 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h2>Group</h2>
-<ul>
-    {% for group in object_list %}
-        <li><a href="{% url 'app:svg' group.key %}">{{ group.key }}</a></li>
-    {% endfor %}
-</ul>
-</body>
-</html>
+{% extends 'app/base.html' %}
+{% load svg %}
+
+{% block body %}
+    <h2>Group</h2>
+    <ul>
+        {% for group in object_list %}
+            <li><a href="{% url 'app:svg' group.collection.key group.key %}">{% svg_inline group.path %}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

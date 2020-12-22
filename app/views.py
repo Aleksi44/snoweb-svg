@@ -24,6 +24,12 @@ class SvgList(ListView):
 
     def get_queryset(self):
         group_key = self.kwargs.get('group_key')
-        if group_key:
+        collection_key = self.kwargs.get('collection_key')
+        if group_key and not collection_key:
             return self.model.objects.filter(group__key=group_key)
+        if group_key and collection_key:
+            return self.model.objects.filter(
+                group__key=group_key,
+                group__collection__key=collection_key
+            )
         return self.model.objects.all()

@@ -21,6 +21,16 @@ class GroupSvg(models.Model):
     def __str__(self):
         return self.key.title()
 
+    @property
+    def path(self):
+        return "%s:%s" % (
+            self.collection.key,
+            self.key
+        )
+
+    def render(self):
+        pass
+
 
 class Svg(models.Model):
     key = models.CharField(max_length=255, verbose_name=_("title"))

@@ -4,7 +4,7 @@ from django.core.management.base import BaseCommand
 from django.core.files.images import ImageFile
 
 from snowebsvg.models import Svg, GroupSvg, Collection
-
+from snowebsvg import settings
 
 class Command(BaseCommand):
 
@@ -46,12 +46,14 @@ class Command(BaseCommand):
                             )
                             Path(svg_path_build).mkdir(parents=True, exist_ok=True)
 
-                            svg_template = get_template('snowebsvg/svg/collections/%s/%s/%s' % (
-                                collection_name,
-                                icon_key,
-                                svg_filename
-                            ))
-                            svg_content = svg_template.render()
+                            svg_template = get_template('snowebsvg/svg/html.html')
+                            svg_content = svg_template.render({
+                                'svg_path': 'snowebsvg/svg/collections/%s/%s/%s' % (
+                                    collection_name,
+                                    icon_key,
+                                    svg_filename
+                                ),
+                            })
 
                             svg_file_build = open(svg_path_build_file, "a")
                             svg_file_build.truncate(0)
