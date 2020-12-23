@@ -10,11 +10,6 @@
     "build": "webpack --mode production",
     "lint": "eslint ."
   },
-  "husky": {
-    "hooks": {
-      "pre-push": "yarn lint && flake8"
-    }
-  },
   "devDependencies": {
     "@babel/core": "7.4.3",
     "@babel/plugin-proposal-class-properties": "7.4.0",

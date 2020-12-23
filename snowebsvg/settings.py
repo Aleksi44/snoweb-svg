@@ -2,6 +2,7 @@ import os
 import json
 import pkg_resources
 
+
 BASE_DIR = os.environ['BASE_DIR']
 
 try:

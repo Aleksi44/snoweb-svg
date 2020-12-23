@@ -1,0 +1,54 @@
+svg {
+  width: 100px;
+  height: 100px;
+  border: 1px solid red;
+}
+
+.fill-primary {
+  fill: red;
+}
+
+.fill-secondary {
+  fill: green;
+}
+
+.fill-tertiary {
+  fill: blue;
+}
+
+
+$transition: opacity 300ms linear;
+
+.svg-trigger {
+
+  .svg-with-layer {
+    g[id^="event-"] {
+      opacity: 0;
+    }
+
+    g[id*="-base"] {
+      opacity: 1;
+    }
+
+    g {
+      transition: $transition; /* vendorless fallback */
+      -o-transition: $transition; /* opera */
+      -ms-transition: $transition; /* IE 10 */
+      -moz-transition: $transition; /* Firefox */
+      -webkit-transition: $transition; /*safari and chrome */
+    }
+  }
+
+  &:hover {
+    .svg-with-layer {
+
+      g[id^="event-"] {
+        opacity: 0;
+      }
+
+      g[id*="-hover"] {
+        opacity: 1;
+      }
+    }
+  }
+}
