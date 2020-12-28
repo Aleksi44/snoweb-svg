@@ -1,3 +1,5 @@
+// Fallback theme dark
+
 :root {
   --svg-theme-light-primary: #14253A;
   --svg-theme-light-secondary: #E63946;
@@ -19,7 +21,7 @@ $themes: (
 
 @mixin theme($themes: $themes) {
   @each $theme, $map in $themes {
-    .theme-#{$theme} & {
+    .svg-theme-#{$theme} & {
       $theme-map: () !global;
       @each $key, $submap in $map {
         $value: map-get(map-get($themes, $theme), '#{$key}');
@@ -37,13 +39,13 @@ $themes: (
 }
 
 
-.fill-primary {
+.svg-fill-primary {
   @include theme($themes) {
     fill: t('primary');
   }
 }
 
-.fill-secondary {
+.svg-fill-secondary {
   @include theme($themes) {
     fill: t('secondary');
   }

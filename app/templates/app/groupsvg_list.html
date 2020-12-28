@@ -5,18 +5,19 @@
 {% block description %}{% endblock %}
 
 {% block body %}
-    <h1>SVG</h1>
-    {% for group in object_list %}
-        <h2>{{ group }}</h2>
-        <ul>
-            {% for svg in group.svg_set.all %}
-                <li>
-                    <h3>{{ svg }}</h3>
-                    <a href="#" class="svg-trigger">
-                        {% svg_inline svg.path %}
+    {% with theme=request.session.theme %}
+        <h1>Icons</h1>
+        {% for group in object_list %}
+            <h2>{{ group }}</h2>
+            <div style="display: flex; flex-wrap: wrap">
+                {% for svg in group.svg_set.all %}
+                    <a style="text-decoration: none; text-align: center; width: 150px; padding: 10px"
+                       href="{% url 'app:svg' group.collection.key group.key svg.key %}" class="svg-trigger">
+                        {% svg_inline svg theme %}
+                        <p><code>{{ svg.path }}</code></p>
                     </a>
-                </li>
-            {% endfor %}
-        </ul>
-    {% endfor %}
+                {% endfor %}
+            </div>
+        {% endfor %}
+    {% endwith %}
 {% endblock %}

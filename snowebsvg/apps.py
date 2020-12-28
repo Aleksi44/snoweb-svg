@@ -19,9 +19,3 @@ class SnowebSvgConfig(AppConfig):
                     'collections'
                 )
                 setattr(settings, 'BASE_DIR_COLLECTION', collection)
-
-                build = "%s/%s" % (
-                    base_dir_svg,
-                    'build',
-                )
-                setattr(settings, 'BASE_DIR_SVG_BUILD', build)

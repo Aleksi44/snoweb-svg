@@ -1,0 +1,12 @@
+{% extends 'snowebsvg/common/svg.html' %}
+
+{% block svg_class %}{{ block.super }} svg-builder-group-hover{% endblock %}
+
+{% block svg_content %}
+    <g id="svg-group-hover-{{ self.path }}-on-start">
+        {% block builder_base %}{% endblock %}
+    </g>
+    <g id="svg-group-hover-{{ self.path }}-on-hover">
+        {% block builder_hover %}{% endblock %}
+    </g>
+{% endblock %}

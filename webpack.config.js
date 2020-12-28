@@ -15,7 +15,6 @@ module.exports = ({ mode = 'development' } = {}) => {
       port: 3009,
       files: [
         'snowebsvg/static/snowebsvg/src/scss/**/*.scss',
-        'snowebsvg/static/dist/js/**/*.js',
       ],
       reloadDelay: 0,
       notify: false,

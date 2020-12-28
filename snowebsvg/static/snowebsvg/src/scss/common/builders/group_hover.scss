@@ -1,12 +1,12 @@
 $transition: opacity 300ms linear;
 
 .svg-trigger {
-  .builder-1 {
-    g[id^='event-'] {
+  .svg-builder-group-hover {
+    g[id^='svg-group-hover-'] {
       opacity: 0;
     }
 
-    g[id*='-base'] {
+    g[id*='-on-start'] {
       opacity: 1;
     }
 
@@ -20,12 +20,12 @@ $transition: opacity 300ms linear;
   }
 
   &:hover {
-    .builder-1 {
-      g[id^='event-'] {
+    .svg-builder-group-hover {
+      g[id^='svg-group-hover-'] {
         opacity: 0;
       }
 
-      g[id*='-hover'] {
+      g[id*='-on-hover'] {
         opacity: 1;
       }
     }

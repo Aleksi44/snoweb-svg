@@ -1,2 +1,4 @@
 django>=3.1.4
+Sphinx>=3.4.1
+furo==2020.12.28b23
 flake8>=3.8.4

@@ -1,0 +1,17 @@
+{% extends 'app/base.html' %}
+{% load svg %}
+
+{% block body %}
+    {% with theme=request.session.theme %}
+        <h1>Svg</h1>
+        {% for svg in object_list %}
+            <h3>Key : <code>{{ svg.path }}</code></h3>
+            <h3>Preview :</h3>
+            <a href="#" class="svg-trigger">
+                {% svg_inline svg theme %}
+            </a>
+            <h3>Code : </h3>
+            <textarea style="height: 300px">{% svg_inline svg theme %}</textarea>
+        {% endfor %}
+    {% endwith %}
+{% endblock %}
