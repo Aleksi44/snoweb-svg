@@ -40,6 +40,15 @@ MIDDLEWARE = [
     'django.middleware.gzip.GZipMiddleware',
 ]
 
+
+def constants_processor(request):
+    from snowebsvg import settings
+    return {
+        'settings': settings,
+        'debug': DEBUG
+    }
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -50,6 +59,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'app.settings.constants_processor'
             ],
             'loaders': [
                 'django.template.loaders.filesystem.Loader',

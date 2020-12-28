@@ -11,20 +11,17 @@ class SnowebSvgConfig(AppConfig):
         for template_directory in Loader('django').get_dirs():
             template_directory = str(template_directory)
             if '/snowebsvg/' in template_directory:
-                svg = "%s/snowebsvg/%s" % (
-                    template_directory,
-                    'svg'
-                )
-                setattr(settings, 'BASE_DIR_SVG', svg)
+                base_dir_svg = "%s/snowebsvg" % template_directory
+                setattr(settings, 'BASE_DIR_SVG', base_dir_svg)
 
                 collection = "%s/%s" % (
-                    svg,
+                    base_dir_svg,
                     'collections'
                 )
                 setattr(settings, 'BASE_DIR_COLLECTION', collection)
 
                 build = "%s/%s" % (
-                    svg,
+                    base_dir_svg,
                     'build',
                 )
                 setattr(settings, 'BASE_DIR_SVG_BUILD', build)

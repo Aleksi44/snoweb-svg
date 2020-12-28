@@ -3,9 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="/static/snowebsvg/dist/css/styles0.0.1.css">
+    <meta name="description" content="{% block description %}{% endblock %}">
+    <meta content="Snoweb" name="author">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" sizes="16x16"
+          href="https://media.snoweb.fr/www/images/favicon_4vyLMhX.2e16d0ba.fill-16x16.format-png.png">
+    <link rel="icon" type="image/png" sizes="32x32"
+          href="https://media.snoweb.fr/www/images/favicon_4vyLMhX.2e16d0ba.fill-32x32.format-png.png">
+    <link rel="icon" type="image/png" sizes="128x128"
+          href="https://media.snoweb.fr/www/images/favicon_4vyLMhX.2e16d0ba.fill-128x128.format-png.png">
+    <link rel="icon" type="image/png" sizes="167x167"
+          href="https://media.snoweb.fr/www/images/favicon_4vyLMhX.2e16d0ba.fill-167x167.format-png.png">
+    <link rel="icon" type="image/png" sizes="180x180"
+          href="https://media.snoweb.fr/www/images/favicon_4vyLMhX.2e16d0ba.fill-180x180.format-png.png">
+    <link rel="apple-touch-icon"
+          href="https://media.snoweb.fr/www/images/favicon_4vyLMhX.2e16d0ba.fill-180x180.format-png.png">
+    <link rel="icon" type="image/png" sizes="192x192"
+          href="https://media.snoweb.fr/www/images/favicon_4vyLMhX.2e16d0ba.fill-192x192.format-png.png">
+    <link rel="icon" type="image/png" sizes="196x196"
+          href="https://media.snoweb.fr/www/images/favicon_4vyLMhX.2e16d0ba.fill-196x196.format-png.png">
+    <link rel="canonical" href="https://{{ request.get_host }}{{ request.path }}"/>
+    {% block css %}
+        <link rel="stylesheet"
+              href="https://cdn.jsdelivr.net/npm/water.css@2/out/dark{% if not debug %}.min{% endif %}.css">
+        <link rel="stylesheet" href="/static/snowebsvg/dist/css/core-{{ settings.VERSION }}.css">
+        <link rel="stylesheet" href="/static/snowebsvg/dist/css/essential-{{ settings.VERSION }}.css">
+        <style>
+            :root {
+                --background-body: #14253A;
+                --background: #161f27;
+                --background-alt: #1a242f;
+                --selection: #E63946;
+                --text-main: #dbdbdb;
+                --text-bright: #fff;
+                --text-muted: #a9b1ba;
+                --links: #E63946;
+                --focus: #E63946;
+                --border: #526980;
+                --code: #E63946;
+                --animation-duration: 0.1s;
+                --button-hover: #324759;
+                --scrollbar-thumb: var(--button-hover);
+                --scrollbar-thumb-hover: rgb(65, 92, 115);
+                --form-placeholder: #a9a9a9;
+                --form-text: #fff;
+                --variable: #E63946;
+                --highlight: #E63946;
+
+                --svg-theme-light-primary: #14253A;
+                --svg-theme-light-secondary: #E63946;
+
+                --svg-theme-dark-primary: #F7F7F7;
+                --svg-theme-dark-secondary: #E63946;
+            }
+        </style>
+    {% endblock %}
 </head>
 <body>
+
+<a href="/">
+    <img style="width: 200px" src="https://media.snoweb.fr/www/documents/logo-primary2.svg" alt="Logo Snoweb">
+</a>
+<hr/>
+
 {% block body %}{% endblock %}
 </body>
 </html>

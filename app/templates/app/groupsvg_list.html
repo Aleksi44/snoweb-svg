@@ -1,13 +1,22 @@
 {% extends 'app/base.html' %}
 {% load svg %}
 
+{% block title %}{% endblock %}
+{% block description %}{% endblock %}
+
 {% block body %}
-    <h2>Group</h2>
-    <ul>
-        {% for group in object_list %}
-            <li>
-                <a class="svg-trigger">{% svg_inline group.path %}</a>
-            </li>
-        {% endfor %}
-    </ul>
+    <h1>SVG</h1>
+    {% for group in object_list %}
+        <h2>{{ group }}</h2>
+        <ul>
+            {% for svg in group.svg_set.all %}
+                <li>
+                    <h3>{{ svg }}</h3>
+                    <a href="#" class="svg-trigger">
+                        {% svg_inline svg.path %}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
 {% endblock %}

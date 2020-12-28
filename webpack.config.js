@@ -25,23 +25,17 @@ module.exports = ({ mode = 'development' } = {}) => {
 
   return {
     entry: {
-      app: path.resolve(__dirname, 'snowebsvg/static/snowebsvg/src/js/app.js'),
-      styles: path.resolve(__dirname, 'snowebsvg/static/snowebsvg/src/scss/styles.scss'),
+      core: path.resolve(__dirname, 'snowebsvg/static/snowebsvg/src/scss/core.scss'),
+      essential: path.resolve(__dirname, 'snowebsvg/static/snowebsvg/src/scss/essential.scss'),
     },
     output: {
-      filename: `static/snowebsvg/dist/js/[name]${version}.js`,
-      chunkFilename: `static/snowebsvg/dist/js/[name]${version}.js`,
+      filename: `static/snowebsvg/dist/js/[name]-${version}.js`,
+      chunkFilename: `static/snowebsvg/dist/js/[name]-${version}.js`,
       path: path.resolve(__dirname, 'snowebsvg'),
       publicPath: '/',
     },
     module: {
       rules: [
-        {
-          test: /\.js$/,
-          use: {
-            loader: 'babel-loader',
-          },
-        },
         {
           test: /\.html$/,
           use: {
@@ -68,7 +62,7 @@ module.exports = ({ mode = 'development' } = {}) => {
             {
               loader: 'file-loader',
               options: {
-                name: `static/snowebsvg/dist/css/[name]${version}.css`,
+                name: `static/snowebsvg/dist/css/[name]-${version}.css`,
               },
             },
             {

@@ -1,32 +1,12 @@
-svg {
-  width: 100px;
-  height: 100px;
-  border: 1px solid red;
-}
-
-.fill-primary {
-  fill: red;
-}
-
-.fill-secondary {
-  fill: green;
-}
-
-.fill-tertiary {
-  fill: blue;
-}
-
-
 $transition: opacity 300ms linear;
 
 .svg-trigger {
-
-  .svg-with-layer {
-    g[id^="event-"] {
+  .builder-1 {
+    g[id^='event-'] {
       opacity: 0;
     }
 
-    g[id*="-base"] {
+    g[id*='-base'] {
       opacity: 1;
     }
 
@@ -40,13 +20,12 @@ $transition: opacity 300ms linear;
   }
 
   &:hover {
-    .svg-with-layer {
-
-      g[id^="event-"] {
+    .builder-1 {
+      g[id^='event-'] {
         opacity: 0;
       }
 
-      g[id*="-hover"] {
+      g[id*='-hover'] {
         opacity: 1;
       }
     }

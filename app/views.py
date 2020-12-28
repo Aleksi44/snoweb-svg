@@ -1,5 +1,5 @@
 from django.views.generic import ListView
-from snowebsvg.models import Collection, GroupSvg, Svg
+from snowebsvg.models import Collection, GroupSvg
 
 
 class CollectionList(ListView):
@@ -15,21 +15,4 @@ class GroupSvgList(ListView):
         collection_key = self.kwargs.get('collection_key')
         if collection_key:
             return self.model.objects.filter(collection__key=collection_key)
-        return self.model.objects.all()
-
-
-class SvgList(ListView):
-    model = Svg
-    template_name = 'app/svg_list.html'
-
-    def get_queryset(self):
-        group_key = self.kwargs.get('group_key')
-        collection_key = self.kwargs.get('collection_key')
-        if group_key and not collection_key:
-            return self.model.objects.filter(group__key=group_key)
-        if group_key and collection_key:
-            return self.model.objects.filter(
-                group__key=group_key,
-                group__collection__key=collection_key
-            )
         return self.model.objects.all()

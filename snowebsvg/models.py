@@ -34,7 +34,7 @@ class GroupSvg(models.Model):
 
     @property
     def path(self):
-        return "%s:%s" % (
+        return "%s-%s" % (
             self.collection.key,
             self.key
         )
@@ -47,52 +47,46 @@ class GroupSvg(models.Model):
             self.key
         )
 
-    def build(self):
-        events = []
-        svg_path = "%s/%s/%s" % (
+    @property
+    def path_svg(self):
+        return "%s/%s/%s" % (
             settings.BASE_DIR_COLLECTION,
             self.collection.key,
             self.key
         )
+
+    def build(self):
         Path(self.path_build).mkdir(parents=True, exist_ok=True)
+        for html_filename in os.listdir(self.path_svg):
+            svg_key = html_filename.replace('.html', '')
+            try:
+                Svg.objects.get(
+                    key=svg_key,
+                    group_id=self.id
+                )
+            except Svg.DoesNotExist:
+                svg = Svg(
+                    key=svg_key,
+                    group_id=self.id
+                )
+                svg_content = svg.render()
 
-        for event_html_filename in os.listdir(svg_path):
-            event = event_html_filename.replace('.html', '')
-            event_tpl = get_template("%s/%s" % (svg_path, event_html_filename))
-            events.append({
-                'id': "event-%s-%s-%s" % (
-                    self.collection.key,
-                    self.key,
-                    event
-                ),
-                'render': event_tpl.render()
-            })
-        svg_template = get_template('snowebsvg/svg/square_100.html')
-        svg_content = svg_template.render({'events': events})
+                path_build_file = "%s/%s.svg" % (
+                    self.path_build,
+                    svg_key
+                )
+                svg_file_build = open(path_build_file, "a")
+                svg_file_build.truncate(0)
+                svg_file_build.write(svg_content)
+                svg_file_build.close()
 
-        path_build_file = "%s/group.svg" % self.path_build
-        svg_file_build = open(path_build_file, "a")
-        svg_file_build.truncate(0)
-        svg_file_build.write(svg_content)
-        svg_file_build.close()
+                svg_file_image = ImageFile(
+                    open(path_build_file, "rb"),
+                    name=self.key
+                )
 
-        svg_file_image = ImageFile(
-            open(path_build_file, "rb"),
-            name=self.key
-        )
-
-        try:
-            Svg.objects.get(
-                key=self.key,
-                group_id=self.id
-            )
-        except Svg.DoesNotExist:
-            svg = Svg(
-                key=self.key,
-                file=svg_file_image,
-                group_id=self.id
-            )
-            svg.save()
+                svg.file = svg_file_image
+                svg.save()
 
 
 class Svg(models.Model):
@@ -107,3 +101,20 @@ class Svg(models.Model):
 
     def __str__(self):
         return self.key.title()
+
+    @property
+    def path(self):
+        return "%s-%s-%s" % (
+            self.group.collection.key,
+            self.group.key,
+            self.key
+        )
+
+    def render(self):
+        svg_template = get_template("%s/%s" % (
+            self.group.path_svg,
+            self.key + '.html'
+        ))
+        return svg_template.render({
+            'self': self,
+        })
