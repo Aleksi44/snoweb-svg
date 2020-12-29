@@ -1,3 +1,7 @@
+import os
+import sys
+import django
+
 # Configuration file for the Sphinx documentation builder.
 #
 # This file only contains a selection of the most common options. For a full
@@ -27,6 +31,8 @@ author = 'snoweb'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    'sphinx.ext.autodoc',
+    'sphinxcontrib_django'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -54,3 +60,10 @@ html_theme_options = {
     "dark_logo": "logo-dark.svg",
 }
 
+autodoc_default_options = {
+    'exclude-members': 'DoesNotExist, MultipleObjectsReturned'
+}
+
+sys.path.insert(0, os.path.join(os.path.abspath('.'), '..'))
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
+django.setup()

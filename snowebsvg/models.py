@@ -12,13 +12,17 @@ class Collection(models.Model):
         return self.key.title()
 
     def build(self):
+        """
+        Build all collections available in django apps template folder named :
+        ``snowebsvg/collections``
+        """
         for group_key in os.listdir("%s/%s" % (settings.BASE_DIR_COLLECTION, self.key)):
             group, _ = GroupSvg.objects.get_or_create(key=group_key, collection_id=self.id)
             group.build()
 
 
 class GroupSvg(models.Model):
-    key = models.CharField(max_length=255, verbose_name=_("key"))
+    key = models.CharField(max_length=255, verbose_name=_("key"), help_text='dfgdfg')
     collection = models.ForeignKey(
         Collection,
         default=None,
@@ -31,6 +35,9 @@ class GroupSvg(models.Model):
 
     @property
     def path(self):
+        """
+        Unique Identifier of ``GroupSvg``
+        """
         return "%s-%s" % (
             self.collection.key,
             self.key
@@ -38,6 +45,9 @@ class GroupSvg(models.Model):
 
     @property
     def path_svg(self):
+        """
+        File path of a ``GroupSvg``
+        """
         return "%s/%s/%s" % (
             settings.BASE_DIR_COLLECTION,
             self.collection.key,
@@ -45,6 +55,10 @@ class GroupSvg(models.Model):
         )
 
     def build(self):
+        """
+        Build all ``Svg`` available in django apps template folder named :
+        ``snowebsvg/collections/<collection_key>/<group_svg_key>``
+        """
         for html_filename in os.listdir(self.path_svg):
             svg_key = html_filename.replace('.html', '')
             try:
@@ -74,6 +88,9 @@ class Svg(models.Model):
 
     @property
     def path(self):
+        """
+        Unique Identifier of Svg
+        """
         return "%s-%s-%s" % (
             self.group.collection.key,
             self.group.key,
@@ -81,6 +98,12 @@ class Svg(models.Model):
         )
 
     def render(self, theme=settings.SVG_DEFAULT_THEME, size=settings.SVG_DEFAULT_SIZE):
+        """
+        Method for rendering an Svg
+
+        :param theme: Theme, defaults to :ref:`SVG_DEFAULT_THEME <references_settings>`
+        :param size: Size, defaults :ref:`SVG_DEFAULT_SIZE <references_settings>`
+        """
         svg_template = get_template("%s/%s" % (
             self.group.path_svg,
             self.key + '.html'

@@ -7,5 +7,5 @@ Getting started
 .. toctree::
    :maxdepth: 2
 
-   html
-   django
+   with_html
+   with_django

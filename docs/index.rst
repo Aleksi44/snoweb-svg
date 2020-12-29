@@ -10,3 +10,5 @@ Welcome to snowebsvg's documentation!
    :maxdepth: 3
 
    getting_started/index
+   how_to/index
+   references/index
