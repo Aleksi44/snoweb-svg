@@ -1,0 +1,19 @@
+name: Deployment
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deployment
+      uses: appleboy/ssh-action@master
+      with:
+        host: svg.snoweb.fr
+        username: debian
+        key: ${{ secrets.KEY }}
+        port: 22
+        script: |
+          cd /home/debian/bin/ && ./snowebsvg_deploy.sh
