@@ -2,17 +2,7 @@ import os
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.template.loader import get_template
-from django.template.loaders.app_directories import Loader
 from snowebsvg import settings
-
-for template_directory in Loader('django').get_dirs():
-    template_directory = str(template_directory)
-    if '/snowebsvg/' in template_directory:
-        base_dir_svg = "%s/snowebsvg" % template_directory
-        BASE_DIR_COLLECTION = "%s/%s" % (
-            base_dir_svg,
-            'collections'
-        )
 
 
 class Collection(models.Model):
@@ -26,7 +16,7 @@ class Collection(models.Model):
         Build all collections available in django apps template folder named :
         ``snowebsvg/collections``
         """
-        for group_key in os.listdir("%s/%s" % (BASE_DIR_COLLECTION, self.key)):
+        for group_key in os.listdir("%s/%s" % (settings.build_dir_collection(), self.key)):
             group, _ = GroupSvg.objects.get_or_create(key=group_key, collection_id=self.id)
             group.build()
 
@@ -59,7 +49,7 @@ class GroupSvg(models.Model):
         File path of a ``GroupSvg``
         """
         return "%s/%s/%s" % (
-            BASE_DIR_COLLECTION,
+            settings.build_dir_collection(),
             self.collection.key,
             self.key
         )
