@@ -3,3 +3,4 @@ Sphinx>=3.4.1
 furo==2020.12.28b23
 flake8>=3.8.4
 sphinxcontrib-django==0.5.1
+django-environ==0.4.5

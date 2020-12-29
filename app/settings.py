@@ -1,7 +1,11 @@
 import os
+import environ
 
 BASE_DIR = os.environ['BASE_DIR']
-DEBUG = True
+env = environ.Env()
+environ.Env.read_env(BASE_DIR + '/.env')
+
+DEBUG = env.bool('DEBUG', default=True)
 
 DATABASES = {
     'default': {
@@ -14,7 +18,7 @@ SECRET_KEY = '[V$xMycv[(YwhThQD+p[s@Wb@Ygy@:`M%D3I8Fs2tJ^Aw#ac$AJ65".*]uwPaK_'
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
-]
+] + env.list('DOMAINS')
 
 INSTALLED_APPS = [
     'snowebsvg',
