@@ -16,7 +16,7 @@ class Collection(models.Model):
         Build all collections available in django apps template folder named :
         ``snowebsvg/collections``
         """
-        for group_key in os.listdir("%s/%s" % (settings.build_dir_collection(), self.key)):
+        for group_key in os.listdir("%s/%s" % (settings.dir_collection(), self.key)):
             group, _ = GroupSvg.objects.get_or_create(key=group_key, collection_id=self.id)
             group.build()
 
@@ -49,7 +49,7 @@ class GroupSvg(models.Model):
         File path of a ``GroupSvg``
         """
         return "%s/%s/%s" % (
-            settings.build_dir_collection(),
+            settings.dir_collection(),
             self.collection.key,
             self.key
         )
@@ -104,8 +104,9 @@ class Svg(models.Model):
         :param theme: Theme, defaults to :ref:`SVG_DEFAULT_THEME <references_settings>`
         :param size: Size, defaults :ref:`SVG_DEFAULT_SIZE <references_settings>`
         """
-        svg_template = get_template("%s/%s" % (
-            self.group.path_svg,
+        svg_template = get_template("snowebsvg/collections/%s/%s/%s" % (
+            self.group.collection.key,
+            self.group.key,
             self.key + '.html'
         ))
         return svg_template.render({

@@ -17,7 +17,7 @@ SVG_DEFAULT_THEME = 'dark'
 SVG_DEFAULT_SIZE = 'x3'
 
 
-def build_dir_collection():
+def dir_collection():
     from django.template.loaders.app_directories import Loader
     for template_directory in Loader('django').get_dirs():
         template_directory = str(template_directory)
