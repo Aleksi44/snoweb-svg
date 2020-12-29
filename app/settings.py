@@ -18,7 +18,7 @@ SECRET_KEY = '[V$xMycv[(YwhThQD+p[s@Wb@Ygy@:`M%D3I8Fs2tJ^Aw#ac$AJ65".*]uwPaK_'
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
-] + env.list('DOMAINS')
+] + env.list('DOMAINS', default=[])
 
 INSTALLED_APPS = [
     'snowebsvg',
