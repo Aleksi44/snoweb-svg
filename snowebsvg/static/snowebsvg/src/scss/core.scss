@@ -1,3 +1,10 @@
 @import 'common/themes';
 @import 'common/sizer';
-@import 'common/builders/group_hover';
+
+$animation-duration: 300ms;
+$animation-timing-function: linear;
+
+@import 'common/builders/basic';
+@import 'common/builders/circle';
+@import 'common/builders/rect';
+@import 'common/builders/line';

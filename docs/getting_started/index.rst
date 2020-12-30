@@ -8,4 +8,5 @@ Getting started
    :maxdepth: 2
 
    with_html
+   with_sass
    with_django

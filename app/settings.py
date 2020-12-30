@@ -16,9 +16,9 @@ DATABASES = {
 SECRET_KEY = '[V$xMycv[(YwhThQD+p[s@Wb@Ygy@:`M%D3I8Fs2tJ^Aw#ac$AJ65".*]uwPaK_'
 
 ALLOWED_HOSTS = [
-    '127.0.0.1',
-    'localhost',
-] + env.list('DOMAINS', default=[])
+                    '127.0.0.1',
+                    'localhost',
+                ] + env.list('DOMAINS', default=[])
 
 INSTALLED_APPS = [
     'snowebsvg',
@@ -84,7 +84,6 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 

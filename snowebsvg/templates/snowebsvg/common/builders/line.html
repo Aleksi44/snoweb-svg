@@ -1,0 +1,8 @@
+{% extends 'snowebsvg/common/builders/basic.html' %}
+
+{% block svg_content %}
+    <line class="svg-builder-line" x1="0" y1="100" x2="100" y2="100" stroke="red" stroke-width="10"></line>
+    <g transform="scale(0.5) translate(50, 50)">
+        {{ block.super }}
+    </g>
+{% endblock %}

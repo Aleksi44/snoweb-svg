@@ -1,0 +1,22 @@
+@keyframes svg-anim-circle-r-full {
+  from {
+    r: 0px;
+  }
+  to {
+    r: 50px;
+  }
+}
+
+.svg-trigger {
+  .svg-builder-circle {
+    r: 0px;
+  }
+
+  &:hover {
+    .svg-builder-circle {
+      animation-name: svg-anim-circle-r-full;
+      animation-duration: $animation-duration;
+      animation-fill-mode: forwards;
+    }
+  }
+}

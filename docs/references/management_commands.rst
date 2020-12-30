@@ -7,6 +7,6 @@ Management commands
 Build
 -----
 
-``python manage.py build``
+``python manage.py svg_build``
 
 Build all collections available

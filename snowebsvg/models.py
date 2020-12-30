@@ -61,17 +61,19 @@ class GroupSvg(models.Model):
         """
         for html_filename in os.listdir(self.path_svg):
             svg_key = html_filename.replace('.html', '')
-            try:
-                Svg.objects.get(
-                    key=svg_key,
-                    group_id=self.id
-                )
-            except Svg.DoesNotExist:
-                svg = Svg(
-                    key=svg_key,
-                    group_id=self.id
-                )
-                svg.save()
+            # We don't build private files
+            if not svg_key.startswith('_'):
+                try:
+                    Svg.objects.get(
+                        key=svg_key,
+                        group_id=self.id
+                    )
+                except Svg.DoesNotExist:
+                    svg = Svg(
+                        key=svg_key,
+                        group_id=self.id
+                    )
+                    svg.save()
 
 
 class Svg(models.Model):

@@ -1,8 +1,14 @@
-$transition: opacity 300ms linear;
+$transition: opacity $animation-duration $animation-timing-function;
+
+.svg-builder-basic {
+  g[id*='-on-hover'] {
+    opacity: 0;
+  }
+}
 
 .svg-trigger {
-  .svg-builder-group-hover {
-    g[id^='svg-group-hover-'] {
+  .svg-builder-basic {
+    g[id^='svg-basic-'] {
       opacity: 0;
     }
 
@@ -20,8 +26,8 @@ $transition: opacity 300ms linear;
   }
 
   &:hover {
-    .svg-builder-group-hover {
-      g[id^='svg-group-hover-'] {
+    .svg-builder-basic {
+      g[id^='svg-basic-'] {
         opacity: 0;
       }
 

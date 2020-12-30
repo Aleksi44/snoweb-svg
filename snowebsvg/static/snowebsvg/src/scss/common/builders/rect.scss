@@ -1,0 +1,27 @@
+$rect-radius: 15px;
+
+@keyframes svg-anim-rect-opacity {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.svg-trigger {
+  .svg-builder-rect {
+    opacity: 0;
+    rx: $rect-radius;
+    ry: $rect-radius;
+  }
+
+  &:hover {
+    .svg-builder-rect {
+      animation-duration: $animation-duration;
+      animation-fill-mode: forwards;
+      animation-name: svg-anim-rect-opacity;
+    }
+  }
+}
