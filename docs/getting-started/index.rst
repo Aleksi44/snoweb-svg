@@ -8,5 +8,4 @@ Getting started
    :maxdepth: 2
 
    html
-   sass
    django

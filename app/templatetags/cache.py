@@ -20,9 +20,10 @@ class CachePage(Node):
         if not settings_django.DEBUG:
             fragment_cache = caches['default']
             request = self.request.resolve(context)
+            theme = request.session.get('theme', 'dark')
             vary_on = list()
             vary_on.append({
-                'theme': request.session['theme']
+                'theme': theme
             })
             fragment_name = 'page_%s_%s' % (
                 settings.VERSION,

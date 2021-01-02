@@ -37,12 +37,16 @@ You need to :doc:`add css files <html>`.
 Add SVG Content
 ---------------
 
-WIP
+With :
+
+- ``<svg_key>`` : choose at `svg.snoweb.fr <https://svg.snoweb.fr>`_.
+- ``<theme>`` : light or dark, see more :doc:`here <../references/css>`.
+- ``<size>`` : x1, x2, ect... see more :doc:`here <../references/css>`.
 
 ::
 
     {% load svg %}
 
     <a href="#" class="svg-trigger">
-        {% svg_inline 'essential-back-basic' 'dark' 'x3' %}
+        {% svg_inline '<svg_key>' '<theme>' '<size>' %}
     </a>
