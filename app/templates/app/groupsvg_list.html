@@ -1,8 +1,8 @@
 {% extends 'app/base.html' %}
 {% load svg %}
 
-{% block title %}SVG Collection{% if object_list.0 %} {{ object_list.0.collection }}{% endif %}{% endblock %}
-{% block description %}{% endblock %}
+{% block title %}Free SVG collection{% if object_list.0 %} {{ object_list.0.collection }}{% endif %} | {{ block.super }}{% endblock %}
+{% block description %}Get free collection {% if object_list.0 %} {{ object_list.0.collection }}{% endif %} of SVGs animated built in HTML and CSS. {{ block.super }}{% endblock %}
 
 {% block body %}
     {% with theme=request.session.theme first_group=object_list.0 %}
@@ -15,4 +15,5 @@
             {% include 'app/common/svg_set.html' with svg_set=group.svg_set.all %}
         {% endfor %}
     {% endwith %}
+    <button type="button" onclick="document.body.scrollTop = 0;document.documentElement.scrollTop = 0;">Scroll to top</button>
 {% endblock %}

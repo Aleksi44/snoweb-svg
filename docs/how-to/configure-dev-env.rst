@@ -1,4 +1,4 @@
-.. _how_to_configure_dev_env:
+.. _how-to_configure-dev-env:
 
 Configure development environment
 =================================

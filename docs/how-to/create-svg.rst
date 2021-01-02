@@ -1,10 +1,10 @@
-.. _how_to_create_svg:
+.. _how-to_create-svg:
 
 
 Create custom SVG
 =================
 
-You need to :doc:`configure development environment <configure_dev_env>`
+You need to :doc:`configure development environment <configure-dev-env>`
 before doing this guide.
 
 1 - Define the entry point
@@ -26,7 +26,7 @@ The entry point of the file will therefore be :
 ``snowebsvg/collections/flag/finnish/rounded.html``
 
 
-The command :doc:`build <../references/management_commands>` then builds automatically
+The command :doc:`build <../references/management-commands>` then builds automatically
 depending on folders and files :
 
 - The collection ``flag``

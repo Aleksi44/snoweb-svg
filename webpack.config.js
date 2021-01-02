@@ -14,7 +14,7 @@ module.exports = ({ mode = 'development' } = {}) => {
       proxy: '127.0.0.1:4243',
       port: 3009,
       files: [
-        'snowebsvg/static/snowebsvg/src/scss/**/*.scss',
+        'static/snowebsvg/src/scss/**/*.scss',
       ],
       reloadDelay: 0,
       notify: false,
@@ -24,13 +24,13 @@ module.exports = ({ mode = 'development' } = {}) => {
 
   return {
     entry: {
-      core: path.resolve(__dirname, 'snowebsvg/static/snowebsvg/src/scss/core.scss'),
-      essential: path.resolve(__dirname, 'snowebsvg/static/snowebsvg/src/scss/essential.scss'),
+      core: path.resolve(__dirname, 'static/snowebsvg/src/scss/core.scss'),
+      essential: path.resolve(__dirname, 'static/snowebsvg/src/scss/essential.scss'),
     },
     output: {
       filename: `static/snowebsvg/dist/js/[name]-${version}.js`,
       chunkFilename: `static/snowebsvg/dist/js/[name]-${version}.js`,
-      path: path.resolve(__dirname, 'snowebsvg'),
+      path: path.resolve(__dirname, '.'),
       publicPath: '/',
     },
     module: {

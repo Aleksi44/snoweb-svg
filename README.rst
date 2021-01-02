@@ -14,17 +14,18 @@ Snoweb SVG
 
 .. image:: https://static.snoweb.fr/documents/logo-secondary.svg
 
-Snoweb SVG is an open source project with SVG and CSS toolkit.
+Snoweb SVG is an open source project with SVGs optimized and animated built in HTML and CSS.
 
 
 Features
 ********
 
-- Micro interaction on hover
+- Animation on hover
 - Theme dark and light
-- SVG code embed
-- No javaScript required
+- SVG code in Html and Css
+- No javascript required
 - Possible integration with Django
 
 Find all Svg at : `svg.snoweb.fr <https://svg.snoweb.fr>`_.
+
 Documentation available : `here <https://snoweb-svg.readthedocs.io/en/latest/>`_.

@@ -27,8 +27,8 @@ class Collection(models.Model):
 
     def build(self):
         """
-        Build all collections available in django apps template folder named :
-        ``snowebsvg/collections``
+        Build all collection group's available in django apps template folder named :
+        ``snowebsvg/collections/<collection_key>``
         """
         for group_key in os.listdir("%s/%s" % (self.root_directory, self.key)):
             group, _ = GroupSvg.objects.get_or_create(key=group_key, collection_id=self.id)
@@ -36,7 +36,7 @@ class Collection(models.Model):
 
     def render_styles(self, theme=settings.SVG_DEFAULT_THEME, size=settings.SVG_DEFAULT_SIZE):
         """
-        Method for rendering stylesheet and styles code
+        Method for rendering stylesheet code
         """
         svg_template = get_template("snowebsvg/common/collection_render_styles.html")
         return svg_template.render({
@@ -112,7 +112,7 @@ class Svg(models.Model):
     )
 
     def __str__(self):
-        return self.key.title()
+        return self.key_composer.title().replace('-', ' ')
 
     @cached_property
     def key_composer(self):

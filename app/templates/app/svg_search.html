@@ -1,12 +1,12 @@
 {% extends 'app/base.html' %}
 {% load svg %}
 
-{% block title %}Search SVG{% if key %} "{{ key }}"{% endif %}{% endblock %}
-{% block description %}{% endblock %}
+{% block title %}Search free SVG for web{% if key %} like "{{ key }}"{% endif %} | {{ block.super }}{% endblock %}
+{% block description %}Search for free SVGs animated built in HTML and CSS. {{ block.super }}{% endblock %}
 
 {% block body %}
     {% with theme=request.session.theme %}
-        <h1>Search Svg{% if key %} "{{ key }}"{% endif %}</h1>
+        <h1>Search Svg{% if key %} by key <code>{{ key }}</code>{% endif %}</h1>
         <form method="POST" style="display: flex">
             {% csrf_token %}
             <input type="text" name="key" placeholder="back" value="{% if key %}{{ key }}{% endif %}">
@@ -14,4 +14,6 @@
         </form>
         {% include 'app/common/svg_set.html' with svg_set=object_list %}
     {% endwith %}
+    <button type="button" onclick="document.body.scrollTop = 0;document.documentElement.scrollTop = 0;">Scroll to top
+    </button>
 {% endblock %}

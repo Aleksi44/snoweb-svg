@@ -9,5 +9,5 @@ References
 
    css
    models
-   management_commands
+   management-commands
    settings

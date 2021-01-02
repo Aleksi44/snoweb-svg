@@ -1,8 +1,8 @@
 {% extends 'app/base.html' %}
 {% load svg %}
 
-{% block title %}SVG Collections{% endblock %}
-{% block description %}{% endblock %}
+{% block title %}Free SVG collections for web | {{ block.super }}{% endblock %}
+{% block description %}Get free collections of SVGs animated built in HTML and CSS. {{ block.super }}{% endblock %}
 
 {% block body %}
     {% with theme=request.session.theme %}

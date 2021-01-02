@@ -1,10 +1,13 @@
+{% load cache static %}
+
 {% with theme=request.session.theme %}
     <!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}{% endblock %}</title>
-        <meta name="description" content="{% block description %}{% endblock %}">
+        <title>{% block title %}Snoweb{% endblock %}</title>
+        <meta name="description"
+              content="{% block description %}Choose and embed web-optimized SVGs in your HTML or with Django.{% endblock %}">
         <meta content="Snoweb" name="author">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" type="image/png" sizes="16x16"
@@ -26,11 +29,14 @@
         <link rel="canonical" href="https://{{ request.get_host }}{{ request.path }}"/>
         {% block css %}
             {% with water_css="https://cdn.jsdelivr.net/npm/water.css@2/out/" %}
-                <link rel="stylesheet" href="
-                        {{ water_css }}{% if theme %}{{ theme }}{% else %}dark{% endif %}{% if not debug %}.min{% endif %}.css">
+                <link rel="stylesheet" href="{{ water_css }}{% if theme %}{{ theme }}{% else %}dark{% endif %}{% if not debug %}.min{% endif %}.css">
             {% endwith %}
-            <link rel="stylesheet" href="/static/snowebsvg/dist/css/core-{{ settings.VERSION }}.css">
-            <link rel="stylesheet" href="/static/snowebsvg/dist/css/essential-{{ settings.VERSION }}.css">
+            {% with href="snowebsvg/dist/css/core-"|add:settings.VERSION|add:".css" %}
+                <link rel="stylesheet" href="{% static href %}">
+            {% endwith %}
+            {% with href="snowebsvg/dist/css/essential-"|add:settings.VERSION|add:".css" %}
+                <link rel="stylesheet" href="{% static href %}">
+            {% endwith %}
             <style>
                 :root {
                 {% if theme == 'light' %}
@@ -103,9 +109,16 @@
         </a>
     </form>
 
-    {% block body %}{% endblock %}
+    {% cache_page request %}{% block body %}{% endblock %}{% endcache_page %}
 
     <hr/>
+
+    <p>Related links :</p>
+    <ul>
+        <li><a href="https://snoweb-svg.readthedocs.io/en/latest/?badge=latest">Documentation</a></li>
+        <li><a href="https://github.com/Aleksi44/snoweb-svg">Github</a></li>
+        <li><a href="https://pypi.org/project/snowebsvg/">PyPI</a></li>
+    </ul>
 
     <small>Made with ❤ | <a href="https://www.snoweb.fr/">Snoweb</a></small>
 

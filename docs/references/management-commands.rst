@@ -1,4 +1,4 @@
-.. _references_management_commands:
+.. _references_management-commands:
 
 
 Management commands

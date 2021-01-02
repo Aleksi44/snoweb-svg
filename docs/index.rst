@@ -9,6 +9,6 @@ Welcome to snowebsvg's documentation!
 .. toctree::
    :maxdepth: 3
 
-   getting_started/index
-   how_to/index
+   getting-started/index
+   how-to/index
    references/index

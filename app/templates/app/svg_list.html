@@ -1,8 +1,9 @@
 {% extends 'app/base.html' %}
 {% load svg %}
 
-{% block title %}SVG{% endblock %}
-{% block description %}{% endblock %}
+{% block title %}Free SVG{% if object_list.0 %} {{ object_list.0 }}{% endif %} | {{ block.super }}{% endblock %}
+{% block description %}Free SVG{% if object_list.0 %} {{ object_list.0 }}{% endif %} animated built in HTML and CSS.
+    {{ block.super }}{% endblock %}
 
 
 {% block body %}
@@ -13,14 +14,39 @@
             <a href="#" class="svg-trigger">
                 {% svg_inline svg theme 'x5' %}
             </a>
-            <h3>Collection : <a href="{% url 'app:group' svg.group.collection.key %}"><code>{{ svg.group.collection.key }}</code></a></h3>
-            <h3>Group : <a href="{% url 'app:svg_search' svg.group.key %}"><code>{{ svg.group.key }}</code></a></h3>
-            <h3>Builder : <a href="{% url 'app:svg_search' svg.key %}"><code>{{ svg.key }}</code></a></h3>
-            <h2>Code CSS :</h2>
+            <h2>Attributes</h2>
+            <ul>
+                <li>
+                    <p>Collection : <a
+                            href="{% url 'app:group' svg.group.collection.key %}"><code>{{ svg.group.collection.key }}</code></a>
+                    </p>
+                </li>
+                <li>
+                    <p>Group : <a href="{% url 'app:svg_search' svg.group.key %}"><code>{{ svg.group.key }}</code></a>
+                    </p>
+                </li>
+                <li>
+                    <p>Builder : <a href="{% url 'app:svg_search' svg.key %}"><code>{{ svg.key }}</code></a></p>
+                </li>
+            </ul>
+            <h2>Code</h2>
+            <ul>
+                <li>
+                    <a href="https://snoweb-svg.readthedocs.io/en/latest/getting-started/html.html">
+                        Getting started with HTML
+                    </a>
+                </li>
+                <li>
+                    <a href="https://snoweb-svg.readthedocs.io/en/latest/getting-started/django.html">
+                        Getting started with Django
+                    </a>
+                </li>
+            </ul>
+            <h3>CSS</h3>
             <textarea>{% collection_styles svg.group.collection theme %}</textarea>
-            <h3>Code HTML : </h3>
+            <h3>HTML</h3>
             <textarea><a href="#" class="svg-trigger">&#13;&#10;&#13;&#10;{% svg_inline svg theme %}&#13;&#10;&#13;&#10;</a></textarea>
-            <h3>Code Django : </h3>
+            <h3>Django</h3>
             <textarea style="height: 110px">{% svg_django svg theme %}</textarea>
         {% endfor %}
     {% endwith %}

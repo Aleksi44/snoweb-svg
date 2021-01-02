@@ -1,4 +1,4 @@
-.. _getting_started_html:
+.. _getting-started_html:
 
 
 Integration with HTML
@@ -26,10 +26,10 @@ Choose at `svg.snoweb.fr <https://svg.snoweb.fr>`_.
         ...
 
         <!--Snoweb SVG Core CSS-->
-        <link rel="stylesheet" href="https://svg.snoweb.fr/static/snowebsvg/dist/css/core-<version>.css">
+        <link rel="stylesheet" href="https://static.snoweb.fr/snowebsvg/dist/css/core-<version>.css">
 
         <!--Add your Snoweb SVG collections CSS like this-->
-        <link rel="stylesheet" href="https://svg.snoweb.fr/static/snowebsvg/dist/css/<collection_key>-<version>.css">
+        <link rel="stylesheet" href="https://static.snoweb.fr/snowebsvg/dist/css/<collection_key>-<version>.css">
 
         <!--Configure vars-->
         <style>

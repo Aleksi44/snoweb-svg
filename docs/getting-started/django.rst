@@ -1,4 +1,4 @@
-.. _getting_started_django:
+.. _getting-started_django:
 
 Integration with Django
 =======================
@@ -31,7 +31,7 @@ Setup
 Add CSS Files
 -------------
 
-You need to :doc:`add css files <with_html>`.
+You need to :doc:`add css files <html>`.
 
 
 Add SVG Content
