@@ -1,0 +1,11 @@
+{% load svg %}
+
+<div style="display: flex; flex-wrap: wrap">
+    {% for svg in svg_set %}
+        <a style="text-decoration: none; text-align: center; width: 150px; padding: 10px"
+           href="{% url 'app:svg' svg.group.collection.key svg.group.key svg.key %}" class="svg-trigger">
+            {% svg_inline svg theme %}
+            <p><code>{{ svg.key_composer }}</code></p>
+        </a>
+    {% endfor %}
+</div>

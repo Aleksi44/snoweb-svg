@@ -1,17 +1,27 @@
 {% extends 'app/base.html' %}
 {% load svg %}
 
+{% block title %}SVG{% endblock %}
+{% block description %}{% endblock %}
+
+
 {% block body %}
+    <button type="button" onclick="window.history.back()">go back</button>
     {% with theme=request.session.theme %}
-        <h1>Svg</h1>
         {% for svg in object_list %}
-            <h3>Key : <code>{{ svg.path }}</code></h3>
-            <h3>Preview :</h3>
+            <h1>SVG <code>{{ svg.key_composer }}</code></h1>
             <a href="#" class="svg-trigger">
-                {% svg_inline svg theme %}
+                {% svg_inline svg theme 'x5' %}
             </a>
-            <h3>Code : </h3>
-            <textarea style="height: 300px">{% svg_inline svg theme %}</textarea>
+            <h3>Collection : <a href="{% url 'app:group' svg.group.collection.key %}"><code>{{ svg.group.collection.key }}</code></a></h3>
+            <h3>Group : <a href="{% url 'app:svg_search' svg.group.key %}"><code>{{ svg.group.key }}</code></a></h3>
+            <h3>Builder : <a href="{% url 'app:svg_search' svg.key %}"><code>{{ svg.key }}</code></a></h3>
+            <h2>Code CSS :</h2>
+            <textarea>{% collection_styles svg.group.collection theme %}</textarea>
+            <h3>Code HTML : </h3>
+            <textarea><a href="#" class="svg-trigger">&#13;&#10;&#13;&#10;{% svg_inline svg theme %}&#13;&#10;&#13;&#10;</a></textarea>
+            <h3>Code Django : </h3>
+            <textarea style="height: 110px">{% svg_django svg theme %}</textarea>
         {% endfor %}
     {% endwith %}
 {% endblock %}

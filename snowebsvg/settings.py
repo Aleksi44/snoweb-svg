@@ -15,15 +15,3 @@ except pkg_resources.DistributionNotFound:
 
 SVG_DEFAULT_THEME = 'dark'
 SVG_DEFAULT_SIZE = 'x3'
-
-
-def dir_collection():
-    from django.template.loaders.app_directories import Loader
-    for template_directory in Loader('django').get_dirs():
-        template_directory = str(template_directory)
-        if '/snowebsvg/' in template_directory:
-            base_dir_svg = "%s/snowebsvg" % template_directory
-            return "%s/%s" % (
-                base_dir_svg,
-                'collections'
-            )

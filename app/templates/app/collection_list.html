@@ -1,13 +1,22 @@
 {% extends 'app/base.html' %}
+{% load svg %}
 
-{% block title %}{% endblock %}
+{% block title %}SVG Collections{% endblock %}
 {% block description %}{% endblock %}
 
 {% block body %}
-    <h1>Collections</h1>
-    <ul>
+    {% with theme=request.session.theme %}
+        <h1>SVG collections</h1>
         {% for collection in object_list %}
-            <li><a href="{% url 'app:group' collection.key %}">{{ collection.key }}</a></li>
+            <a style="display: inline-block; text-decoration: none;" class="svg-trigger"
+               href="{% url 'app:group' collection.key %}">
+                <h2><code>{{ collection.key }}</code></h2>
+                {% for group in collection.groupsvg_set.all %}
+                    {% for svg in group.svg_set.all %}
+                        {% svg_inline svg theme 'x1' %}
+                    {% endfor %}
+                {% endfor %}
+            </a>
         {% endfor %}
-    </ul>
+    {% endwith %}
 {% endblock %}

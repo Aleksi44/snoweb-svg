@@ -26,7 +26,8 @@
         <link rel="canonical" href="https://{{ request.get_host }}{{ request.path }}"/>
         {% block css %}
             {% with water_css="https://cdn.jsdelivr.net/npm/water.css@2/out/" %}
-                <link rel="stylesheet" href="{{ water_css }}{% if theme %}{{ theme }}{% else %}dark{% endif %}{% if not debug %}.min{% endif %}.css">
+                <link rel="stylesheet" href="
+                        {{ water_css }}{% if theme %}{{ theme }}{% else %}dark{% endif %}{% if not debug %}.min{% endif %}.css">
             {% endwith %}
             <link rel="stylesheet" href="/static/snowebsvg/dist/css/core-{{ settings.VERSION }}.css">
             <link rel="stylesheet" href="/static/snowebsvg/dist/css/essential-{{ settings.VERSION }}.css">
@@ -94,13 +95,20 @@
     </a>
     <hr/>
 
-    <form method="POST" style="display: flex">
-        {% csrf_token %}
+    <form method="GET" style="display: flex">
         <input type="submit" name="theme" value="dark">
         <input type="submit" name="theme" value="light">
+        <a href="{% url 'app:svg_search' %}">
+            <button type="button">search</button>
+        </a>
     </form>
 
     {% block body %}{% endblock %}
+
+    <hr/>
+
+    <small>Made with ❤ | <a href="https://www.snoweb.fr/">Snoweb</a></small>
+
     </body>
     </html>
 {% endwith %}

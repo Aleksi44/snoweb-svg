@@ -1,0 +1,17 @@
+{% extends 'app/base.html' %}
+{% load svg %}
+
+{% block title %}Search SVG{% if key %} "{{ key }}"{% endif %}{% endblock %}
+{% block description %}{% endblock %}
+
+{% block body %}
+    {% with theme=request.session.theme %}
+        <h1>Search Svg{% if key %} "{{ key }}"{% endif %}</h1>
+        <form method="POST" style="display: flex">
+            {% csrf_token %}
+            <input type="text" name="key" placeholder="back" value="{% if key %}{{ key }}{% endif %}">
+            <input type="submit" value="Search">
+        </form>
+        {% include 'app/common/svg_set.html' with svg_set=object_list %}
+    {% endwith %}
+{% endblock %}

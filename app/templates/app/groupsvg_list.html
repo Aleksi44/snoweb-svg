@@ -1,23 +1,18 @@
 {% extends 'app/base.html' %}
 {% load svg %}
 
-{% block title %}{% endblock %}
+{% block title %}SVG Collection{% if object_list.0 %} {{ object_list.0.collection }}{% endif %}{% endblock %}
 {% block description %}{% endblock %}
 
 {% block body %}
-    {% with theme=request.session.theme %}
-        <h1>Icons</h1>
+    {% with theme=request.session.theme first_group=object_list.0 %}
+        <h1>SVG collection{% if first_group %}
+            <a href="{% url 'app:group' first_group.collection.key %}"><code>{{ first_group.collection.key }}</code></a>{% endif %}
+        </h1>
+        <h2>Groups</h2>
         {% for group in object_list %}
-            <h2>{{ group }}</h2>
-            <div style="display: flex; flex-wrap: wrap">
-                {% for svg in group.svg_set.all %}
-                    <a style="text-decoration: none; text-align: center; width: 150px; padding: 10px"
-                       href="{% url 'app:svg' group.collection.key group.key svg.key %}" class="svg-trigger">
-                        {% svg_inline svg theme %}
-                        <p><code>{{ svg.path }}</code></p>
-                    </a>
-                {% endfor %}
-            </div>
+            <h3><a href="{% url 'app:svg_search' group.key %}"><code>{{ group.key }}</code></a></h3>
+            {% include 'app/common/svg_set.html' with svg_set=group.svg_set.all %}
         {% endfor %}
     {% endwith %}
 {% endblock %}
