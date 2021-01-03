@@ -3,6 +3,7 @@ import json
 import pkg_resources
 
 BASE_DIR = os.environ['BASE_DIR']
+BASE_URL_CSS = "https://static.snoweb.fr/snowebsvg/dist/css/"
 
 try:
     #  Production part

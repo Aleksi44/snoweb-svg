@@ -9,5 +9,7 @@ class Command(BaseCommand):
         Collection.objects.all().delete()
         instance = Collection()
         for collection_name in os.listdir(instance.root_directory):
-            collection, _ = Collection.objects.get_or_create(key=collection_name)
-            collection.build()
+            # We don't build private files
+            if not collection_name.startswith('_'):
+                collection, _ = Collection.objects.get_or_create(key=collection_name)
+                collection.build()

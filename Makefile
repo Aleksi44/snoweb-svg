@@ -19,3 +19,14 @@ deploy:
 patch:
 	npm version patch
 	git push --tags origin master
+
+test:
+	python manage.py test -v 2
+
+svg_build:
+	python manage.py svg_build
+
+rm_db:
+	rm -f db.sqlite3
+
+fresh: rm_db mm test svg_build

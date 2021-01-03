@@ -38,7 +38,7 @@ class Collection(models.Model):
         """
         Method for rendering stylesheet code
         """
-        svg_template = get_template("snowebsvg/common/collection_render_styles.html")
+        svg_template = get_template("snowebsvg/collections/%s/styles.html" % self.key)
         return svg_template.render({
             'self': self,
             'theme': theme,
@@ -85,21 +85,25 @@ class GroupSvg(models.Model):
         Build all ``Svg`` available in django apps template folder named :
         ``snowebsvg/collections/<collection_key>/<group_svg_key>``
         """
-        for html_filename in os.listdir(self.path_entry):
-            svg_key = html_filename.replace('.html', '')
-            # We don't build private files
-            if not svg_key.startswith('_'):
-                try:
-                    Svg.objects.get(
-                        key=svg_key,
-                        group_id=self.id
-                    )
-                except Svg.DoesNotExist:
-                    svg = Svg(
-                        key=svg_key,
-                        group_id=self.id
-                    )
-                    svg.save()
+        try:
+            for html_filename in os.listdir(self.path_entry):
+                svg_key = html_filename.replace('.html', '')
+                # We don't build private files
+                if not svg_key.startswith('_'):
+                    try:
+                        Svg.objects.get(
+                            key=svg_key,
+                            group_id=self.id
+                        )
+                    except Svg.DoesNotExist:
+                        svg = Svg(
+                            key=svg_key,
+                            group_id=self.id
+                        )
+                        svg.save()
+        except NotADirectoryError:
+            # `self.path_entry` is not a directory, pass it
+            pass
 
 
 class Svg(models.Model):
@@ -140,7 +144,7 @@ class Svg(models.Model):
         """
         Method for rendering Django template code
         """
-        svg_template = get_template("snowebsvg/common/svg_render_django.html")
+        svg_template = get_template("snowebsvg/collections/%s/django.html" % self.group.collection.key)
         return svg_template.render({
             'self': self,
             'theme': theme,

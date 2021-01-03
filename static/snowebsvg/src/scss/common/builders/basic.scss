@@ -1,37 +1,37 @@
 $transition: opacity $animation-duration $animation-timing-function;
 
 .svg-builder-basic {
-  g[id*='-on-hover'] {
+  position: relative;
+
+  *[id*='-on-hover'] {
     opacity: 0;
   }
 }
 
 .svg-trigger {
   .svg-builder-basic {
-    g[id^='svg-basic-'] {
+    *[id^='svg-basic-'] {
+      position: absolute;
       opacity: 0;
-    }
-
-    g[id*='-on-start'] {
-      opacity: 1;
-    }
-
-    g {
       transition: $transition; /* vendorless fallback */
       -o-transition: $transition; /* opera */
       -ms-transition: $transition; /* IE 10 */
       -moz-transition: $transition; /* Firefox */
       -webkit-transition: $transition; /*safari and chrome */
     }
+
+    *[id*='-on-start'] {
+      opacity: 1;
+    }
   }
 
   &:hover {
     .svg-builder-basic {
-      g[id^='svg-basic-'] {
+      *[id^='svg-basic-'] {
         opacity: 0;
       }
 
-      g[id*='-on-hover'] {
+      *[id*='-on-hover'] {
         opacity: 1;
       }
     }

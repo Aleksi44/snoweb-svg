@@ -113,3 +113,31 @@ if AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY:
     }
     STATIC_URL = 'https://%s/' % AWS_S3_CUSTOM_DOMAIN
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+# LOGGING
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            '()': 'app.formatter.DjangoColorsFormatter',
+            'format': '[%(asctime)s] %(levelname)s\033[0m \033[1m%(name)s\033[0m -> %(message)s'
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        },
+    },
+    'loggers': {
+        'snowebsvg': {
+            'handlers': ['console'],
+            'propagate': True,
+            'level': 'DEBUG',
+        },
+    }
+}
