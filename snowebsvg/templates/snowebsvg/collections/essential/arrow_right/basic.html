@@ -1,9 +1,13 @@
 {% extends 'snowebsvg/common/builders/basic.html' %}
 
 {% block builder_base %}
-    {% include 'snowebsvg/collections/essential/arrow_right/_path-base.html' %}
+    <g transform="rotate(-180, 50, 50)">
+        {% include 'snowebsvg/collections/essential/arrow_left/_polygon-base.html' %}
+    </g>
 {% endblock %}
 
 {% block builder_hover %}
-    {% include 'snowebsvg/collections/essential/arrow_right/_path-hover.html' %}
+    <g transform="rotate(-180, 50, 50)">
+        {% include 'snowebsvg/collections/essential/arrow_left/_polygons-hover.html' %}
+    </g>
 {% endblock %}

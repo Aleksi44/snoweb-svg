@@ -11,6 +11,9 @@ from snowebsvg import settings
 class Collection(models.Model):
     key = models.CharField(max_length=255, verbose_name=_("key"))
 
+    class Meta:
+        ordering = ('key',)
+
     def __str__(self):
         return self.key.title()
 
@@ -30,9 +33,14 @@ class Collection(models.Model):
         Build all collection group's available in django apps template folder named :
         ``snowebsvg/collections/<collection_key>``
         """
+        conf_files = [
+            'django.html',
+            'styles.html'
+        ]
         for group_key in os.listdir("%s/%s" % (self.root_directory, self.key)):
-            group, _ = GroupSvg.objects.get_or_create(key=group_key, collection_id=self.id)
-            group.build()
+            if group_key not in conf_files:
+                group, _ = GroupSvg.objects.get_or_create(key=group_key, collection_id=self.id)
+                group.build()
 
     def render_styles(self, theme=settings.SVG_DEFAULT_THEME, size=settings.SVG_DEFAULT_SIZE):
         """
@@ -55,6 +63,9 @@ class GroupSvg(models.Model):
         on_delete=models.CASCADE,
         null=True
     )
+
+    class Meta:
+        ordering = ('key',)
 
     def __str__(self):
         return self.key.title()
@@ -114,6 +125,9 @@ class Svg(models.Model):
         on_delete=models.CASCADE,
         null=True
     )
+
+    class Meta:
+        ordering = ('key',)
 
     def __str__(self):
         return self.key_composer.title().replace('-', ' ')
