@@ -12,9 +12,6 @@ Snoweb SVG
     :target: https://snoweb-svg.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
 
-.. raw:: html
-    :file: static/coverage.svg
-
 .. image:: https://static.snoweb.fr/documents/logo-secondary.svg
 
 Snoweb SVG is an open source project with SVGs optimized and animated built in HTML and CSS.
