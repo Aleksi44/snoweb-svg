@@ -11,9 +11,7 @@
     {% with theme=request.session.theme %}
         {% for svg in object_list %}
             <h1>SVG <code>{{ svg.key_composer }}</code></h1>
-            <a href="#" class="svg-trigger">
-                {% svg_inline svg theme 'x5' %}
-            </a>
+            {% svg_preview svg theme 'x5' %}
             <h2>Attributes</h2>
             <ul>
                 <li>
@@ -46,10 +44,10 @@
             <textarea id="code-styles-{{ svg.key_composer }}">{% collection_styles svg.group.collection theme %}</textarea>
             <button type="button" onclick="document.getElementById('code-styles-{{ svg.key_composer }}').select();document.execCommand('copy');">Copy</button>
             <h3>HTML</h3>
-            <textarea id="code-html-{{ svg.key_composer }}"><a href="#" class="svg-trigger">&#13;&#10;&#13;&#10;{% svg_inline svg theme %}&#13;&#10;&#13;&#10;</a></textarea>
+            <textarea id="code-html-{{ svg.key_composer }}">{% svg_preview svg theme 'x3' %}</textarea>
             <button type="button" onclick="document.getElementById('code-html-{{ svg.key_composer }}').select();document.execCommand('copy');">Copy</button>
             <h3>Django</h3>
-            <textarea id="code-django-{{ svg.key_composer }}" style="height: 110px">{% svg_django svg theme %}</textarea>
+            <textarea id="code-django-{{ svg.key_composer }}" style="height: 110px">{% svg_django svg theme 'x3' %}</textarea>
             <button type="button" onclick="document.getElementById('code-django-{{ svg.key_composer }}').select();document.execCommand('copy');">Copy</button>
         {% endfor %}
     {% endwith %}

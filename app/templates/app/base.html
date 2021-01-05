@@ -31,10 +31,16 @@
             {% with water_css="https://cdn.jsdelivr.net/npm/water.css@2/out/" %}
                 <link rel="stylesheet" href="{{ water_css }}{% if theme %}{{ theme }}{% else %}dark{% endif %}{% if not debug %}.min{% endif %}.css">
             {% endwith %}
-            {% with href="snowebsvg/dist/css/core-"|add:settings.VERSION|add:".css" %}
+            {% with href="snowebsvg/dist/css/themes-"|add:settings.VERSION|add:".css" %}
+                <link rel="stylesheet" href="{% static href %}">
+            {% endwith %}
+            {% with href="snowebsvg/dist/css/sizer-"|add:settings.VERSION|add:".css" %}
                 <link rel="stylesheet" href="{% static href %}">
             {% endwith %}
             {% with href="snowebsvg/dist/css/essential-"|add:settings.VERSION|add:".css" %}
+                <link rel="stylesheet" href="{% static href %}">
+            {% endwith %}
+            {% with href="snowebsvg/dist/css/effect-"|add:settings.VERSION|add:".css" %}
                 <link rel="stylesheet" href="{% static href %}">
             {% endwith %}
             <style>

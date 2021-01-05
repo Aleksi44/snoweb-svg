@@ -1,0 +1,11 @@
+{% load svg %}
+
+<div class="svg-trigger" style="flex: 1">
+    <article class="svg-effect-builder" style="position: relative; margin: 20px">
+        {% svg_inline self theme %}
+        <div style="padding: 10px">
+            <h2>{% lorem 5 w random %}</h2>
+            <p>{% lorem 10 w random %}</p>
+        </div>
+    </article>
+</div>

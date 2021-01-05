@@ -1,5 +1,7 @@
 from django.contrib.sitemaps.views import sitemap
 from django.urls import path
+from django.conf import settings
+from django.views.generic import TemplateView
 
 from app.views import CollectionList, GroupSvgList, SvgList, SvgSearch
 from app.sitemaps import StaticSitemap, CollectionSitemap, GroupSvgSitemap, SvgSitemap
@@ -22,3 +24,8 @@ urlpatterns = [
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap')
 ]
+
+if settings.DEBUG:
+    urlpatterns += [
+        path('test/', TemplateView.as_view(template_name='app/experimental.html'), name='experimental'),
+    ]

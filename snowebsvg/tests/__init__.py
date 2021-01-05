@@ -3,7 +3,7 @@ from django.test import TestCase
 from django.core import management
 
 from snowebsvg.models import Svg, Collection
-from snowebsvg.templatetags.svg import svg_inline, svg_django, collection_styles
+from snowebsvg.templatetags.svg import svg_inline, svg_django, collection_styles, svg_preview
 
 logger = logging.getLogger('snowebsvg')
 
@@ -30,6 +30,15 @@ class SnowebSvgTest(TestCase):
         for svg in Svg.objects.all():
             logger.debug("svg_django key_composer=`%s`" % str(svg.key_composer))
             svg_django(svg.key_composer)
+
+    def test_templatetags_svg_preview(self):
+        self.test_svg_build()
+        for svg in Svg.objects.all():
+            logger.debug("svg_preview svg=`%s`" % str(svg))
+            svg_preview(svg)
+        for svg in Svg.objects.all():
+            logger.debug("svg_preview key_composer=`%s`" % str(svg.key_composer))
+            svg_preview(svg.key_composer)
 
     def test_templatetags_collection_styles(self):
         self.test_svg_build()

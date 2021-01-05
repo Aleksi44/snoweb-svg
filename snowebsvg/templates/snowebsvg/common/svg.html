@@ -1,6 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg"
-     class="{% block svg_class %}svg-snoweb {% if size %}{{ size }}{% else %}x3{% endif %} svg-theme-{% if theme %}{{ theme }}{% else %}dark{% endif %}{% endblock %}"
-     x="{% block svg_x %}0px{% endblock %}"
-     y="{% block svg_y %}0px{% endblock %}"
+     class="{% block svg_class %}svg-snoweb {% if size %}{{ size }}{% endif %} svg-theme-{% if theme %}{{ theme }}{% endif %}{% endblock %}"
+     x="{% block svg_x %}0{% endblock %}"
+     y="{% block svg_y %}0{% endblock %}"
      viewBox="{% block svg_viewbox %}0 0 100 100{% endblock %}"
+     preserveAspectRatio="{% block svg_aspect_ratio %}xMidYMid meet{% endblock %}"
 >{% block svg_content %}{% endblock %}</svg>

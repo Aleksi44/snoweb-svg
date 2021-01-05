@@ -1,0 +1,16 @@
+/* This file is only for experimental testing, do not code production code here */
+
+h2, p {
+  color: red;
+}
+
+.svg-effect-builder {
+  position: relative;
+
+  svg:first-of-type {
+    z-index: -1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+}
