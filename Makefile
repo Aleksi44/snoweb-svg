@@ -29,4 +29,10 @@ svg_build:
 rm_db:
 	rm -f db.sqlite3
 
-fresh: rm_db mm test svg_build
+coverage:
+	coverage run --source='.' manage.py test
+	rm -f static/coverage.svg
+	coverage-badge -o static/coverage.svg
+	coverage report
+
+fresh: rm_db mm test svg_build coverage

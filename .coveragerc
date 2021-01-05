@@ -1,0 +1,11 @@
+[run]
+omit =
+    app/*
+    ./manage.py
+    ./wsgi.py
+    ./setup.py
+
+[report]
+exclude_lines =
+    if settings.DEBUG
+    except pkg_resources.DistributionNotFound:
