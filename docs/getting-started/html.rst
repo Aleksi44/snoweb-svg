@@ -28,7 +28,7 @@ Choose at `svg.snoweb.fr <https://svg.snoweb.fr>`_.
         <!--Themes : manage dark and light mode-->
         <link rel="stylesheet" href="https://static.snoweb.fr/snowebsvg/dist/css/themes-<version>.css">
         <!--Sizer : add default size to SVGs-->
-        <link rel="stylesheet" href="https://static.snoweb.fr/snowebsvg/dist/css/themes-<version>.css">
+        <link rel="stylesheet" href="https://static.snoweb.fr/snowebsvg/dist/css/sizer-<version>.css">
 
         <!--Add your Snoweb SVG collections CSS like this-->
         <link rel="stylesheet" href="https://static.snoweb.fr/snowebsvg/dist/css/<collection_key>-<version>.css">

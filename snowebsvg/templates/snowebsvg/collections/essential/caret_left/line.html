@@ -1,0 +1,13 @@
+{% extends 'snowebsvg/common/builders/line.html' %}
+
+{% block builder_base %}
+    <g transform="rotate(90, 50, 50)">
+        {% include 'snowebsvg/common/svg/caret/base.html' %}
+    </g>
+{% endblock %}
+
+{% block builder_hover %}
+    <g transform="rotate(90, 50, 50)">
+        {% include 'snowebsvg/common/svg/caret/hover.html' %}
+    </g>
+{% endblock %}
