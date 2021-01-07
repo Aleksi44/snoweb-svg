@@ -50,3 +50,15 @@ $themes: (
     fill: t('secondary');
   }
 }
+
+.svg-stroke-primary {
+  @include theme($themes) {
+    stroke: t('primary');
+  }
+}
+
+.svg-stroke-secondary {
+  @include theme($themes) {
+    stroke: t('secondary');
+  }
+}

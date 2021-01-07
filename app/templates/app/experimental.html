@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block body %}
-    {% with theme=request.session.theme svg_key='essential-angle_down-basic' %}
+    {% with theme=request.session.theme svg_key='effect-article-basic' %}
         <h1>Experimental</h1>
 
         <div class="svg-trigger" style="display: flex; align-items: center;">
@@ -24,7 +24,7 @@
 
 
 
-        <div style="display: flex; flex-wrap: wrap">
+        <div class="svg-trigger" style="display: flex; flex-wrap: wrap">
             <article class="svg-effect-builder" style="position: relative; flex: 1; margin: 20px">
                 {% svg_inline svg_key theme %}
                 <h2>{% lorem 5 w random %}</h2>

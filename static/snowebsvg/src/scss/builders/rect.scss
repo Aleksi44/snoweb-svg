@@ -1,5 +1,3 @@
-$rect-radius: 15px;
-
 @keyframes svg-anim-rect-opacity {
   from {
     opacity: 0;
@@ -13,8 +11,6 @@ $rect-radius: 15px;
 .svg-trigger {
   .svg-builder-rect {
     opacity: 0;
-    rx: $rect-radius;
-    ry: $rect-radius;
   }
 
   &:hover {

@@ -1,4 +1,4 @@
 {% load svg %}
 <a href="{% url 'app:svg' self.group.collection.key self.group.key self.key %}" class="svg-trigger">
-    {% svg_inline self theme size %}
+    {% block preview_content %}{% svg_inline self theme size %}{% endblock %}
 </a>

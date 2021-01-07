@@ -1,0 +1,6 @@
+{% extends 'snowebsvg/common/preview.html' %}
+{% load svg %}
+
+{% block preview_content %}<div style="width: 200px; height: 200px;">
+    {% svg_inline self theme %}
+</div>{% endblock %}

@@ -1,8 +1,7 @@
 {% load svg %}
 
-<div style="display: flex; flex-wrap: wrap">
+<div style="display: flex; flex-wrap: wrap; align-items: center;">
     {% for svg in svg_set %}
         {% svg_preview svg theme 'x3' %}
-        {% comment %}<p><code>{{ svg.key_composer }}</code></p>{% endcomment %}
     {% endfor %}
 </div>
