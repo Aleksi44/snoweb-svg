@@ -6,7 +6,9 @@ from snowebsvg.models import Collection, GroupSvg, Svg
 
 
 class BaseSitemap(sitemaps.Sitemap):
+    priority = 0.4
     protocol = 'https'
+    changefreq = 'daily'
 
     def get_urls(self, site=None, **kwargs):
         site = Site(domain='svg.snoweb.fr', name='svg.snoweb.fr')
@@ -14,8 +16,6 @@ class BaseSitemap(sitemaps.Sitemap):
 
 
 class StaticSitemap(BaseSitemap):
-    priority = 0.5
-    changefreq = 'daily'
 
     def items(self):
         return ['app:collection', 'app:svg_search']
@@ -25,8 +25,6 @@ class StaticSitemap(BaseSitemap):
 
 
 class CollectionSitemap(BaseSitemap):
-    priority = 0.5
-    changefreq = 'daily'
 
     def items(self):
         return Collection.objects.all()
@@ -36,8 +34,6 @@ class CollectionSitemap(BaseSitemap):
 
 
 class GroupSvgSitemap(BaseSitemap):
-    priority = 0.5
-    changefreq = 'daily'
 
     def items(self):
         return GroupSvg.objects.all()
@@ -47,8 +43,6 @@ class GroupSvgSitemap(BaseSitemap):
 
 
 class SvgSitemap(BaseSitemap):
-    priority = 0.5
-    changefreq = 'daily'
 
     def items(self):
         return Svg.objects.all()

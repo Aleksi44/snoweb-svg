@@ -131,7 +131,7 @@ class Svg(models.Model):
         ordering = ('key',)
 
     def __str__(self):
-        return self.key_composer.title().replace('-', ' ')
+        return self.key_composer.title().replace('-', ' ').replace('_', ' ')
 
     @cached_property
     def key_composer(self):
