@@ -42,6 +42,17 @@ Fill primary colors with current theme.
 
 Fill secondary colors with current theme.
 
+.svg-stroke-primary
+~~~~~~~~~~~~~~~~~
+
+Stroke primary colors with current theme.
+
+.svg-stroke-secondary
+~~~~~~~~~~~~~~~~~~~
+
+Stroke secondary colors with current theme.
+
+
 Size
 ----
 
