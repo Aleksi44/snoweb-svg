@@ -7,13 +7,23 @@ register = template.Library()
 
 
 @register.simple_tag
-def svg_inline(svg_target, theme=None, size=None):
+def svg_inline(svg_target, theme=None, size=None, grid=False):
     if isinstance(svg_target, Svg):
-        return svg_target.render_html(theme, size)
+        return svg_target.render_html(theme, size, grid)
     else:
         svg = Svg()
         svg_composed = svg.key_decomposer(svg_target)
-        return svg_composed.render_html(theme, size)
+        return svg_composed.render_html(theme, size, grid)
+
+
+@register.simple_tag
+def svg_preview(svg_target, theme=None, size=None, grid=False):
+    if isinstance(svg_target, Svg):
+        return svg_target.render_preview(theme, size, grid)
+    else:
+        svg = Svg()
+        svg_composed = svg.key_decomposer(svg_target)
+        return svg_composed.render_preview(theme, size, grid)
 
 
 @register.simple_tag
@@ -24,16 +34,6 @@ def svg_django(svg_target, theme=None, size=None):
         svg = Svg()
         svg_composed = svg.key_decomposer(svg_target)
         return svg_composed.render_django(theme, size)
-
-
-@register.simple_tag
-def svg_preview(svg_target, theme=None, size=None):
-    if isinstance(svg_target, Svg):
-        return svg_target.render_preview(theme, size)
-    else:
-        svg = Svg()
-        svg_composed = svg.key_decomposer(svg_target)
-        return svg_composed.render_preview(theme, size)
 
 
 @register.simple_tag

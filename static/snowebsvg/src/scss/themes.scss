@@ -3,19 +3,23 @@
 :root {
   --svg-theme-light-primary: #14253A;
   --svg-theme-light-secondary: #E63946;
+  --svg-theme-light-tertiary: #f7f7f7;
 
   --svg-theme-dark-primary: #F7F7F7;
   --svg-theme-dark-secondary: #E63946;
+  --svg-theme-dark-tertiary: #112032;
 }
 
 $themes: (
         dark: (
                 primary: var(--svg-theme-dark-primary),
                 secondary: var(--svg-theme-dark-secondary),
+                tertiary: var(--svg-theme-dark-tertiary),
         ),
         light: (
                 primary: var(--svg-theme-light-primary),
                 secondary: var(--svg-theme-light-secondary),
+                tertiary: var(--svg-theme-light-tertiary),
         ),
 );
 
@@ -38,6 +42,7 @@ $themes: (
   @return map-get($theme-map, $key);
 }
 
+/* Fill */
 
 .svg-fill-primary {
   @include theme($themes) {
@@ -51,6 +56,14 @@ $themes: (
   }
 }
 
+.svg-fill-tertiary {
+  @include theme($themes) {
+    fill: t('tertiary');
+  }
+}
+
+/* Stroke */
+
 .svg-stroke-primary {
   @include theme($themes) {
     stroke: t('primary');
@@ -60,5 +73,11 @@ $themes: (
 .svg-stroke-secondary {
   @include theme($themes) {
     stroke: t('secondary');
+  }
+}
+
+.svg-stroke-tertiary {
+  @include theme($themes) {
+    stroke: t('tertiary');
   }
 }

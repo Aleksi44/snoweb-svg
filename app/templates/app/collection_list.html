@@ -8,12 +8,13 @@
     {% with theme=request.session.theme %}
         <h1>SVG collections</h1>
         {% for collection in object_list %}
-            <a style="display: inline-block; text-decoration: none;" class="svg-trigger"
-               href="{% url 'app:group' collection.key %}">
-                <h2><code>{{ collection.key }}</code></h2>
+            <h2><code>{{ collection.key }}</code></h2>
+            <a style="text-decoration: none" href="{% url 'app:group' collection.key %}">
                 {% for group in collection.groupsvg_set.all %}
                     {% for svg in group.svg_set.all %}
+                        <span style="display: inline-block; text-decoration: none;" class="svg-trigger">
                         {% svg_inline svg theme 'x1' %}
+                    </span>
                     {% endfor %}
                 {% endfor %}
             </a>

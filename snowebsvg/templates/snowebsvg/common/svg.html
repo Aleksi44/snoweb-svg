@@ -1,7 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg"
+     id="{{ grid }}"
      class="{% block svg_class %}svg-snoweb {% if size %}{{ size }}{% endif %} svg-theme-{% if theme %}{{ theme }}{% endif %}{% endblock %}"
      x="{% block svg_x %}0{% endblock %}"
      y="{% block svg_y %}0{% endblock %}"
      viewBox="{% block svg_viewbox %}0 0 100 100{% endblock %}"
      preserveAspectRatio="{% block svg_aspect_ratio %}xMidYMid meet{% endblock %}"
->{% block svg_content %}{% endblock %}</svg>
+>{% block svg_content %}{% endblock %}{% if grid %}{% include 'snowebsvg/common/grid.html' %}{% endif %}</svg>

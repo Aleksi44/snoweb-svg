@@ -134,6 +134,17 @@ class Svg(models.Model):
         return self.key_composer.title().replace('-', ' ').replace('_', ' ')
 
     @cached_property
+    def path(self):
+        """
+        :return string: Path html of Svg
+        """
+        return "snowebsvg/collections/%s/%s/%s.html" % (
+            self.group.collection.key,
+            self.group.key,
+            self.key
+        )
+
+    @cached_property
     def key_composer(self):
         """
         :return string: Unique Identifier of Svg
@@ -179,37 +190,37 @@ class Svg(models.Model):
             svg_template = get_template("snowebsvg/common/django.html")
             return svg_template.render(context)
 
-    def render_html(self, theme=settings.SVG_DEFAULT_THEME, size=settings.SVG_DEFAULT_SIZE):
+    def render_html(self, theme=settings.SVG_DEFAULT_THEME, size=settings.SVG_DEFAULT_SIZE, grid=False):
         """
         Method for rendering Svg to HTML
 
         :param theme: Theme, defaults to :ref:`SVG_DEFAULT_THEME <references_settings>`
         :param size: Size, defaults :ref:`SVG_DEFAULT_SIZE <references_settings>`
+        :param grid: Grid, add grid for debugging SVG, defaults to False`
         """
-        svg_template = get_template("snowebsvg/collections/%s/%s/%s.html" % (
-            self.group.collection.key,
-            self.group.key,
-            self.key
-        ))
+        svg_template = get_template(self.path)
         return svg_template.render({
             'self': self,
             'theme': theme,
-            'size': size
+            'size': size,
+            'grid': grid
         })
 
-    def render_preview(self, theme=settings.SVG_DEFAULT_THEME, size=settings.SVG_DEFAULT_SIZE):
+    def render_preview(self, theme=settings.SVG_DEFAULT_THEME, size=settings.SVG_DEFAULT_SIZE, grid=False):
         """
         Method for rendering a preview of Svg to HTML
         If _preview.html exist, then render the preview html file
-        If _preview does not exist, then fall back on render_html()
+        If _preview does not exist, then fall back to the common html file
 
         :param theme: Theme, defaults to :ref:`SVG_DEFAULT_THEME <references_settings>`
         :param size: Size, defaults :ref:`SVG_DEFAULT_SIZE <references_settings>`
+        :param grid: Grid, add grid for debugging SVG, defaults to False`
         """
         context = {
             'self': self,
             'theme': theme,
-            'size': size
+            'size': size,
+            'grid': grid,
         }
         try:
             svg_template = get_template("snowebsvg/collections/%s/%s/_preview.html" % (

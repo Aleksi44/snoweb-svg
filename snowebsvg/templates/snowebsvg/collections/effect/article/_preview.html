@@ -1,6 +1,6 @@
 {% load svg %}<a class="svg-trigger" style="text-decoration: none"
    href="{% url 'app:svg' self.group.collection.key self.group.key self.key %}">
-    <article class="svg-effect-builder" style="max-width: 200px; margin: 20px">
+    <article class="svg-effect-builder" style="background:{% if theme == 'light' %}#f7f7f7{% else %}#112032{% endif %};max-width: 200px; margin: 20px">
         {% svg_inline self theme %}
         <div style="padding: 10px">
             <h2>{% lorem 5 w random %}</h2>

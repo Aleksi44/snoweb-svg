@@ -1,0 +1,35 @@
+{% extends 'snowebsvg/common/builders/basic.html' %}
+
+{% block svg_viewbox %}0 0 120 200{% endblock %}
+{% block svg_aspect_ratio %}none{% endblock %}
+
+{% block builder_base %}
+    <linearGradient id="{{ self.key_composer }}-base"
+                    x1="-35.17"
+                    y1="155.1"
+                    x2="63.12"
+                    y2="26.24"
+                    gradientTransform="matrix(1, 0, 0, -1, 0, 200)"
+                    gradientUnits="userSpaceOnUse"
+    >
+        <stop offset="0" stop-opacity="0.2"></stop>
+        <stop offset="1" stop-opacity="0"></stop>
+    </linearGradient>
+    <path fill="url(#{{ self.key_composer }}-base)" d="M0,200s122-5.88,120-50.47S.35,55.65,0,0"></path>
+{% endblock %}
+
+{% block builder_hover %}
+    <linearGradient id="{{ self.key_composer }}-hover"
+                    x1="-35.17"
+                    y1="155.1"
+                    x2="63.12"
+                    y2="26.24"
+                    gradientTransform="matrix(1, 0, 0, -1, 0, 200)"
+                    gradientUnits="userSpaceOnUse"
+    >
+        <stop offset="0" stop-opacity="0.8"></stop>
+        <stop offset="1" stop-opacity="0"></stop>
+    </linearGradient>
+    <path fill="url(#{{ self.key_composer }}-hover)" d="M0,200s122-5.88,120-50.47S.35,55.65,0,0"></path>
+
+{% endblock %}

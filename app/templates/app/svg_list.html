@@ -11,7 +11,7 @@
     {% with theme=request.session.theme %}
         {% for svg in object_list %}
             <h1>SVG <code>{{ svg.key_composer }}</code></h1>
-            {% svg_preview svg theme 'x5' %}
+            {% svg_preview svg theme 'x10' True %}
             <h2>Attributes</h2>
             <ul>
                 <li>
