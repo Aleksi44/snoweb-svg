@@ -134,7 +134,7 @@ class Svg(models.Model):
         return self.key_composer.title().replace('-', ' ').replace('_', ' ')
 
     @cached_property
-    def path(self):
+    def path_entry(self):
         """
         :return string: Path html of Svg
         """
@@ -198,7 +198,7 @@ class Svg(models.Model):
         :param size: Size, defaults :ref:`SVG_DEFAULT_SIZE <references_settings>`
         :param grid: Grid, add grid for debugging SVG, defaults to False`
         """
-        svg_template = get_template(self.path)
+        svg_template = get_template(self.path_entry)
         return svg_template.render({
             'self': self,
             'theme': theme,
@@ -209,8 +209,9 @@ class Svg(models.Model):
     def render_preview(self, theme=settings.SVG_DEFAULT_THEME, size=settings.SVG_DEFAULT_SIZE, grid=False):
         """
         Method for rendering a preview of Svg to HTML
-        If _preview.html exist, then render the preview html file
-        If _preview does not exist, then fall back to the common html file
+
+        If _preview.html exist, then render the preview html file.
+        If _preview.html does not exist, then fall back to the common preview.html file.
 
         :param theme: Theme, defaults to :ref:`SVG_DEFAULT_THEME <references_settings>`
         :param size: Size, defaults :ref:`SVG_DEFAULT_SIZE <references_settings>`

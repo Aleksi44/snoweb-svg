@@ -1,10 +1,20 @@
-{% block css %}{% endblock %}
+{% block css %}<!--Themes (not required) : manage dark and light mode-->
+<link rel="stylesheet" href="{{ settings.BASE_URL_CSS }}themes-{{ settings.VERSION }}.css">
+
+<!--Sizer (not required) : add default size to SVGs-->
+<link rel="stylesheet" href="{{ settings.BASE_URL_CSS }}sizer-{{ settings.VERSION }}.css">
+
+<!--Collections (required)-->
+{% endblock %}
+
 <style>
     :root {
         --svg-theme-light-primary: #14253A;
         --svg-theme-light-secondary: #E63946;
+        --svg-theme-light-tertiary: #f7f7f7;
 
         --svg-theme-dark-primary: #F7F7F7;
         --svg-theme-dark-secondary: #E63946;
+        --svg-theme-dark-tertiary: #112032;
     }
 </style>

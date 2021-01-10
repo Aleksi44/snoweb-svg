@@ -1,10 +1,12 @@
 {% load svg %}<a class="svg-trigger" style="text-decoration: none"
-   href="{% url 'app:svg' self.group.collection.key self.group.key self.key %}">
-    <article class="svg-effect-builder" style="background:{% if theme == 'light' %}#f7f7f7{% else %}#112032{% endif %};max-width: 200px; margin: 20px">
+                 href="{% url 'app:svg' self.group.collection.key self.group.key self.key %}">
+    <article class="svg-effect-builder"
+             style="background:{% if theme == 'light' %}#f7f7f7{% else %}#112032{% endif %};max-width: 200px; margin: 20px">
         {% svg_inline self theme %}
-        <div style="padding: 10px">
+        <div class="svg-effect-container" style="padding: 10px">
+            {% include 'snowebsvg/common/mock/img_square.html' %}
             <h2>{% lorem 5 w random %}</h2>
-            <p>{% lorem 10 w random %}</p>
+            <p style="color: var(--text-bright)">{% lorem 10 w random %}</p>
         </div>
     </article>
 </a>

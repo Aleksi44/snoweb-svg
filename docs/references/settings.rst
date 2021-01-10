@@ -21,5 +21,7 @@ Define the default size of the SVG :
 - x1
 - x2
 - x3
+- x5
+- x10
 
 Default value : ``x3``

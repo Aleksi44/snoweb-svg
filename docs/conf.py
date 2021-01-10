@@ -67,3 +67,11 @@ autodoc_default_options = {
 sys.path.insert(0, os.path.join(os.path.abspath('.'), '..'))
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
 django.setup()
+
+from snowebsvg.settings import VERSION
+
+rst_epilog = """
+.. |version| replace:: {version}
+""".format(
+    version=VERSION,
+)

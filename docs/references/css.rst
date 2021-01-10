@@ -42,15 +42,25 @@ Fill primary colors with current theme.
 
 Fill secondary colors with current theme.
 
+.svg-fill-tertiary
+~~~~~~~~~~~~~~~~~~
+
+Fill tertiary colors with current theme.
+
 .svg-stroke-primary
-~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 Stroke primary colors with current theme.
 
 .svg-stroke-secondary
-~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
 Stroke secondary colors with current theme.
+
+.svg-stroke-tertiary
+~~~~~~~~~~~~~~~~~~~~
+
+Stroke tertiary colors with current theme.
 
 
 Size
@@ -61,3 +71,12 @@ Size
 
 .svg-snoweb.x2
 ~~~~~~~~~~~~~~
+
+.svg-snoweb.x3
+~~~~~~~~~~~~~~
+
+.svg-snoweb.x5
+~~~~~~~~~~~~~~
+
+.svg-snoweb.x10
+~~~~~~~~~~~~~~~

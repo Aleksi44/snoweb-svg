@@ -1,5 +1,3 @@
 {% extends 'snowebsvg/common/styles.html' %}
 
-{% block css %}<link rel="stylesheet" href="{{ settings.BASE_URL_CSS }}themes-{{ settings.VERSION }}.css">
-<link rel="stylesheet" href="{{ settings.BASE_URL_CSS }}sizer-{{ settings.VERSION }}.css">
-<link rel="stylesheet" href="{{ settings.BASE_URL_CSS }}{{ self.key }}-{{ settings.VERSION }}.css">{% endblock %}
+{% block css %}{{ block.super }}<link rel="stylesheet" href="{{ settings.BASE_URL_CSS }}{{ self.key }}-{{ settings.VERSION }}.css">{% endblock %}
