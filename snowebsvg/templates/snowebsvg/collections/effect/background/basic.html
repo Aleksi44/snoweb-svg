@@ -11,10 +11,10 @@
     <filter id="{{ self.key_composer }}-blur" x="0" y="0">
         <feGaussianBlur in="SourceAlpha" stdDeviation="1"></feGaussianBlur>
     </filter>
-    
+
     <g opacity="0.15" transform="{% scale 2.25 x=96 y=54 %}">
         <circle filter="url(#{{ self.key_composer }}-blur)"
-                class="svg-fill-tertiary svg-builder-circle"
+                class="svg-fill-tertiary svg-builder-circle svg-keep"
                 cx="96"
                 cy="54"
                 r="0">

@@ -7,16 +7,42 @@
   }
 }
 
+// Regular
+
 .svg-trigger {
   .svg-builder-circle {
     r: 0px;
+    animation-duration: $animation-duration;
+
+    &.svg-slow {
+      animation-duration: #{$animation-duration * 2};
+    }
   }
 
   &:hover {
     .svg-builder-circle {
       animation-name: svg-anim-circle-r-full;
-      animation-duration: $animation-duration;
       animation-fill-mode: forwards;
+    }
+  }
+}
+
+// Keep animation
+
+.svg-trigger {
+  .svg-builder-circle.svg-keep {
+    r: 50px;
+    animation-name: svg-anim-circle-r-full;
+    animation-fill-mode: backwards;
+    animation-play-state: paused;
+  }
+
+  &:active,
+  &:focus,
+  &:hover {
+    .svg-builder-circle.svg-keep {
+      animation-fill-mode: forwards;
+      animation-play-state: running;
     }
   }
 }

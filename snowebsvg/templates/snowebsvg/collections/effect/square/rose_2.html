@@ -16,7 +16,7 @@
         {% for prop in props %}
             <circle transform="{% scale 0.5 x=prop.0|to_int y=prop.1|to_int %}"
                     style="mix-blend-mode: screen;"
-                    class="svg-fill-tertiary svg-builder-circle"
+                    class="svg-fill-tertiary svg-builder-circle svg-slow svg-keep"
                     cx="{{ prop.0 }}"
                     cy="{{ prop.1 }}"
                     r="0">
