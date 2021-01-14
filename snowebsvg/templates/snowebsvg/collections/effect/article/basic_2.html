@@ -2,6 +2,7 @@
 
 {% block svg_viewbox %}0 0 120 200{% endblock %}
 {% block svg_aspect_ratio %}none{% endblock %}
+{% block svg_class %}{{ block.super }} svg-bg{% endblock %}
 
 {% block builder_base %}
     <path class="svg-fill-primary" opacity="0.04"

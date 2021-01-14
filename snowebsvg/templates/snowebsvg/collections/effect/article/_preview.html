@@ -4,7 +4,9 @@
              style="background:{% if theme == 'light' %}#f7f7f7{% else %}#112032{% endif %};max-width: 200px; margin: 20px">
         {% svg_inline self theme %}
         <div class="svg-effect-container" style="padding: 10px">
-            {% include 'snowebsvg/common/mock/img_square.html' %}
+            <svg class="svg-snoweb svg-theme-{% if theme == 'light' %}light{% else %}dark{% endif %}" style="width: 100%;" viewBox="0 0 1920 1080">
+                <rect stroke-width="3" width="1920" height="1080" class="svg-fill-tertiary svg-stroke-primary"></rect>
+            </svg>
             <h2>{% lorem 5 w random %}</h2>
             <p style="color: var(--text-bright)">{% lorem 10 w random %}</p>
         </div>

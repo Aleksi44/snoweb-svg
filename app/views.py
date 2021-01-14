@@ -64,4 +64,4 @@ class SvgSearch(ListView):
             key_slug = slugify(key)
             if key_slug:
                 return redirect('app:svg_search', key=key_slug)
-        return super().post(request, *args, **kwargs)
+        return redirect('app:svg_search')

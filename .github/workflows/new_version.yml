@@ -1,5 +1,8 @@
-name: push
-on: [ push, pull_request ]
+name: coverage
+on:
+  push:
+    tags:
+      - '*'
 
 jobs:
   test:
@@ -19,6 +22,17 @@ jobs:
         with:
           parallel: true
           flag-name: Unit Test
+
+      - name: Deployment
+        uses: appleboy/ssh-action@master
+        with:
+          host: svg.snoweb.fr
+          username: debian
+          key: ${{ secrets.KEY }}
+          port: 22
+          script: |
+            cd /home/debian/bin/ && ./snowebsvg_deploy.sh
+
 
   coveralls_finish:
     needs: test

@@ -1,0 +1,11 @@
+{{ start }} load svg {{ end }}
+
+{% block content %}<a href="#" class="svg-trigger">
+        <div class="svg-effect-builder">
+
+            {{ start }} svg_inline '{{ self.key_composer }}' '{{ theme }}' '{{ size }}' {{ end }}
+
+            ...
+
+        </div>
+</a>{% endblock %}

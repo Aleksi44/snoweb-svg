@@ -1,31 +1,29 @@
-{% extends 'snowebsvg/common/builders/basic.html' %}
+{% extends 'snowebsvg/common/svg.html' %}
 
 {% block svg_viewbox %}0 0 120 200{% endblock %}
-{% block svg_aspect_ratio %}none{% endblock %}
+{% block svg_aspect_ratio %}xMidYMid slice{% endblock %}
+{% block svg_class %}{{ block.super }} svg-bg{% endblock %}
 
-{% block builder_base %}
-    <linearGradient id="{{ self.key_composer }}-base"
-                    x1="-1.65" y1="25.23"
-                    x2="100.52"
-                    y2="149.14"
-                    gradientTransform="matrix(1, 0, 0, -1, 0, 200)"
-                    gradientUnits="userSpaceOnUse">
-        <stop offset="0" stop-opacity="0.1"></stop>
-        <stop offset="1" stop-opacity="0"></stop>
-    </linearGradient>
-    <rect fill="url(#{{ self.key_composer }}-base)" width="120" height="200"></rect>
-{% endblock %}
+{% block svg_content %}
+    <filter id="{{ self.key_composer }}-blur" x="0" y="0">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="1"></feGaussianBlur>
+    </filter>
 
-{% block builder_hover %}
-    <linearGradient id="{{ self.key_composer }}-hover"
-                    x1="-1.65"
-                    y1="25.23"
-                    x2="100.52"
-                    y2="149.14"
-                    gradientTransform="matrix(1, 0, 0, -1, 0, 200)"
-                    gradientUnits="userSpaceOnUse">
-        <stop offset="0" stop-opacity="0.8" stop-color="var(--svg-theme-{% if theme == 'light' %}light{% else %}dark{% endif %}-tertiary)"></stop>
-        <stop offset="1" stop-opacity="0"></stop>
-    </linearGradient>
-    <rect fill="url(#{{ self.key_composer }}-hover)" width="120" height="200"></rect>
+    <rect class="svg-fill-tertiary" width="120" height="200"></rect>
+
+    <g opacity="0.15">
+        <circle filter="url(#{{ self.key_composer }}-blur)" class="svg-fill-tertiary svg-builder-circle" cx="97.78"
+                cy="22.22" r="22.22"></circle>
+        <circle filter="url(#{{ self.key_composer }}-blur)" class="svg-fill-tertiary svg-builder-circle" cx="38.35"
+                cy="38.35" r="38.35"></circle>
+        <circle filter="url(#{{ self.key_composer }}-blur)" class="svg-fill-tertiary svg-builder-circle" cx="22.22"
+                cy="177.78" r="22.22"></circle>
+        <circle filter="url(#{{ self.key_composer }}-blur)" class="svg-fill-tertiary svg-builder-circle" cx="81.65"
+                cy="161.65" r="38.35"></circle>
+        <circle filter="url(#{{ self.key_composer }}-blur)" class="svg-fill-tertiary svg-builder-circle" cx="100.07"
+                cy="107.39" r="11.82"></circle>
+        <circle filter="url(#{{ self.key_composer }}-blur)" class="svg-fill-tertiary svg-builder-circle" cx="18.66"
+                cy="107.39" r="11.82"></circle>
+    </g>
+
 {% endblock %}

@@ -1,19 +1,20 @@
 {% extends 'snowebsvg/common/svg.html' %}
 
-{% block svg_viewbox %}0 0 120 200{% endblock %}
+{% block svg_viewbox %}0 0 192 108{% endblock %}
 {% block svg_aspect_ratio %}xMidYMid slice{% endblock %}
 {% block svg_class %}{{ block.super }} svg-bg{% endblock %}
+
 
 {% block svg_content %}
     <filter id="{{ self.key_composer }}-blur" x="0" y="0">
         <feGaussianBlur in="SourceAlpha" stdDeviation="1"></feGaussianBlur>
     </filter>
 
-    <rect class="svg-fill-tertiary" width="120" height="200"></rect>
+    <rect class="svg-fill-tertiary" width="192" height="108"></rect>
 
-    <g opacity="0.15" transform="scale(2.35) translate(-33, -58)">
-        <circle filter="url(#{{ self.key_composer }}-blur)" class="svg-fill-tertiary svg-builder-circle" cx="60"
-                cy="100" r="0"></circle>
+    <g opacity="0.15" transform="scale(2.25) translate(-52, -30)">
+        <circle filter="url(#{{ self.key_composer }}-blur)" class="svg-fill-tertiary svg-builder-circle" cx="96"
+                cy="54" r="0"></circle>
     </g>
 
 {% endblock %}

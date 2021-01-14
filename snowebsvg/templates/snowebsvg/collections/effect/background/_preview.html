@@ -1,0 +1,12 @@
+{% load svg %}<a class="svg-trigger" style="text-decoration: none"
+                 href="{% url 'app:svg' self.group.collection.key self.group.key self.key %}">
+    <div class="svg-effect-builder"
+             style="background:{% if theme == 'light' %}#f7f7f7{% else %}#112032{% endif %};width: 100%;">
+        {% svg_inline self theme %}
+        <div class="svg-effect-container">
+            <svg class="svg-snoweb svg-theme-{% if theme == 'light' %}light{% else %}dark{% endif %}" style="width: 100%;" viewBox="0 0 192 108">
+                <rect opacity="0" stroke-width="3" width="192" height="108" class="svg-fill-tertiary svg-stroke-primary"></rect>
+            </svg>
+        </div>
+    </div>
+</a>
