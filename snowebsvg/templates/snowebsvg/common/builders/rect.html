@@ -1,5 +1,7 @@
 {% extends 'snowebsvg/common/builders/basic.html' %}
 
+{% load svg_utils %}
+
 {% block svg_content %}
     <clipPath id="clip-path-{{ self.key_composer }}">
         <rect x="0" y="0" width="100" height="100" rx="15" ry="15"></rect>
@@ -9,12 +11,12 @@
 
         <rect class="svg-fill-tertiary" x="0" y="0" width="100" height="100"></rect>
 
-        <g transform="scale(1.45) translate(-15, -15)">
+        <g transform="{% scale 1.45 %}">
             <circle class="svg-fill-secondary svg-builder-circle" cx="50" cy="50" r="50"></circle>
         </g>
     </g>
 
-    <g transform="scale(0.5) translate(50, 50)">
+    <g transform="{% scale 0.5 %}">
         {{ block.super }}
     </g>
 

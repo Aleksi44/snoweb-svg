@@ -1,11 +1,11 @@
-name: coverage
+name: version
 on:
   push:
     tags:
       - '*'
 
 jobs:
-  test:
+  version:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

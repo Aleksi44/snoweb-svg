@@ -1,0 +1,32 @@
+{% extends 'snowebsvg/common/svg.html' %}
+
+{% load svg_utils %}
+
+
+{% block svg_content %}
+    {% with s=0.5 %}
+
+        {% parse "25;25 25;75 75;25 75;75" as props %}
+        {% for prop in props %}
+            <circle transform="{% scale s x=prop.0|to_int y=prop.1|to_int %}"
+                    class="svg-fill-tertiary"
+                    cx="{{ prop.0 }}"
+                    cy="{{ prop.1 }}"
+                    r="50">
+            </circle>
+        {% endfor %}
+
+        {% parse "25;50 50;25 50;75 75;50" as props %}
+        {% for prop in props %}
+            <circle transform="{% scale s x=prop.0|to_int y=prop.1|to_int %}"
+                    style="mix-blend-mode: screen;"
+                    class="svg-fill-tertiary svg-builder-circle"
+                    cx="{{ prop.0 }}"
+                    cy="{{ prop.1 }}"
+                    r="0">
+            </circle>
+        {% endfor %}
+
+    {% endwith %}
+
+{% endblock %}

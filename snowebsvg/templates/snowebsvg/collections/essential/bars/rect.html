@@ -1,11 +1,13 @@
 {% extends 'snowebsvg/common/builders/rect.html' %}
 
+{% load svg_utils %}
+
 {% block builder_base %}
     {% include 'snowebsvg/collections/essential/bars/_rects-base.html' %}
 {% endblock %}
 
 {% block builder_hover %}
-    <g transform="scale(-1, 1) translate(-100, 0)">
+    <g transform="{% scale -1 1 %}">
         {% include 'snowebsvg/collections/essential/bars/_rects-base.html' %}
     </g>
 {% endblock %}
