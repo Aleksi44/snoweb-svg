@@ -35,7 +35,7 @@ jobs:
 
 
   coveralls_finish:
-    needs: test
+    needs: version
     runs-on: ubuntu-latest
     steps:
       - name: Coveralls Finished
