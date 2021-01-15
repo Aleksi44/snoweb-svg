@@ -1,0 +1,16 @@
+{% extends 'snowebsvg/common/svg.html' %}
+
+{% load svg_utils %}
+
+
+{% block svg_content %}
+    <clipPath id="clip-path-{{ self.key_composer }}">
+        {% include 'snowebsvg/common/svg/snowflake/base.html' %}
+    </clipPath>
+
+    {% include 'snowebsvg/common/svg/snowflake/base.html' with snowflake_class='svg-fill-tertiary' %}
+
+    <g clip-path="url(#clip-path-{{ self.key_composer }})">
+        <circle class="svg-fill-primary svg-builder-circle svg-keep" cx="50" cy="50" r="0"></circle>
+    </g>
+{% endblock %}

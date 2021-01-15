@@ -1,4 +1,4 @@
-{% load cache static %}
+{% load cache static css_inline %}
 
 {% with theme=request.session.theme %}
     <!DOCTYPE html>
@@ -28,21 +28,23 @@
               href="https://media.snoweb.fr/www/images/favicon_4vyLMhX.2e16d0ba.fill-196x196.format-png.png">
         <link rel="canonical" href="https://{{ request.get_host }}{{ request.path }}"/>
         {% block css %}
-            {% with water_css="https://cdn.jsdelivr.net/npm/water.css@2/out/" %}
-                <link rel="stylesheet" href="{{ water_css }}{% if theme %}{{ theme }}{% else %}dark{% endif %}{% if not debug %}.min{% endif %}.css">
-            {% endwith %}
-            {% with href="snowebsvg/dist/css/themes-"|add:settings.VERSION|add:".css" %}
-                <link rel="stylesheet" href="{% static href %}">
-            {% endwith %}
-            {% with href="snowebsvg/dist/css/sizer-"|add:settings.VERSION|add:".css" %}
-                <link rel="stylesheet" href="{% static href %}">
-            {% endwith %}
-            {% with href="snowebsvg/dist/css/essential-"|add:settings.VERSION|add:".css" %}
-                <link rel="stylesheet" href="{% static href %}">
-            {% endwith %}
-            {% with href="snowebsvg/dist/css/effect-"|add:settings.VERSION|add:".css" %}
-                <link rel="stylesheet" href="{% static href %}">
-            {% endwith %}
+            {% css_inline %}
+                {% with water_css="https://cdn.jsdelivr.net/npm/water.css@2/out/" %}
+                    <link rel="stylesheet" href="{{ water_css }}{% if theme %}{{ theme }}{% else %}dark{% endif %}{% if not debug %}.min{% endif %}.css">
+                {% endwith %}
+                {% with href="snowebsvg/dist/css/themes-"|add:settings.VERSION|add:".css" %}
+                    <link rel="stylesheet" href="{% static href %}">
+                {% endwith %}
+                {% with href="snowebsvg/dist/css/sizer-"|add:settings.VERSION|add:".css" %}
+                    <link rel="stylesheet" href="{% static href %}">
+                {% endwith %}
+                {% with href="snowebsvg/dist/css/essential-"|add:settings.VERSION|add:".css" %}
+                    <link rel="stylesheet" href="{% static href %}">
+                {% endwith %}
+                {% with href="snowebsvg/dist/css/effect-"|add:settings.VERSION|add:".css" %}
+                    <link rel="stylesheet" href="{% static href %}">
+                {% endwith %}
+            {% end_css_inline %}
             <style>
                 :root {
                 {% if theme == 'light' %}

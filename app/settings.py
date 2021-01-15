@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     "django.contrib.sitemaps",
     'storages',
+    'django_css_inline'
 ]
 
 MIDDLEWARE = [
@@ -141,3 +142,7 @@ LOGGING = {
         },
     }
 }
+
+# DJANGO CSS INLINE
+
+DJANGO_CSS_INLINE_ENABLE = not DEBUG
