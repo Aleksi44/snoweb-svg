@@ -16,3 +16,4 @@ except pkg_resources.DistributionNotFound:
 
 SVG_DEFAULT_THEME = 'dark'
 SVG_DEFAULT_SIZE = 'x3'
+SVG_DEFAULT_VARIANT = ''

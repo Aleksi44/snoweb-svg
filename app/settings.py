@@ -32,7 +32,6 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     "django.contrib.sitemaps",
     'storages',
-    'django_css_inline'
 ]
 
 MIDDLEWARE = [
@@ -44,7 +43,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.gzip.GZipMiddleware',
-    'app.middlewares.ThemeMiddleware',
+    'app.middlewares.SettingsMiddleware',
 ]
 
 
@@ -142,7 +141,3 @@ LOGGING = {
         },
     }
 }
-
-# DJANGO CSS INLINE
-
-DJANGO_CSS_INLINE_ENABLE = not DEBUG

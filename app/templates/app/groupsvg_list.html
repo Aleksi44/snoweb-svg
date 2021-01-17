@@ -5,7 +5,7 @@
 {% block description %}Get free collection {% if object_list.0 %} {{ object_list.0.collection }}{% endif %} of SVGs animated built in HTML and CSS. {{ block.super }}{% endblock %}
 
 {% block body %}
-    {% with theme=request.session.theme first_group=object_list.0 %}
+    {% with theme=request.session.theme first_group=object_list.0 variant=request.session.variant %}
         <h1>SVG collection{% if first_group %}
             <a href="{% url 'app:group' first_group.collection.key %}"><code>{{ first_group.collection.key }}</code></a>{% endif %}
         </h1>

@@ -3,8 +3,27 @@
 {% load svg_utils %}
 
 {% block svg_content %}
-    <circle class="svg-fill-tertiary" cx="50" cy="50" r="50"></circle>
-    <circle class="svg-fill-secondary svg-builder-circle" cx="50" cy="50" r="50"></circle>
+
+
+    {% comment %}We transform here because of `stdDeviation` of blur{% endcomment %}
+    {% if variant == 'glass' %}<g transform="{% scale 0.8 %}">{% endif %}
+
+    <circle {% variant_manager variant self 'attrs' %}
+            class="svg-fill-tertiary"
+            cx="50"
+            cy="50"
+            r="50">
+    </circle>
+
+    {% if variant == 'glass' %}</g>{% endif %}
+
+    <circle {% variant_manager variant self 'attrs' %}
+            class="svg-fill-secondary svg-builder-circle"
+            cx="50"
+            cy="50"
+            r="50">
+    </circle>
+
     <g transform="{% scale 0.5 %}">
         {{ block.super }}
     </g>

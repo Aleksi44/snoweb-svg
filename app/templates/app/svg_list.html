@@ -7,11 +7,10 @@
 
 
 {% block body %}
-    <button type="button" onclick="window.history.back()">go back</button>
-    {% with theme=request.session.theme %}
+    {% with theme=request.session.theme variant=request.session.variant %}
         {% for svg in object_list %}
             <h1>SVG <code>{{ svg.key_composer }}</code></h1>
-            {% svg_preview svg theme 'x10' True %}
+            {% svg_preview svg theme 'x10' variant True %}
             <h2>Attributes</h2>
             <ul>
                 <li>
@@ -47,7 +46,7 @@
             <textarea id="code-html-{{ svg.key_composer }}">{% svg_preview svg theme 'x3' %}</textarea>
             <button type="button" onclick="document.getElementById('code-html-{{ svg.key_composer }}').select();document.execCommand('copy');">Copy</button>
             <h3>Django</h3>
-            <textarea id="code-django-{{ svg.key_composer }}" style="height: 110px">{% svg_django svg theme 'x3' %}</textarea>
+            <textarea id="code-django-{{ svg.key_composer }}" style="height: 110px">{% svg_django svg theme 'x3' variant=variant %}</textarea>
             <button type="button" onclick="document.getElementById('code-django-{{ svg.key_composer }}').select();document.execCommand('copy');">Copy</button>
         {% endfor %}
     {% endwith %}

@@ -1,4 +1,6 @@
 from django import template
+from django.template.loader import get_template
+from django.template.exceptions import TemplateDoesNotExist
 
 register = template.Library()
 
@@ -25,3 +27,19 @@ def parse(list_props):
 @register.filter
 def to_int(value):
     return int(value)
+
+
+@register.simple_tag
+def variant_manager(variant=None, svg=None, variant_part='defs'):
+    if variant and svg:
+        try:
+            svg_template = get_template("snowebsvg/common/variants/%s/%s.html" % (
+                variant,
+                variant_part
+            ))
+            return svg_template.render({
+                'self': svg,
+            })
+        except TemplateDoesNotExist:
+            return ''
+    return ''

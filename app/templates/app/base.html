@@ -1,4 +1,4 @@
-{% load cache static css_inline %}
+{% load cache static settings %}
 
 {% with theme=request.session.theme %}
     <!DOCTYPE html>
@@ -28,27 +28,26 @@
               href="https://media.snoweb.fr/www/images/favicon_4vyLMhX.2e16d0ba.fill-196x196.format-png.png">
         <link rel="canonical" href="https://{{ request.get_host }}{{ request.path }}"/>
         {% block css %}
-            {% css_inline %}
-                {% with water_css="https://cdn.jsdelivr.net/npm/water.css@2/out/" %}
-                    <link rel="stylesheet" href="{{ water_css }}{% if theme %}{{ theme }}{% else %}dark{% endif %}{% if not debug %}.min{% endif %}.css">
-                {% endwith %}
-                {% with href="snowebsvg/dist/css/themes-"|add:settings.VERSION|add:".css" %}
-                    <link rel="stylesheet" href="{% static href %}">
-                {% endwith %}
-                {% with href="snowebsvg/dist/css/sizer-"|add:settings.VERSION|add:".css" %}
-                    <link rel="stylesheet" href="{% static href %}">
-                {% endwith %}
-                {% with href="snowebsvg/dist/css/essential-"|add:settings.VERSION|add:".css" %}
-                    <link rel="stylesheet" href="{% static href %}">
-                {% endwith %}
-                {% with href="snowebsvg/dist/css/effect-"|add:settings.VERSION|add:".css" %}
-                    <link rel="stylesheet" href="{% static href %}">
-                {% endwith %}
-            {% end_css_inline %}
+            {% with water_css="https://cdn.jsdelivr.net/npm/water.css@2/out/" %}
+                <link rel="stylesheet" href="
+                        {{ water_css }}{% if theme %}{{ theme }}{% else %}dark{% endif %}{% if not debug %}.min{% endif %}.css">
+            {% endwith %}
+            {% with href="snowebsvg/dist/css/themes-"|add:settings.VERSION|add:".css" %}
+                <link rel="stylesheet" href="{% static href %}">
+            {% endwith %}
+            {% with href="snowebsvg/dist/css/sizer-"|add:settings.VERSION|add:".css" %}
+                <link rel="stylesheet" href="{% static href %}">
+            {% endwith %}
+            {% with href="snowebsvg/dist/css/essential-"|add:settings.VERSION|add:".css" %}
+                <link rel="stylesheet" href="{% static href %}">
+            {% endwith %}
+            {% with href="snowebsvg/dist/css/effect-"|add:settings.VERSION|add:".css" %}
+                <link rel="stylesheet" href="{% static href %}">
+            {% endwith %}
             <style>
                 :root {
                 {% if theme == 'light' %}
-                    --background-body: #fff;
+                    --background-body: {% settings_by_key request 'theme_light_background_body' %};
                     --background: #efefef;
                     --background-alt: #f7f7f7;
                     --selection: #E63946;
@@ -68,7 +67,7 @@
                     --variable: #E63946;
                     --highlight: #E63946;
                 {% else %}
-                    --background-body: #14253A;
+                    --background-body: {% settings_by_key request 'theme_dark_background_body' %};
                     --background: #112032;
                     --background-alt: #112032;
                     --selection: #E63946;
@@ -89,13 +88,13 @@
                     --highlight: #E63946;
                 {% endif %}
 
-                    --svg-theme-light-primary: #14253A;
-                    --svg-theme-light-secondary: #E63946;
-                    --svg-theme-light-tertiary: #f7f7f7;
+                    --svg-theme-light-primary: {% settings_by_key request 'theme_light_primary' %};
+                    --svg-theme-light-secondary: {% settings_by_key request 'theme_light_secondary' %};
+                    --svg-theme-light-tertiary: {% settings_by_key request 'theme_light_tertiary' %};
 
-                    --svg-theme-dark-primary: #F7F7F7;
-                    --svg-theme-dark-secondary: #E63946;
-                    --svg-theme-dark-tertiary: #112032;
+                    --svg-theme-dark-primary: {% settings_by_key request 'theme_dark_primary' %};
+                    --svg-theme-dark-secondary: {% settings_by_key request 'theme_dark_secondary' %};
+                    --svg-theme-dark-tertiary: {% settings_by_key request 'theme_dark_tertiary' %};
                 }
             </style>
         {% endblock %}
@@ -111,15 +110,20 @@
     </a>
     <hr/>
 
-    <form method="GET" style="display: flex">
-        <input type="submit" name="theme" value="dark">
-        <input type="submit" name="theme" value="light">
+    <div style="display: flex">
+        <a href="{% url 'app:collection' %}">
+            <button type="button">home</button>
+        </a>
         <a href="{% url 'app:svg_search' %}">
             <button type="button">search</button>
         </a>
-    </form>
+        <a href="{% url 'app:svg_settings' %}">
+            <button type="button">settings</button>
+        </a>
+    </div>
 
     {% cache_page request %}{% block body %}{% endblock %}{% endcache_page %}
+    {% block body_no_cache %}{% endblock %}
 
     <hr/>
 

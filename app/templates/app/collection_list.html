@@ -5,7 +5,7 @@
 {% block description %}Get free collections of SVGs animated built in HTML and CSS. {{ block.super }}{% endblock %}
 
 {% block body %}
-    {% with theme=request.session.theme %}
+    {% with theme=request.session.theme variant=request.session.variant %}
         <h1>SVG collections</h1>
         {% for collection in object_list %}
             <a style="text-decoration: none" href="{% url 'app:group' collection.key %}">
@@ -15,7 +15,7 @@
                 {% for svg in group.svg_set.all %}
                     <a style="text-decoration: none" href="{% url 'app:svg' collection.key svg.group.key svg.key  %}">
                     <span style="display: inline-block; text-decoration: none;" class="svg-trigger">
-                        {% svg_inline svg theme 'x2' %}
+                        {% svg_inline svg theme 'x2' variant=variant %}
                     </span>
                     </a>
                 {% endfor %}
