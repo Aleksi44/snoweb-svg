@@ -12,7 +12,7 @@ variants_settings = {
         ('theme_dark_secondary', '#E63946'),
         ('theme_dark_tertiary', '#112032'),
         ('theme_light_background_body', '#FFFFFF'),
-        ('theme_dark_background_body', '#14253A'),
+        ('theme_dark_background_body', 'radial-gradient(ellipse at top, #173049, #020A11)'),
     ),
     'glass': (
         ('theme_light_primary', '#14253A'),
@@ -21,8 +21,8 @@ variants_settings = {
         ('theme_dark_primary', '#F7F7F7'),
         ('theme_dark_secondary', '#F7F7F7'),
         ('theme_dark_tertiary', '#F7F7F7'),
-        ('theme_light_background_body', 'radial-gradient(ellipse at top, #37dbff, transparent)'),
-        ('theme_dark_background_body', 'radial-gradient(ellipse at top, #E63946, #14253A)'),
+        ('theme_light_background_body', 'linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%),linear-gradient(127deg, rgba(242,214,17,.8), rgba(242,214,17,0) 70.71%),linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%);'),
+        ('theme_dark_background_body', 'linear-gradient(155deg,#1B1464, #99272D,#ED1C24,#F15A24,#1B1464)'),
     )
 }
 

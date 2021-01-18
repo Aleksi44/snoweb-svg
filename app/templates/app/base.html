@@ -47,54 +47,43 @@
             <style>
                 :root {
                 {% if theme == 'light' %}
-                    --background-body: {% settings_by_key request 'theme_light_background_body' %};
-                    --background: #efefef;
-                    --background-alt: #f7f7f7;
-                    --selection: #E63946;
-                    --text-main: #363636;
-                    --text-bright: #14253A;
-                    --text-muted: #70777f;
-                    --links: #E63946;
-                    --focus: #E63946;
-                    --border: #dbdbdb;
-                    --code: #14253A;
-                    --animation-duration: 0.1s;
-                    --button-hover: #ddd;
-                    --scrollbar-thumb: rgb(213, 213, 213);
-                    --scrollbar-thumb-hover: rgb(196, 196, 196);
-                    --form-placeholder: #949494;
-                    --form-text: #000;
-                    --variable: #E63946;
-                    --highlight: #E63946;
+                    {% settings_by_key request 'theme_light_background_body' as background_body %}
+                    {% settings_by_key request 'theme_light_primary' as primary %}
+                    {% settings_by_key request 'theme_light_secondary' as secondary %}
+                    {% settings_by_key request 'theme_light_tertiary' as tertiary %}
                 {% else %}
-                    --background-body: {% settings_by_key request 'theme_dark_background_body' %};
-                    --background: #112032;
-                    --background-alt: #112032;
-                    --selection: #E63946;
-                    --text-main: #dbdbdb;
-                    --text-bright: #fff;
-                    --text-muted: #a9b1ba;
-                    --links: #E63946;
-                    --focus: #E63946;
-                    --border: #526980;
-                    --code: #E63946;
-                    --animation-duration: 0.1s;
-                    --button-hover: #324759;
-                    --scrollbar-thumb: var(--button-hover);
-                    --scrollbar-thumb-hover: rgb(65, 92, 115);
-                    --form-placeholder: #a9a9a9;
-                    --form-text: #fff;
-                    --variable: #E63946;
-                    --highlight: #E63946;
+                    {% settings_by_key request 'theme_dark_background_body' as background_body %}
+                    {% settings_by_key request 'theme_dark_primary' as primary %}
+                    {% settings_by_key request 'theme_dark_secondary' as secondary %}
+                    {% settings_by_key request 'theme_dark_tertiary' as tertiary %}
                 {% endif %}
+                    --background-body: {{ background_body }};
+                    --background: {{ tertiary }};
+                    --background-alt: {{ tertiary }};
+                    --selection: {{ secondary }};
+                    --text-main: {{ primary }};
+                    --text-bright: {{ primary }};
+                    --text-muted: {{ primary }};
+                    --links: {{ secondary }};
+                    --focus: {{ secondary }};
+                    --border: {{ tertiary }};
+                    --code: gray;
+                    --animation-duration: 0.1s;
+                    --button-hover: {{ secondary }};
+                    --scrollbar-thumb: {{ tertiary }};
+                    --scrollbar-thumb-hover: {{ tertiary }};
+                    --form-placeholder: {{ primary }};
+                    --form-text: gray;
+                    --variable: {{ secondary }};
+                    --highlight: {{ secondary }};
 
-                    --svg-theme-light-primary: {% settings_by_key request 'theme_light_primary' %};
-                    --svg-theme-light-secondary: {% settings_by_key request 'theme_light_secondary' %};
-                    --svg-theme-light-tertiary: {% settings_by_key request 'theme_light_tertiary' %};
+                    --svg-theme-light-primary: {{ primary }};
+                    --svg-theme-light-secondary: {{ secondary }};
+                    --svg-theme-light-tertiary: {{ tertiary }};
 
-                    --svg-theme-dark-primary: {% settings_by_key request 'theme_dark_primary' %};
-                    --svg-theme-dark-secondary: {% settings_by_key request 'theme_dark_secondary' %};
-                    --svg-theme-dark-tertiary: {% settings_by_key request 'theme_dark_tertiary' %};
+                    --svg-theme-dark-primary: {{ primary }};
+                    --svg-theme-dark-secondary: {{ secondary }};
+                    --svg-theme-dark-tertiary: {{ tertiary }};
                 }
             </style>
         {% endblock %}
