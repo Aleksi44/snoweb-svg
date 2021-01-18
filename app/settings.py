@@ -13,7 +13,7 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-SECRET_KEY = '[V$xMycv[(YwhThQD+p[s@Wb@Ygy@:`M%D3I8Fs2tJ^Aw#ac$AJ65".*]uwPaK_'
+SECRET_KEY = env.str('SECRET_KEY', default='debug_key')
 
 ALLOWED_HOSTS = [
                     '127.0.0.1',
