@@ -21,7 +21,7 @@ def is_valid_background_color(value):
     try:
         is_valid_hexadecimal(value)
     except ValidationError:
-        if not value.startswith('radial-gradient('):
+        if not value.startswith('radial-gradient(') and not value.startswith('linear-gradient('):
             raise ValidationError(
                 _('%(value)s is not a valid css property'),
                 params={'value': value},
