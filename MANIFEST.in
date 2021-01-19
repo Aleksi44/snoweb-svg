@@ -1,3 +1,4 @@
 include *.rst
 include AUTHORS
 include LICENSE
+recursive-include snowebsvg/templates *.html
