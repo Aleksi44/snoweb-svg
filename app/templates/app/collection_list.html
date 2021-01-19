@@ -15,7 +15,7 @@
                 {% for svg in group.svg_set.all %}
                     <a style="text-decoration: none" href="{% url 'app:svg' collection.key svg.group.key svg.key  %}">
                     <span style="display: inline-block; text-decoration: none;" class="svg-trigger">
-                        {% svg_inline svg theme 'x2' variant=variant %}
+                        {% svg_inline svg theme 'x3' variant=variant %}
                     </span>
                     </a>
                 {% endfor %}
