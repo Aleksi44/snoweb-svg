@@ -63,6 +63,32 @@ Stroke secondary colors with current theme.
 Stroke tertiary colors with current theme.
 
 
+Builders
+--------
+
+.svg-builder-basic
+~~~~~~~~~~~~~~~~~~
+
+This class need to be encapsulated by ``.svg-trigger``
+
+This class is parent of 2 children with id :
+
+- on-start
+- on-hover
+
+This class manage opacity according to hover event.
+
+
+.svg-builder-circle
+~~~~~~~~~~~~~~~~~~~
+
+This class need to be encapsulated by ``.svg-trigger``
+
+This class need to be assign to a ``<circle>``
+
+This class increases radius from 0 to 100 on hover event.
+
+
 Size
 ----
 

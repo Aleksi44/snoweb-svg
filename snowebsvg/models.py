@@ -72,16 +72,6 @@ class GroupSvg(models.Model):
         return self.key.title()
 
     @cached_property
-    def key_composer(self):
-        """
-        Unique key Identifier of ``GroupSvg``
-        """
-        return "%s-%s" % (
-            self.collection.key,
-            self.key
-        )
-
-    @cached_property
     def path_entry(self):
         """
         File path of a ``GroupSvg``

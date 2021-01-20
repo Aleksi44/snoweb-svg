@@ -1,5 +1,6 @@
 from django import template
 from snowebsvg.models import Svg
+from snowebsvg import settings
 
 register = template.Library()
 
@@ -37,3 +38,15 @@ def svg_django(svg_target, theme=None, size=None, variant=None):
 @register.simple_tag
 def collection_styles(collection, theme=None, size=None):
     return collection.render_styles(theme, size)
+
+
+@register.simple_tag
+def svg_stylesheets(*bundles):
+    ret = ""
+    for bundle in bundles:
+        ret += ("<link rel=\"stylesheet\" href=\"%s%s-%s.css\">" % (
+            settings.BASE_URL_CSS,
+            bundle,
+            settings.VERSION
+        ))
+    return ret

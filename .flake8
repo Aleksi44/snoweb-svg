@@ -10,3 +10,4 @@ exclude =
     dist,
     mediafiles,
     *migrations*
+    docs

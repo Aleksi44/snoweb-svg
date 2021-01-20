@@ -25,3 +25,13 @@ Define the default size of the SVG :
 - x10
 
 Default value : ``x3``
+
+SVG_DEFAULT_VARIANT
+-------------------
+
+Define the default variant of the SVG :
+
+- none
+- glass
+
+Default value : ``''``

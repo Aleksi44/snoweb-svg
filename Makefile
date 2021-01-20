@@ -31,6 +31,6 @@ rm_db:
 
 coverage:
 	coverage run --source='.' manage.py test
-	coverage report
+	coverage report -m
 
 fresh: rm_db mm test svg_build coverage
