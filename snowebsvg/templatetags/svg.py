@@ -6,13 +6,13 @@ register = template.Library()
 
 
 @register.simple_tag
-def svg_inline(svg_target, theme=None, size=None, variant=None, grid=False):
+def svg_inline(svg_target, theme=None, size=None, variant=None, grid=False, klass=None):
     if isinstance(svg_target, Svg):
-        return svg_target.render_html(theme, size, variant, grid)
+        return svg_target.render_html(theme, size, variant, grid, klass)
     else:
         svg = Svg()
         svg_composed = svg.key_decomposer(svg_target)
-        return svg_composed.render_html(theme, size, variant, grid)
+        return svg_composed.render_html(theme, size, variant, grid, klass)
 
 
 @register.simple_tag

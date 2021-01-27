@@ -23,8 +23,12 @@ With :
 
         ...
 
-        <!--Themes (not required) : manage dark and light mode-->
+        <!--Themes (not required) : manage dark and light mode with class-->
         <link rel="stylesheet" href="https://static.snoweb.fr/snowebsvg/dist/css/themes-<version>.css">
+
+        <!--Themes auto (not required) : manage dark and light mode with prefers-color-scheme-->
+        <link rel="stylesheet" href="https://static.snoweb.fr/snowebsvg/dist/css/themesauto-<version>.css">
+
         <!--Sizer (not required) : add default size to SVGs-->
         <link rel="stylesheet" href="https://static.snoweb.fr/snowebsvg/dist/css/sizer-<version>.css">
 

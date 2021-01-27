@@ -184,7 +184,7 @@ class Svg(models.Model):
             return svg_template.render(context)
 
     def render_html(self, theme=settings.SVG_DEFAULT_THEME, size=settings.SVG_DEFAULT_SIZE,
-                    variant=settings.SVG_DEFAULT_VARIANT, grid=False):
+                    variant=settings.SVG_DEFAULT_VARIANT, grid=False, klass=None):
         """
         Method for rendering Svg to HTML
 
@@ -192,7 +192,7 @@ class Svg(models.Model):
         :param size: Size, defaults :ref:`SVG_DEFAULT_SIZE <references_settings>`
         :param grid: Grid, add grid for debugging SVG, defaults to False`
         :param variant: Variant, defaults :ref:`SVG_DEFAULT_VARIANT <references_settings>`
-
+        :param klass: extra css class
         """
         svg_template = get_template(self.path_entry)
         return svg_template.render({
@@ -200,7 +200,8 @@ class Svg(models.Model):
             'theme': theme,
             'size': size,
             'grid': grid,
-            'variant': variant
+            'variant': variant,
+            'klass': klass
         })
 
     def render_preview(self, theme=settings.SVG_DEFAULT_THEME, size=settings.SVG_DEFAULT_SIZE,

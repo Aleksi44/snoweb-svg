@@ -1,0 +1,67 @@
+// Fallback theme dark
+
+:root {
+  --svg-theme-light-primary: #14253A;
+  --svg-theme-light-secondary: #E63946;
+  --svg-theme-light-tertiary: #f7f7f7;
+
+  --svg-theme-dark-primary: #F7F7F7;
+  --svg-theme-dark-secondary: #E63946;
+  --svg-theme-dark-tertiary: #112032;
+}
+
+@media (prefers-color-scheme: dark) {
+  .svg-fill-primary {
+    fill: var(--svg-theme-dark-primary);
+  }
+
+  .svg-fill-secondary {
+    fill: var(--svg-theme-dark-secondary);
+  }
+
+  .svg-fill-tertiary {
+    fill: var(--svg-theme-dark-tertiary);
+  }
+
+  /* Stroke */
+
+  .svg-stroke-primary {
+    stroke: var(--svg-theme-dark-primary);
+  }
+
+  .svg-stroke-secondary {
+    stroke: var(--svg-theme-dark-secondary);
+  }
+
+  .svg-stroke-tertiary {
+    stroke: var(--svg-theme-dark-tertiary);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .svg-fill-primary {
+    fill: var(--svg-theme-light-primary);
+  }
+
+  .svg-fill-secondary {
+    fill: var(--svg-theme-light-secondary);
+  }
+
+  .svg-fill-tertiary {
+    fill: var(--svg-theme-light-tertiary);
+  }
+
+  /* Stroke */
+
+  .svg-stroke-primary {
+    stroke: var(--svg-theme-light-primary);
+  }
+
+  .svg-stroke-secondary {
+    stroke: var(--svg-theme-light-secondary);
+  }
+
+  .svg-stroke-tertiary {
+    stroke: var(--svg-theme-light-tertiary);
+  }
+}

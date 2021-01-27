@@ -47,7 +47,9 @@ You have 2 options :
 
         ...
 
-        {% svg_stylesheets 'themes' 'sizer' 'essential' 'effect' %}
+        {% autoescape off %}
+            {% svg_stylesheets 'themes' 'sizer' 'essential' 'effect' %}
+        {% endautoescape %}
 
     </head>
 
@@ -62,11 +64,13 @@ With :
 - ``<size>`` : 'x1', 'x2', ect... see more :doc:`here <../references/css>`.
 - ``<variant>`` : 'none' or 'glass', see more :doc:`here <../references/settings>`.
 - ``<grid>`` : True or False, display a grid preview.
+- ``<klass>`` : Add extra css classes to <svg> element.
+
 
 ::
 
     {% load svg %}
 
     <a href="#" class="svg-trigger">
-        {% svg_inline '<svg_key>' '<theme>' '<size>' '<variant>' '<grid>' %}
+        {% svg_inline '<svg_key>' '<theme>' '<size>' '<variant>' '<grid>' '<klass>' %}
     </a>
