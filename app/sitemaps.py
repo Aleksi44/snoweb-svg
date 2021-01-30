@@ -11,7 +11,7 @@ class BaseSitemap(sitemaps.Sitemap):
     changefreq = 'daily'
 
     def get_urls(self, site=None, **kwargs):
-        site = Site(domain='svg.snoweb.fr', name='svg.snoweb.fr')
+        site = Site(domain='www.snoweb-svg.com', name='www.snoweb-svg.com')
         return super(BaseSitemap, self).get_urls(site=site, **kwargs)
 
 

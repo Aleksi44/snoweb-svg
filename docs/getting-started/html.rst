@@ -15,7 +15,7 @@ With :
 .. image:: https://img.shields.io/pypi/v/snowebsvg
     :target: https://pypi.org/project/snowebsvg/
 
-- <collection_key> : Choose at `svg.snoweb.fr <https://svg.snoweb.fr>`_.
+- <collection_key> : Choose at `www.snoweb-svg.com <https://www.snoweb-svg.com/en/>`_.
 
 ::
 
@@ -53,4 +53,4 @@ With :
 Add SVG Content
 ---------------
 
-Choose and add your SVG content in your html at `svg.snoweb.fr <https://svg.snoweb.fr>`_.
+Choose and add your SVG content in your html at `www.snoweb-svg.com <https://www.snoweb-svg.com/en/>`_.

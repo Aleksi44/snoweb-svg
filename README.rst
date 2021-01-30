@@ -29,6 +29,6 @@ Features
 - No javascript required
 - Possible integration with Django
 
-Find all Svg at : `svg.snoweb.fr <https://svg.snoweb.fr>`_.
+Find all Svg at `www.snoweb-svg.com <https://www.snoweb-svg.com/en/>`_.
 
-Documentation available : `here <https://snoweb-svg.readthedocs.io/en/latest/>`_.
+Documentation available `here <https://snoweb-svg.readthedocs.io/en/latest/>`_.

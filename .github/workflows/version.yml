@@ -26,7 +26,7 @@ jobs:
       - name: Deployment
         uses: appleboy/ssh-action@master
         with:
-          host: svg.snoweb.fr
+          host: www.snoweb-svg.com
           username: debian
           key: ${{ secrets.KEY }}
           port: 22

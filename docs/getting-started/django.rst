@@ -59,7 +59,7 @@ Add SVG Content
 
 With :
 
-- ``<svg_key>`` : choose at `svg.snoweb.fr <https://svg.snoweb.fr>`_.
+- ``<svg_key>`` : choose at `www.snoweb-svg.com <https://www.snoweb-svg.com/en/>`_.
 - ``<theme>`` : 'light' or 'dark', see more :doc:`here <../references/css>`.
 - ``<size>`` : 'x1', 'x2', ect... see more :doc:`here <../references/css>`.
 - ``<variant>`` : 'none' or 'glass', see more :doc:`here <../references/settings>`.
