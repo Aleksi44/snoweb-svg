@@ -25,7 +25,8 @@ class CachePage(Node):
             vary_on = list()
             vary_on.append({
                 'theme': theme,
-                'variant': variant
+                'variant': variant,
+                'lang': request.LANGUAGE_CODE
             })
             fragment_name = 'page_%s_%s' % (
                 settings.VERSION,

@@ -1,0 +1,221 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-01-30 14:50+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/forms.py:14
+#, python-format
+msgid "%(value)s is not a hexadecimal color"
+msgstr ""
+
+#: app/forms.py:26
+#, python-format
+msgid "%(value)s is not a valid css property"
+msgstr ""
+
+#: app/forms.py:45
+msgid "Color theme light primary"
+msgstr ""
+
+#: app/forms.py:46 app/forms.py:51 app/forms.py:56 app/forms.py:64
+#: app/forms.py:69 app/forms.py:74
+msgid "Hexadecimal color"
+msgstr ""
+
+#: app/forms.py:50
+msgid "Color theme light secondary"
+msgstr ""
+
+#: app/forms.py:55
+msgid "Color theme light tertiary"
+msgstr ""
+
+#: app/forms.py:63
+msgid "Color theme dark primary"
+msgstr ""
+
+#: app/forms.py:68
+msgid "Color theme dark secondary"
+msgstr ""
+
+#: app/forms.py:73
+msgid "Color theme dark tertiary"
+msgstr ""
+
+#: app/forms.py:83
+msgid "Color theme light background body"
+msgstr ""
+
+#: app/forms.py:84 app/forms.py:92
+msgid "Hexadecimal color, linear-gradient, radial-gradient"
+msgstr ""
+
+#: app/forms.py:91
+msgid "Color theme dark background body"
+msgstr ""
+
+#: app/templates/app/base.html:112
+msgid "Home"
+msgstr ""
+
+#: app/templates/app/base.html:115 app/templates/app/svg_search.html:11
+#: app/templates/app/svg_search.html:16
+msgid "Search"
+msgstr ""
+
+#: app/templates/app/base.html:118 app/templates/app/svg_settings.html:11
+msgid "Settings"
+msgstr ""
+
+#: app/templates/app/base.html:127
+msgid "Related links"
+msgstr ""
+
+#: app/templates/app/base.html:129
+msgid "Documentation"
+msgstr ""
+
+#: app/templates/app/base.html:134
+msgid "Made with ❤"
+msgstr ""
+
+#: app/templates/app/collection_list.html:4
+msgid "Free SVG collections for web"
+msgstr ""
+
+#: app/templates/app/collection_list.html:5
+msgid "Get free collections of SVGs animated built in HTML and CSS."
+msgstr ""
+
+#: app/templates/app/collection_list.html:9
+msgid "collections"
+msgstr ""
+
+#: app/templates/app/groupsvg_list.html:4
+msgid "Free SVG collection"
+msgstr ""
+
+#: app/templates/app/groupsvg_list.html:5
+msgid "Get free collection"
+msgstr ""
+
+#: app/templates/app/groupsvg_list.html:5
+msgid "of SVGs animated built in HTML and CSS."
+msgstr ""
+
+#: app/templates/app/groupsvg_list.html:9
+msgid "collection"
+msgstr ""
+
+#: app/templates/app/groupsvg_list.html:12
+msgid "Groups"
+msgstr ""
+
+#: app/templates/app/groupsvg_list.html:18 app/templates/app/svg_search.html:21
+msgid "Scroll to top"
+msgstr ""
+
+#: app/templates/app/svg_list.html:4 app/templates/app/svg_list.html:5
+msgid "Free SVG"
+msgstr ""
+
+#: app/templates/app/svg_list.html:5
+msgid "animated and built in HTML and CSS."
+msgstr ""
+
+#: app/templates/app/svg_list.html:14
+msgid "Attributes"
+msgstr ""
+
+#: app/templates/app/svg_list.html:17
+msgid "Collection"
+msgstr ""
+
+#: app/templates/app/svg_list.html:22
+msgid "Group"
+msgstr ""
+
+#: app/templates/app/svg_list.html:26
+msgid "Builder"
+msgstr ""
+
+#: app/templates/app/svg_list.html:29
+msgid "Code"
+msgstr ""
+
+#: app/templates/app/svg_list.html:33
+msgid "Getting started with HTML"
+msgstr ""
+
+#: app/templates/app/svg_list.html:38
+msgid "Getting started with Django"
+msgstr ""
+
+#: app/templates/app/svg_list.html:44 app/templates/app/svg_list.html:47
+#: app/templates/app/svg_list.html:50
+msgid "Copy"
+msgstr ""
+
+#: app/templates/app/svg_search.html:4
+msgid "Search free SVG for web"
+msgstr ""
+
+#: app/templates/app/svg_search.html:6
+msgid "Search for free SVGs animated built in HTML and CSS."
+msgstr ""
+
+#: app/templates/app/svg_search.html:11
+msgid "by key"
+msgstr ""
+
+#: app/templates/app/svg_settings.html:4
+msgid "Settings SVG for web"
+msgstr ""
+
+#: app/templates/app/svg_settings.html:5
+msgid "Configure settings and get free SVGs animated built in HTML and CSS."
+msgstr ""
+
+#: app/templates/app/svg_settings.html:13
+msgid "Preview"
+msgstr ""
+
+#: app/templates/app/svg_settings.html:19
+msgid "Themes"
+msgstr ""
+
+#: app/templates/app/svg_settings.html:30
+#: app/templates/app/svg_settings.html:39
+msgid "Save"
+msgstr ""
+
+#: app/templates/app/svg_settings.html:33
+msgid "Themes App"
+msgstr ""
+
+#: app/templates/app/svg_settings.html:42
+msgid "Variant"
+msgstr ""
+
+#: app/templates/app/svg_settings.html:49
+msgid "Reset"
+msgstr ""
+
+#: snowebsvg/models.py:13 snowebsvg/models.py:60 snowebsvg/models.py:112
+msgid "Key"
+msgstr ""

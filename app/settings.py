@@ -43,6 +43,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.gzip.GZipMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'app.middlewares.SettingsMiddleware',
 ]
 
@@ -51,7 +52,8 @@ def constants_processor(request):
     from snowebsvg import settings
     return {
         'settings': settings,
-        'debug': DEBUG
+        'debug': DEBUG,
+        'LANGUAGE_CODE': LANGUAGE_CODE
     }
 
 
@@ -141,3 +143,18 @@ LOGGING = {
         },
     }
 }
+
+# INTERNATIONALIZATION
+
+TIME_ZONE = 'UTC'
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
+)
+LANGUAGE_CODE = 'en'
+LANGUAGES = [
+    ('en', "English"),
+    ('fr', "French"),
+]

@@ -1,12 +1,12 @@
 {% extends 'app/base.html' %}
-{% load svg %}
+{% load i18n svg %}
 
-{% block title %}Free SVG collections for web | {{ block.super }}{% endblock %}
-{% block description %}Get free collections of SVGs animated built in HTML and CSS. {{ block.super }}{% endblock %}
+{% block title %}{% trans 'Free SVG collections for web' %} | {{ block.super }}{% endblock %}
+{% block description %}{% trans 'Get free collections of SVGs animated built in HTML and CSS.' %} {{ block.super }}{% endblock %}
 
 {% block body %}
     {% with theme=request.session.theme variant=request.session.variant %}
-        <h1>SVG collections</h1>
+        <h1>SVG {% trans 'collections' %}</h1>
         {% for collection in object_list %}
             <a style="text-decoration: none" href="{% url 'app:group' collection.key %}">
                 <h2><code>{{ collection.key }}</code></h2>

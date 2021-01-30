@@ -1,22 +1,22 @@
 {% extends 'app/base.html' %}
-{% load svg %}
+{% load i18n svg %}
 
-{% block title %}Settings SVG for web | {{ block.super }}{% endblock %}
-{% block description %}Configure settings and get free SVGs animated built in HTML and CSS.
+{% block title %}{% trans 'Settings SVG for web' %} | {{ block.super }}{% endblock %}
+{% block description %}{% trans 'Configure settings and get free SVGs animated built in HTML and CSS.' %}
     {{ block.super }}{% endblock %}
 
 
 {% block body_no_cache %}
     {% with theme=request.session.theme variant=request.session.variant %}
-        <h1>Settings Svg</h1>
+        <h1>{% trans 'Settings' %} SVG</h1>
 
-        <h2>Preview</h2>
+        <h2>{% trans 'Preview' %}</h2>
         {% svg_preview 'essential-cube-basic_2' theme 'x5' variant False %}
         {% svg_preview 'essential-cube-circle_2' theme 'x5' variant False %}
         {% svg_preview 'essential-cube-rect_2' theme 'x5' variant False %}
         {% svg_preview 'essential-cube-line_2' theme 'x5' variant False %}
 
-        <h2>Themes Svg</h2>
+        <h2>{% trans 'Themes' %} SVG</h2>
 
         <form method="GET" style="display: flex">
             <input type="submit" name="theme" value="dark">
@@ -27,26 +27,26 @@
             {% csrf_token %}
             <input type="hidden" name="form_key" value="form_theme_{{ theme }}">
             {% if theme == 'light' %}{{ form_theme_light.as_p }}{% else %}{{ form_theme_dark.as_p }}{% endif %}
-            <input type="submit" value="Save">
+            <input type="submit" value="{% trans 'Save' %}">
         </form>
 
-        <h2>Themes App</h2>
+        <h2>{% trans 'Themes App' %}</h2>
 
         <form method="POST" action="{% url 'app:svg_settings' %}">
             {% csrf_token %}
             <input type="hidden" name="form_key" value="form_theme_{{ theme }}_app">
             {% if theme == 'light' %}{{ form_theme_light_app.as_p }}{% else %}{{ form_theme_dark_app.as_p }}{% endif %}
-            <input type="submit" value="Save">
+            <input type="submit" value="{% trans 'Save' %}">
         </form>
 
-        <h2>Variant SVG</h2>
+        <h2>{% trans 'Variant' %} SVG</h2>
 
         <form method="GET" style="display: flex">
             <input type="submit" name="variant" value="none">
             <input type="submit" name="variant" value="glass">
         </form>
 
-        <h2>Reset</h2>
+        <h2>{% trans 'Reset' %}</h2>
         <form method="POST" style="display: flex">
             {% csrf_token %}
             <input type="submit" name="reset" value="reset">

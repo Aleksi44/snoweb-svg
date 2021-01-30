@@ -40,22 +40,54 @@ class BackgroundColorFormField(forms.CharField):
 # Snoweb SVG
 
 class ThemeLightForm(Form):
-    theme_light_primary = HexFormField(required=False)
-    theme_light_secondary = HexFormField(required=False)
-    theme_light_tertiary = HexFormField(required=False)
+    theme_light_primary = HexFormField(
+        required=False,
+        label=_('Color theme light primary'),
+        help_text=_('Hexadecimal color')
+    )
+    theme_light_secondary = HexFormField(
+        required=False,
+        label=_('Color theme light secondary'),
+        help_text=_('Hexadecimal color')
+    )
+    theme_light_tertiary = HexFormField(
+        required=False,
+        label=_('Color theme light tertiary'),
+        help_text=_('Hexadecimal color')
+    )
 
 
 class ThemeDarkForm(Form):
-    theme_dark_primary = HexFormField(required=False)
-    theme_dark_secondary = HexFormField(required=False)
-    theme_dark_tertiary = HexFormField(required=False)
+    theme_dark_primary = HexFormField(
+        required=False,
+        label=_('Color theme dark primary'),
+        help_text=_('Hexadecimal color')
+    )
+    theme_dark_secondary = HexFormField(
+        required=False,
+        label=_('Color theme dark secondary'),
+        help_text=_('Hexadecimal color')
+    )
+    theme_dark_tertiary = HexFormField(
+        required=False,
+        label=_('Color theme dark tertiary'),
+        help_text=_('Hexadecimal color')
+    )
 
 
 # App
 
 class ThemeLightAppForm(Form):
-    theme_light_background_body = BackgroundColorFormField(required=False)
+    theme_light_background_body = BackgroundColorFormField(
+        required=False,
+        label=_('Color theme light background body'),
+        help_text=_('Hexadecimal color, linear-gradient, radial-gradient')
+    )
 
 
 class ThemeDarkAppForm(Form):
-    theme_dark_background_body = BackgroundColorFormField(required=False)
+    theme_dark_background_body = BackgroundColorFormField(
+        required=False,
+        label=_('Color theme dark background body'),
+        help_text=_('Hexadecimal color, linear-gradient, radial-gradient')
+    )

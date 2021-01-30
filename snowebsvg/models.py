@@ -10,7 +10,7 @@ from snowebsvg import settings
 
 
 class Collection(models.Model):
-    key = models.CharField(max_length=255, verbose_name=_("key"))
+    key = models.CharField(max_length=255, verbose_name=_("Key"))
 
     class Meta:
         ordering = ('key',)
@@ -57,7 +57,7 @@ class Collection(models.Model):
 
 
 class GroupSvg(models.Model):
-    key = models.CharField(max_length=255, verbose_name=_("key"))
+    key = models.CharField(max_length=255, verbose_name=_("Key"))
     collection = models.ForeignKey(
         Collection,
         default=None,
@@ -109,7 +109,7 @@ class GroupSvg(models.Model):
 
 
 class Svg(models.Model):
-    key = models.CharField(max_length=255, verbose_name=_("key"))
+    key = models.CharField(max_length=255, verbose_name=_("Key"))
     group = models.ForeignKey(
         GroupSvg,
         default=None,

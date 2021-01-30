@@ -1,8 +1,8 @@
-{% load cache static settings %}
+{% load i18n cache static settings internationalization %}
 
 {% with theme=request.session.theme %}
     <!DOCTYPE html>
-    <html lang="en">
+    <html lang="{{ request.LANGUAGE_CODE }}">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Snoweb{% endblock %}</title>
@@ -27,10 +27,18 @@
         <link rel="icon" type="image/png" sizes="196x196"
               href="https://media.snoweb.fr/www/images/favicon_4vyLMhX.2e16d0ba.fill-196x196.format-png.png">
         <link rel="canonical" href="https://{{ request.get_host }}{{ request.path }}"/>
+        {% get_available_languages as languages %}
+        {% for lang_code, lang_name in languages %}
+            {% with href=request|alternate_href:lang_code %}
+                {% if lang_code == LANGUAGE_CODE %}
+                    <link rel="alternate" hreflang="x-default" href="{{ href }}"/>
+                {% endif %}
+                <link rel="alternate" hreflang="{{ lang_code }}" href="{{ href }}">
+            {% endwith %}
+        {% endfor %}
         {% block css %}
             {% with water_css="https://cdn.jsdelivr.net/npm/water.css@2/out/" %}
-                <link rel="stylesheet" href="
-                        {{ water_css }}{% if theme %}{{ theme }}{% else %}dark{% endif %}{% if not debug %}.min{% endif %}.css">
+                <link rel="stylesheet" href="{{ water_css }}{% if theme %}{{ theme }}{% else %}dark{% endif %}{% if not debug %}.min{% endif %}.css">
             {% endwith %}
             {% with href="snowebsvg/dist/css/themes-"|add:settings.VERSION|add:".css" %}
                 <link rel="stylesheet" href="{% static href %}">
@@ -77,17 +85,11 @@
                     --variable: {{ secondary }};
                     --highlight: {{ secondary }};
 
-                    {% settings_by_key request 'theme_light_primary' as primary %}
-                    {% settings_by_key request 'theme_light_secondary' as secondary %}
-                    {% settings_by_key request 'theme_light_tertiary' as tertiary %}
-                    --svg-theme-light-primary: {{ primary }};
+                {% settings_by_key request 'theme_light_primary' as primary %}{% settings_by_key request 'theme_light_secondary' as secondary %}{% settings_by_key request 'theme_light_tertiary' as tertiary %} --svg-theme-light-primary: {{ primary }};
                     --svg-theme-light-secondary: {{ secondary }};
                     --svg-theme-light-tertiary: {{ tertiary }};
 
-                    {% settings_by_key request 'theme_dark_primary' as primary %}
-                    {% settings_by_key request 'theme_dark_secondary' as secondary %}
-                    {% settings_by_key request 'theme_dark_tertiary' as tertiary %}
-                    --svg-theme-dark-primary: {{ primary }};
+                {% settings_by_key request 'theme_dark_primary' as primary %}{% settings_by_key request 'theme_dark_secondary' as secondary %}{% settings_by_key request 'theme_dark_tertiary' as tertiary %} --svg-theme-dark-primary: {{ primary }};
                     --svg-theme-dark-secondary: {{ secondary }};
                     --svg-theme-dark-tertiary: {{ tertiary }};
                 }
@@ -107,13 +109,13 @@
 
     <div style="display: flex">
         <a href="{% url 'app:collection' %}">
-            <button type="button">home</button>
+            <button type="button">{% trans 'Home' %}</button>
         </a>
         <a href="{% url 'app:svg_search' %}">
-            <button type="button">search</button>
+            <button type="button">{% trans 'Search' %}</button>
         </a>
         <a href="{% url 'app:svg_settings' %}">
-            <button type="button">settings</button>
+            <button type="button">{% trans 'Settings' %}</button>
         </a>
     </div>
 
@@ -122,14 +124,14 @@
 
     <hr/>
 
-    <p>Related links :</p>
+    <p>{% trans 'Related links' %} :</p>
     <ul>
-        <li><a href="https://snoweb-svg.readthedocs.io/en/latest/?badge=latest">Documentation</a></li>
+        <li><a href="https://snoweb-svg.readthedocs.io/en/latest/?badge=latest">{% trans 'Documentation' %}</a></li>
         <li><a href="https://github.com/Aleksi44/snoweb-svg">Github</a></li>
         <li><a href="https://pypi.org/project/snowebsvg/">PyPI</a></li>
     </ul>
 
-    <small>Made with ❤ | <a href="https://www.snoweb.fr/">Snoweb</a></small>
+    <small>{% trans 'Made with ❤' %} | <a href="https://www.snoweb.fr/">Snoweb</a></small>
 
     </body>
     </html>
