@@ -15,7 +15,7 @@ Snoweb SVG
 .. image:: https://coveralls.io/repos/github/Aleksi44/snoweb-svg/badge.svg?branch=master
     :target: https://coveralls.io/github/Aleksi44/snoweb-svg?branch=master
 
-.. image:: https://static.snoweb.fr/documents/logo-secondary.svg
+.. image:: https://static.snoweb.fr/documents/SVG-SNOWEB-ICONS-DARK
 
 Snoweb SVG is an open source project with SVGs optimized and animated built in HTML and CSS.
 
