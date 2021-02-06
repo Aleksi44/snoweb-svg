@@ -24,9 +24,9 @@ Features
 ********
 
 - Animation on hover
-- Theme dark and light
-- SVG code in Html and Css
+- Svg code in html and css
 - No javascript required
+- Theme dark and light (with css class or prefers-color-scheme)
 - Possible integration with Django
 
 Find all Svg at `www.snoweb-svg.com <https://www.snoweb-svg.com/en/>`_.

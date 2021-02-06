@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-30 14:50+0000\n"
+"POT-Creation-Date: 2021-02-06 15:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -69,28 +69,28 @@ msgstr "Couleur hexadécimale, linear-gradient, radial-gradient"
 msgid "Color theme dark background body"
 msgstr "Couleur de fond avec le thème sombre"
 
-#: app/templates/app/base.html:112
+#: app/templates/app/base.html:114
 msgid "Home"
 msgstr "Accueil"
 
-#: app/templates/app/base.html:115 app/templates/app/svg_search.html:11
+#: app/templates/app/base.html:117 app/templates/app/svg_search.html:11
 #: app/templates/app/svg_search.html:16
 msgid "Search"
 msgstr "Recherche"
 
-#: app/templates/app/base.html:118 app/templates/app/svg_settings.html:11
+#: app/templates/app/base.html:120 app/templates/app/svg_settings.html:11
 msgid "Settings"
 msgstr "Paramètres"
 
-#: app/templates/app/base.html:127
+#: app/templates/app/base.html:129
 msgid "Related links"
 msgstr "Liens connexes"
 
-#: app/templates/app/base.html:129
+#: app/templates/app/base.html:131
 msgid "Documentation"
 msgstr ""
 
-#: app/templates/app/base.html:134
+#: app/templates/app/base.html:136
 msgid "Made with ❤"
 msgstr "Fabriqué avec ❤"
 
@@ -222,5 +222,19 @@ msgstr "Réinitialiser"
 msgid "Key"
 msgstr "Clé"
 
-#~ msgid "Hexadecimal color or linear-gradient"
-#~ msgstr "Couleur hexadécimale"
+#: snowebsvg/templates/snowebsvg/collections/brand/_preview.html:1
+msgid ""
+"WARNING This work includes material that may be protected as a trademark in "
+"some jurisdictions. If you want to use it, you have to ensure that you have "
+"the legal right to do so and that you do not infringe any trademark rights. "
+"The use of these trademarks does not indicate endorsement of the trademark "
+"holder by Snoweb SVG, nor vice versa. See the trademark owner for rules "
+"about appropriate use of their trademarks."
+msgstr ""
+"AVERTISSEMENT Ce travail comprend du matériel qui peut être protégé en tant "
+"que marque commerciale dans certaines juridictions. Si vous souhaitez "
+"l'utiliser, vous devez vous assurer que vous avez le droit légal de le faire "
+"et que vous ne violez aucun droit de marque. L'utilisation de ces marques "
+"n'indique pas l'approbation  du titulaire de la marque par Snoweb SVG, ni "
+"vice versa. Consultez le propriétaire de la marque pour connaître les règles "
+"relatives à l'utilisation appropriée de ses marques."

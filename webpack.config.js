@@ -24,7 +24,6 @@ module.exports = ({ mode = 'development' } = {}) => {
 
   return {
     entry: {
-      experimental: path.resolve(__dirname, 'static/snowebsvg/src/scss/experimental.scss'),
       themes: path.resolve(__dirname, 'static/snowebsvg/src/scss/themes.scss'),
       themesauto: path.resolve(__dirname, 'static/snowebsvg/src/scss/themesauto.scss'),
       sizer: path.resolve(__dirname, 'static/snowebsvg/src/scss/sizer.scss'),

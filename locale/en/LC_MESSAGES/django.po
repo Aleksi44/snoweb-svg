@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-30 14:50+0000\n"
+"POT-Creation-Date: 2021-02-06 15:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -69,28 +69,28 @@ msgstr ""
 msgid "Color theme dark background body"
 msgstr ""
 
-#: app/templates/app/base.html:112
+#: app/templates/app/base.html:114
 msgid "Home"
 msgstr ""
 
-#: app/templates/app/base.html:115 app/templates/app/svg_search.html:11
+#: app/templates/app/base.html:117 app/templates/app/svg_search.html:11
 #: app/templates/app/svg_search.html:16
 msgid "Search"
 msgstr ""
 
-#: app/templates/app/base.html:118 app/templates/app/svg_settings.html:11
+#: app/templates/app/base.html:120 app/templates/app/svg_settings.html:11
 msgid "Settings"
 msgstr ""
 
-#: app/templates/app/base.html:127
+#: app/templates/app/base.html:129
 msgid "Related links"
 msgstr ""
 
-#: app/templates/app/base.html:129
+#: app/templates/app/base.html:131
 msgid "Documentation"
 msgstr ""
 
-#: app/templates/app/base.html:134
+#: app/templates/app/base.html:136
 msgid "Made with ❤"
 msgstr ""
 
@@ -218,4 +218,14 @@ msgstr ""
 
 #: snowebsvg/models.py:13 snowebsvg/models.py:60 snowebsvg/models.py:112
 msgid "Key"
+msgstr ""
+
+#: snowebsvg/templates/snowebsvg/collections/brand/_preview.html:1
+msgid ""
+"WARNING This work includes material that may be protected as a trademark in "
+"some jurisdictions. If you want to use it, you have to ensure that you have "
+"the legal right to do so and that you do not infringe any trademark rights. "
+"The use of these trademarks does not indicate endorsement of the trademark "
+"holder by Snoweb SVG, nor vice versa. See the trademark owner for rules "
+"about appropriate use of their trademarks."
 msgstr ""

@@ -35,8 +35,3 @@ urlpatterns = [
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap')
 ]
-
-if settings.DEBUG:
-    urlpatterns += [
-        path('test/', TemplateView.as_view(template_name='app/experimental.html'), name='experimental'),
-    ]

@@ -15,7 +15,6 @@ With :
 .. image:: https://img.shields.io/pypi/v/snowebsvg
     :target: https://pypi.org/project/snowebsvg/
 
-- <collection_key> : Choose at `www.snoweb-svg.com <https://www.snoweb-svg.com/en/>`_.
 
 ::
 
@@ -32,10 +31,13 @@ With :
         <!--Sizer (not required) : add default size to SVGs-->
         <link rel="stylesheet" href="https://static.snoweb.fr/snowebsvg/dist/css/sizer-<version>.css">
 
-        <!--Add your Snoweb SVG collections CSS like this-->
-        <link rel="stylesheet" href="https://static.snoweb.fr/snowebsvg/dist/css/<collection_key>-<version>.css">
+        <!--Effect (not required) : freeze animation for some collections -->
+        <link rel="stylesheet" href="https://static.snoweb.fr/snowebsvg/dist/css/effect-<version>.css">
 
-        <!--Configure colors-->
+        <!--Builders (required for some collections) : add animations builders -->
+        <link rel="stylesheet" href="https://static.snoweb.fr/snowebsvg/dist/css/essential-<version>.css">
+
+        <!--Configure colors (not required if you don't use theme) -->
         <style>
             :root {
                 --svg-theme-light-primary: #14253A;
