@@ -2,7 +2,7 @@ import logging
 from django.test import TestCase
 from django.core import management
 
-from snowebsvg.models import Svg, Collection
+from snowebsvg.models import Svg, Collection, GroupSvg
 from snowebsvg import settings
 from snowebsvg.templatetags.svg import \
     svg_inline, \
@@ -16,11 +16,27 @@ logger = logging.getLogger('snowebsvg')
 
 class SnowebSvgTest(TestCase):
 
-    def test_svg_build(self):
+    def svg_build(self):
         management.call_command('svg_build')
 
+    def test_svg_clear(self):
+        self.svg_build()
+        management.call_command('svg_clean')
+        self.assertEqual(
+            Svg.objects.all().count(),
+            0
+        )
+        self.assertEqual(
+            GroupSvg.objects.all().count(),
+            0
+        )
+        self.assertEqual(
+            Svg.objects.all().count(),
+            0
+        )
+
     def test_templatetags_svg_inline(self):
-        self.test_svg_build()
+        self.svg_build()
         for svg in Svg.objects.all():
             logger.debug("svg_inline svg=`%s`" % str(svg))
             logger.debug("svg_inline group_svg=`%s`" % str(svg.group))
@@ -31,7 +47,7 @@ class SnowebSvgTest(TestCase):
             svg_inline(svg.key_composer)
 
     def test_templatetags_svg_django(self):
-        self.test_svg_build()
+        self.svg_build()
         for svg in Svg.objects.all():
             logger.debug("svg_django svg=`%s`" % str(svg))
             svg_django(svg)
@@ -40,7 +56,7 @@ class SnowebSvgTest(TestCase):
             svg_django(svg.key_composer)
 
     def test_templatetags_svg_preview(self):
-        self.test_svg_build()
+        self.svg_build()
         for svg in Svg.objects.all():
             logger.debug("svg_preview svg=`%s`" % str(svg))
             svg_preview(svg)
@@ -49,13 +65,10 @@ class SnowebSvgTest(TestCase):
             svg_preview(svg.key_composer)
 
     def test_templatetags_collection_styles(self):
-        self.test_svg_build()
+        self.svg_build()
         for collection in Collection.objects.all():
             logger.debug("collection_styles collection=`%s`" % str(collection))
             collection_styles(collection)
-
-    def test_variant_manager(self):
-        self.test_svg_build()
 
     def test_svg_stylesheets(self):
         bundles = svg_stylesheets('themes')

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Collection, GroupSvg, Svg
+from snowebsvg.models import Collection, GroupSvg, Svg
 
 
 class GroupSvgInline(admin.TabularInline):

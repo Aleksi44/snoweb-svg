@@ -6,7 +6,6 @@ from snowebsvg.models import Collection
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
-        Collection.objects.all().delete()
         instance = Collection()
         for collection_name in os.listdir(instance.root_directory):
             # We don't build private files
