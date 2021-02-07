@@ -19,8 +19,15 @@
         <h2>{% trans 'Themes' %} SVG</h2>
 
         <form method="GET" style="display: flex">
-            <input type="submit" name="theme" value="dark">
-            <input type="submit" name="theme" value="light">
+            <input {% if theme == 'dark' %}style="border: 1px solid gray; background: transparent"{% endif %} type="submit" name="theme" value="dark">
+            <input {% if theme == 'light' %}style="border: 1px solid gray; background: transparent"{% endif %} type="submit" name="theme" value="light">
+        </form>
+
+        <h2>{% trans 'Variant' %} SVG</h2>
+
+        <form method="GET" style="display: flex">
+            <input {% if not variant %}style="border: 1px solid gray; background: transparent"{% endif %} type="submit" name="variant" value="none">
+            <input {% if variant == 'glass' %}style="border: 1px solid gray; background: transparent"{% endif %} type="submit" name="variant" value="glass">
         </form>
 
         <form method="POST" action="{% url 'app:svg_settings' %}">
@@ -37,13 +44,6 @@
             <input type="hidden" name="form_key" value="form_theme_{{ theme }}_app">
             {% if theme == 'light' %}{{ form_theme_light_app.as_p }}{% else %}{{ form_theme_dark_app.as_p }}{% endif %}
             <input type="submit" value="{% trans 'Save' %}">
-        </form>
-
-        <h2>{% trans 'Variant' %} SVG</h2>
-
-        <form method="GET" style="display: flex">
-            <input type="submit" name="variant" value="none">
-            <input type="submit" name="variant" value="glass">
         </form>
 
         <h2>{% trans 'Reset' %}</h2>
