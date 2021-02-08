@@ -119,7 +119,7 @@ class Svg(index.Indexed, models.Model):
     )
 
     search_fields = [
-        index.SearchField('key', partial_match=True),
+        index.SearchField('key_composer', partial_match=True),
     ]
 
     class Meta:
