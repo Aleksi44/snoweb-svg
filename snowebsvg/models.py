@@ -44,15 +44,13 @@ class Collection(models.Model):
                 group, _ = GroupSvg.objects.get_or_create(key=group_key, collection_id=self.id)
                 group.build()
 
-    def render_styles(self, theme=settings.SVG_DEFAULT_THEME, size=settings.SVG_DEFAULT_SIZE):
+    def render_styles(self):
         """
         Method for rendering stylesheet code
         """
         svg_template = get_template("snowebsvg/collections/%s/styles.html" % self.key)
         return svg_template.render({
             'self': self,
-            'theme': theme,
-            'size': size,
             'settings': settings
         })
 
@@ -118,6 +116,7 @@ class Svg(index.Indexed, models.Model):
         null=True
     )
 
+    # Wagtail index
     search_fields = [
         index.SearchField('key_composer', partial_match=True),
     ]
@@ -161,19 +160,21 @@ class Svg(index.Indexed, models.Model):
             group__collection__key=collection_key
         )
 
-    def render_django(self, theme=settings.SVG_DEFAULT_THEME, size=settings.SVG_DEFAULT_SIZE,
-                      variant=settings.SVG_DEFAULT_VARIANT):
+    def render_django(self, theme=settings.SVG_DEFAULT_THEME, width=settings.SVG_DEFAULT_WIDTH,
+                      height=settings.SVG_DEFAULT_HEIGHT, variant=settings.SVG_DEFAULT_VARIANT):
         """
         Method for rendering Django template code
 
         :param theme: Theme, defaults to :ref:`SVG_DEFAULT_THEME <references_settings>`
-        :param size: Size, defaults :ref:`SVG_DEFAULT_SIZE <references_settings>`
+        :param width: Width, defaults :ref:`SVG_DEFAULT_WIDTH <references_settings>`
+        :param height: Height, defaults :ref:`SVG_DEFAULT_HEIGHT <references_settings>`
         :param variant: Variant, defaults :ref:`SVG_DEFAULT_VARIANT <references_settings>`
         """
         context = {
             'self': self,
             'theme': theme,
-            'size': size,
+            'width': width,
+            'height': height,
             'variant': variant,
             'start': '{%',
             'end': '%}'
@@ -188,13 +189,15 @@ class Svg(index.Indexed, models.Model):
             svg_template = get_template("snowebsvg/common/django.html")
             return svg_template.render(context)
 
-    def render_html(self, theme=settings.SVG_DEFAULT_THEME, size=settings.SVG_DEFAULT_SIZE,
-                    variant=settings.SVG_DEFAULT_VARIANT, grid=False, klass=None):
+    def render_html(self, theme=settings.SVG_DEFAULT_THEME, width=settings.SVG_DEFAULT_WIDTH,
+                    height=settings.SVG_DEFAULT_HEIGHT, variant=settings.SVG_DEFAULT_VARIANT,
+                    grid=False, klass=None):
         """
         Method for rendering Svg to HTML
 
         :param theme: Theme, defaults to :ref:`SVG_DEFAULT_THEME <references_settings>`
-        :param size: Size, defaults :ref:`SVG_DEFAULT_SIZE <references_settings>`
+        :param width: Width, defaults :ref:`SVG_DEFAULT_WIDTH <references_settings>`
+        :param height: Height, defaults :ref:`SVG_DEFAULT_HEIGHT <references_settings>`
         :param grid: Grid, add grid for debugging SVG, defaults to False`
         :param variant: Variant, defaults :ref:`SVG_DEFAULT_VARIANT <references_settings>`
         :param klass: extra css class
@@ -203,14 +206,15 @@ class Svg(index.Indexed, models.Model):
         return svg_template.render({
             'self': self,
             'theme': theme,
-            'size': size,
+            'width': width,
+            'height': height,
             'grid': grid,
             'variant': variant,
             'klass': klass
         })
 
-    def render_preview(self, theme=settings.SVG_DEFAULT_THEME, size=settings.SVG_DEFAULT_SIZE,
-                       variant=settings.SVG_DEFAULT_VARIANT, grid=False):
+    def render_preview(self, theme=settings.SVG_DEFAULT_THEME, width=settings.SVG_DEFAULT_WIDTH,
+                       height=settings.SVG_DEFAULT_HEIGHT, variant=settings.SVG_DEFAULT_VARIANT, grid=False):
         """
         Method for rendering a preview of Svg to HTML
 
@@ -218,7 +222,8 @@ class Svg(index.Indexed, models.Model):
         If _preview.html does not exist, then fall back to the common preview.html file.
 
         :param theme: Theme, defaults to :ref:`SVG_DEFAULT_THEME <references_settings>`
-        :param size: Size, defaults :ref:`SVG_DEFAULT_SIZE <references_settings>`
+        :param width: Width, defaults :ref:`SVG_DEFAULT_WIDTH <references_settings>`
+        :param height: Height, defaults :ref:`SVG_DEFAULT_HEIGHT <references_settings>`
         :param grid: Grid, add grid for debugging SVG, defaults to False`
         :param variant: Variant, defaults :ref:`SVG_DEFAULT_VARIANT <references_settings>`
 
@@ -226,7 +231,8 @@ class Svg(index.Indexed, models.Model):
         context = {
             'self': self,
             'theme': theme,
-            'size': size,
+            'width': width,
+            'height': height,
             'grid': grid,
             'variant': variant
         }

@@ -13,18 +13,15 @@ Define the default theme of the SVG :
 
 Default value : ``dark``
 
-SVG_DEFAULT_SIZE
-----------------
+SVG_DEFAULT_WIDTH
+-----------------
 
-Define the default size of the SVG :
+Default value : ``100``
 
-- x1
-- x2
-- x3
-- x5
-- x10
+SVG_DEFAULT_HEIGHT
+------------------
 
-Default value : ``x3``
+Default value : ``100``
 
 SVG_DEFAULT_VARIANT
 -------------------
@@ -34,4 +31,4 @@ Define the default variant of the SVG :
 - none
 - glass
 
-Default value : ``''``
+Default value : ``'glass'``

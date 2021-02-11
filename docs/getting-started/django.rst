@@ -48,7 +48,7 @@ You have 2 options :
         ...
 
         {% autoescape off %}
-            {% svg_stylesheets 'themes' 'sizer' 'essential' 'effect' %}
+            {% svg_stylesheets 'themes' 'essential' 'effect' %}
         {% endautoescape %}
 
     </head>
@@ -61,7 +61,8 @@ With :
 
 - ``<svg_key>`` : choose at `www.snoweb-svg.com <https://www.snoweb-svg.com/en/>`_.
 - ``<theme>`` : 'light' or 'dark', see more :doc:`here <../references/css>`.
-- ``<size>`` : 'x1', 'x2', ect... see more :doc:`here <../references/css>`.
+- ``<width>`` : 100, 100%, auto, ect...
+- ``<height>`` : 100, 100%, auto, ect...
 - ``<variant>`` : 'none' or 'glass', see more :doc:`here <../references/settings>`.
 - ``<grid>`` : True or False, display a grid preview.
 - ``<klass>`` : Add extra css classes to <svg> element.
@@ -72,5 +73,5 @@ With :
     {% load svg %}
 
     <a href="#" class="svg-trigger">
-        {% svg_inline '<svg_key>' '<theme>' '<size>' '<variant>' '<grid>' '<klass>' %}
+        {% svg_inline '<svg_key>' '<theme>' '<width>' '<height>' '<variant>' '<grid>' '<klass>' %}
     </a>

@@ -3,7 +3,7 @@
 {% block content %}<a href="#" class="svg-trigger">
         <article class="svg-effect-builder">
 
-            {{ start }} svg_inline '{{ self.key_composer }}' '{{ theme }}' '{{ size }}'{% if variant %} '{{ variant }}'{% endif %} {{ end }}
+            {{ start }} svg_inline '{{ self.key_composer }}' '{{ theme }}' {{ width }} {{ height }}{% if variant %} '{{ variant }}'{% endif %} {{ end }}
 
             <h2>{% lorem 5 w random %}</h2>
             <p>{% lorem 10 w random %}</p>

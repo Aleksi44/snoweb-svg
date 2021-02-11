@@ -6,38 +6,38 @@ register = template.Library()
 
 
 @register.simple_tag
-def svg_inline(svg_target, theme=None, size=None, variant=None, grid=False, klass=None):
+def svg_inline(svg_target, theme=None, width=None, height=None, variant=None, grid=False, klass=None):
     if isinstance(svg_target, Svg):
-        return svg_target.render_html(theme, size, variant, grid, klass)
+        return svg_target.render_html(theme, width, height, variant, grid, klass)
     else:
         svg = Svg()
         svg_composed = svg.key_decomposer(svg_target)
-        return svg_composed.render_html(theme, size, variant, grid, klass)
+        return svg_composed.render_html(theme, width, height, variant, grid, klass)
 
 
 @register.simple_tag
-def svg_preview(svg_target, theme=None, size=None, variant=None, grid=False):
+def svg_preview(svg_target, theme=None, width=None, height=None, variant=None, grid=False):
     if isinstance(svg_target, Svg):
-        return svg_target.render_preview(theme, size, variant, grid)
+        return svg_target.render_preview(theme, width, height, variant, grid)
     else:
         svg = Svg()
         svg_composed = svg.key_decomposer(svg_target)
-        return svg_composed.render_preview(theme, size, variant, grid)
+        return svg_composed.render_preview(theme, width, height, variant, grid)
 
 
 @register.simple_tag
-def svg_django(svg_target, theme=None, size=None, variant=None):
+def svg_django(svg_target, theme=None, width=None, height=None, variant=None):
     if isinstance(svg_target, Svg):
-        return svg_target.render_django(theme, size, variant)
+        return svg_target.render_django(theme, width, height, variant)
     else:
         svg = Svg()
         svg_composed = svg.key_decomposer(svg_target)
-        return svg_composed.render_django(theme, size, variant)
+        return svg_composed.render_django(theme, width, height, variant)
 
 
 @register.simple_tag
-def collection_styles(collection, theme=None, size=None):
-    return collection.render_styles(theme, size)
+def collection_styles(collection):
+    return collection.render_styles()
 
 
 @register.simple_tag

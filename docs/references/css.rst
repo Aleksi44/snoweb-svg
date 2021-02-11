@@ -87,22 +87,3 @@ This class need to be encapsulated by ``.svg-trigger``
 This class need to be assign to a ``<circle>``
 
 This class increases radius from 0 to 100 on hover event.
-
-
-Size
-----
-
-.svg-snoweb.x1
-~~~~~~~~~~~~~~
-
-.svg-snoweb.x2
-~~~~~~~~~~~~~~
-
-.svg-snoweb.x3
-~~~~~~~~~~~~~~
-
-.svg-snoweb.x5
-~~~~~~~~~~~~~~
-
-.svg-snoweb.x10
-~~~~~~~~~~~~~~~

@@ -1,8 +1,8 @@
-{% block css %}<!--Themes (not required) : manage dark and light mode-->
+{% block css %}<!--Themes (not required) : manage dark and light mode with class-->
 <link rel="stylesheet" href="{{ settings.BASE_URL_CSS }}themes-{{ settings.VERSION }}.css">
 
-<!--Sizer (not required) : add default size to SVGs-->
-<link rel="stylesheet" href="{{ settings.BASE_URL_CSS }}sizer-{{ settings.VERSION }}.css">
+<!--Themes auto (not required) : manage dark and light mode with prefers-color-scheme-->
+<link rel="stylesheet" href="{{ settings.BASE_URL_CSS }}themesauto-{{ settings.VERSION }}.css">
 
 <!--Collections (required)-->
 {% endblock %}

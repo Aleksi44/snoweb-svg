@@ -15,5 +15,6 @@ except pkg_resources.DistributionNotFound:
         VERSION = data['version']
 
 SVG_DEFAULT_THEME = 'light'
-SVG_DEFAULT_SIZE = 'x3'
+SVG_DEFAULT_WIDTH = 100
+SVG_DEFAULT_HEIGHT = 100
 SVG_DEFAULT_VARIANT = 'glass'
