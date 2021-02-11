@@ -1,8 +1,6 @@
 $transition: opacity $animation-duration $animation-timing-function;
 
 .svg-builder-basic {
-  position: relative;
-
   *[id*='-on-hover'] {
     opacity: 0;
   }
