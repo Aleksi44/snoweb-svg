@@ -14,7 +14,7 @@ except pkg_resources.DistributionNotFound:
         data = json.load(package)
         VERSION = data['version']
 
-SVG_DEFAULT_THEME = 'light'
+SVG_DEFAULT_THEME = 'dark'
 SVG_DEFAULT_WIDTH = 100
 SVG_DEFAULT_HEIGHT = 100
 SVG_DEFAULT_VARIANT = 'glass'

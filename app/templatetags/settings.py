@@ -22,7 +22,7 @@ variants_settings = {
         ('theme_dark_secondary', '#F7F7F7'),
         ('theme_dark_tertiary', '#F7F7F7'),
         ('theme_light_background_body', 'linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%),linear-gradient(127deg, rgba(242,214,17,.8), rgba(242,214,17,0) 70.71%),linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%);'),
-        ('theme_dark_background_body', 'linear-gradient(155deg,#1B1464, #99272D,#ED1C24,#F15A24,#1B1464)'),
+        ('theme_dark_background_body', 'linear-gradient(217deg, rgba(86,193,202,.8), rgba(86,193,202,0) 70.71%),linear-gradient(127deg, rgba(96,144,209,.8), rgba(96,144,209,0) 70.71%),linear-gradient(336deg, rgba(114,58,223,.8), rgba(114,58,223,0) 70.71%);'),
     )
 }
 
