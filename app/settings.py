@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     "django.contrib.sitemaps",
     'storages',
+    'django_css_inline'
 ]
 
 MIDDLEWARE = [
@@ -158,3 +159,5 @@ LANGUAGES = [
     ('en', "English"),
     ('fr', "French"),
 ]
+
+DJANGO_CSS_INLINE_ENABLE = not DEBUG
