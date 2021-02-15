@@ -2,9 +2,6 @@
 
 {% load svg_utils %}
 
-{% block svg_class %}{{ block.super }} svg-builder-basic{% endblock %}
-
-
 {% block svg_content %}
     {% with s=0.5 %}
 
@@ -12,7 +9,7 @@
         {% for prop in props %}
             <circle {% variant_manager variant self 'attrs' %}
                     transform="{% scale s x=prop.0|to_int y=prop.1|to_int %}"
-                    class="svg-fill-tertiary"
+                    class="svg-fill-primary"
                     cx="{{ prop.0 }}"
                     cy="{{ prop.1 }}"
                     r="50">
@@ -24,7 +21,7 @@
             <circle {% variant_manager variant self 'attrs' %}
                     transform="{% scale s x=prop.0|to_int y=prop.1|to_int %}"
                     style="mix-blend-mode: screen;"
-                    class="svg-fill-tertiary svg-builder-circle svg-keep"
+                    class="svg-fill-primary svg-builder-circle svg-keep"
                     cx="{{ prop.0 }}"
                     cy="{{ prop.1 }}"
                     r="0">

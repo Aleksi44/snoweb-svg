@@ -11,7 +11,7 @@
     <g clip-path="url(#clip-path-{{ self.key_composer }})">
 
         <rect {% variant_manager variant self 'attrs' %}
-                class="svg-fill-tertiary"
+                class="svg-fill-primary"
                 x="0" y="0"
                 width="100"
                 height="100">
@@ -22,7 +22,7 @@
             <circle {% variant_manager variant self 'attrs' %}
                     transform="{% scale 0.5 x=prop.0|to_int y=prop.1|to_int %}"
                     style="mix-blend-mode: screen;"
-                    class="svg-fill-tertiary svg-builder-circle svg-slow svg-keep"
+                    class="svg-fill-primary svg-builder-circle svg-slow svg-keep"
                     cx="{{ prop.0 }}"
                     cy="{{ prop.1 }}"
                     r="0">

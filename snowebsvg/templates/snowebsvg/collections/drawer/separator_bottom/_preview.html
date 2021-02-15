@@ -1,6 +1,6 @@
 {% load svg %}<a class="svg-trigger" style="text-decoration: none"
                  href="{% url 'app:svg' self.group.collection.key self.group.key self.key %}">
     <div style="width: 100%; overflow: hidden">
-        {% svg_inline self theme '100%' 50 variant=variant %}
+        {% svg_inline self theme '100%' 100 variant=variant %}
     </div>
 </a>
