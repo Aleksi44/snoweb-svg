@@ -1,6 +1,5 @@
 {% load svg_utils %}
 <svg xmlns="http://www.w3.org/2000/svg"
-     id="id-{{ self.key_composer }}"
      class="{% block svg_class %}svg-snoweb {% if theme %}svg-theme-{{ theme }}{% endif %}{% endblock %}{% if klass %} {{ klass }}{% endif %}"
      x="{% block svg_x %}0{% endblock %}"
      y="{% block svg_y %}0{% endblock %}"

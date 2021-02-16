@@ -3,13 +3,13 @@
 {% load svg_utils %}
 
 {% block svg_content %}
-
-    <clipPath id="clip-path-{{ self.key_composer }}">
+    {% unique_id as id %}
+    <clipPath id="clip-path-{{ id }}">
         <rect x="0" y="95" width="100" height="5"></rect>
     </clipPath>
 
 
-    <g clip-path="url(#clip-path-{{ self.key_composer }})">
+    <g clip-path="url(#clip-path-{{ id }})">
 
         <rect {% variant_manager variant self 'attrs' %}
                 class="svg-fill-tertiary"

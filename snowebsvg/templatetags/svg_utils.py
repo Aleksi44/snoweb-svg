@@ -1,3 +1,6 @@
+from datetime import datetime
+from uuid import uuid4
+
 from django import template
 from django.template.loader import get_template
 from django.template.exceptions import TemplateDoesNotExist
@@ -43,3 +46,8 @@ def variant_manager(variant=None, svg=None, variant_part='defs'):
         except TemplateDoesNotExist:
             return ''
     return ''
+
+
+@register.simple_tag
+def unique_id():
+    return datetime.now().strftime('%Y%m-%d%H-%M%S-') + str(uuid4())

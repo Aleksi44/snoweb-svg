@@ -1,13 +1,15 @@
 {% extends 'snowebsvg/common/svg.html' %}
+{% load svg_utils %}
 
 {% block svg_viewbox %}0 0 100 100{% endblock %}
 
 {% block svg_content %}
+    {% unique_id as id %}
     <defs>
-        <pattern id="unit-{{ self.key_composer }}" x="0" y="0" width="10" height="10"
+        <pattern id="unit-{{ id }}" x="0" y="0" width="10" height="10"
                  patternUnits="userSpaceOnUse">
             <polygon class="svg-fill-primary" points="5 2.5 7.5 7.5 2.5 7.5 5 2.5"></polygon>
         </pattern>
     </defs>
-    <rect width="100" height="100" fill="url(#unit-{{ self.key_composer }})"></rect>
+    <rect width="100" height="100" fill="url(#unit-{{ id }})"></rect>
 {% endblock %}
