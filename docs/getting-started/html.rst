@@ -28,11 +28,8 @@ With :
         <!--Themes auto (not required) : manage dark and light mode with prefers-color-scheme-->
         <link rel="stylesheet" href="https://static.snoweb.fr/snowebsvg/dist/css/themesauto-<version>.css">
 
-        <!--Effect (not required) : freeze animation for some collections -->
-        <link rel="stylesheet" href="https://static.snoweb.fr/snowebsvg/dist/css/effect-<version>.css">
-
         <!--Builders (required for some collections) : add animations builders -->
-        <link rel="stylesheet" href="https://static.snoweb.fr/snowebsvg/dist/css/essential-<version>.css">
+        <link rel="stylesheet" href="https://static.snoweb.fr/snowebsvg/dist/css/core-<version>.css">
 
         <!--Configure colors (not required if you don't use theme) -->
         <style>

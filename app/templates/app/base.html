@@ -45,10 +45,7 @@
                     {% with href="snowebsvg/dist/css/themes-"|add:settings.VERSION|add:".css" %}
                         <link rel="stylesheet" href="{% static href %}">
                     {% endwith %}
-                    {% with href="snowebsvg/dist/css/essential-"|add:settings.VERSION|add:".css" %}
-                        <link rel="stylesheet" href="{% static href %}">
-                    {% endwith %}
-                    {% with href="snowebsvg/dist/css/effect-"|add:settings.VERSION|add:".css" %}
+                    {% with href="snowebsvg/dist/css/core-"|add:settings.VERSION|add:".css" %}
                         <link rel="stylesheet" href="{% static href %}">
                     {% endwith %}
                 {% end_css_inline %}

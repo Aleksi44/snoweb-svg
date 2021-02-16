@@ -17,20 +17,21 @@ logger = logging.getLogger('snowebsvg')
 class SnowebSvgTest(TestCase):
 
     def svg_build(self):
-        management.call_command('svg_build')
+        if Svg.objects.all().count() == 0:
+            management.call_command('svg_build')
 
-    def test_svg_clear(self):
+    def test_svg_sync(self):
         self.svg_build()
-        management.call_command('svg_clean')
-        self.assertEqual(
+        management.call_command('svg_sync')
+        self.assertGreater(
             Svg.objects.all().count(),
             0
         )
-        self.assertEqual(
+        self.assertGreater(
             GroupSvg.objects.all().count(),
             0
         )
-        self.assertEqual(
+        self.assertGreater(
             Svg.objects.all().count(),
             0
         )

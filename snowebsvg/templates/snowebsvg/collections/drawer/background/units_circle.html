@@ -1,0 +1,14 @@
+{% extends 'snowebsvg/common/svg.html' %}
+
+{% block svg_viewbox %}0 0 1000 1000{% endblock %}
+{% block svg_aspect_ratio %}xMidYMid slice{% endblock %}
+
+{% block svg_content %}
+    <defs>
+        <pattern id="unit-{{ self.key_composer }}" x="0" y="0" width="10" height="10"
+                 patternUnits="userSpaceOnUse">
+            <circle cx="5" cy="5" r="1" class="svg-fill-primary"></circle>
+        </pattern>
+    </defs>
+    <rect width="1000" height="1000" fill="url(#unit-{{ self.key_composer }})"></rect>
+{% endblock %}

@@ -48,11 +48,17 @@ class Collection(models.Model):
         """
         Method for rendering stylesheet code
         """
-        svg_template = get_template("snowebsvg/collections/%s/styles.html" % self.key)
-        return svg_template.render({
+
+        context = {
             'self': self,
             'settings': settings
-        })
+        }
+        try:
+            svg_template = get_template("snowebsvg/collections/%s/styles.html" % self.key)
+            return svg_template.render(context)
+        except TemplateDoesNotExist:
+            svg_template = get_template("snowebsvg/common/styles.html")
+            return svg_template.render(context)
 
 
 class GroupSvg(models.Model):
