@@ -1,12 +1,19 @@
 from django import template
 from snowebsvg.models import Svg
-from snowebsvg import settings
+from snowebsvg import settings as svg_settings
+from django.conf import settings
 
 register = template.Library()
 
+SVG_DEFAULT_THEME = getattr(settings, 'SVG_DEFAULT_THEME', None)
+SVG_DEFAULT_WIDTH = getattr(settings, 'SVG_DEFAULT_WIDTH', None)
+SVG_DEFAULT_HEIGHT = getattr(settings, 'SVG_DEFAULT_HEIGHT', None)
+SVG_DEFAULT_VARIANT = getattr(settings, 'SVG_DEFAULT_VARIANT', None)
+
 
 @register.simple_tag
-def svg_inline(svg_target, theme=None, width=None, height=None, variant=None, grid=False, klass=None):
+def svg_inline(svg_target, theme=SVG_DEFAULT_THEME, width=SVG_DEFAULT_WIDTH, height=SVG_DEFAULT_HEIGHT,
+               variant=SVG_DEFAULT_VARIANT, grid=False, klass=None):
     if isinstance(svg_target, Svg):
         return svg_target.render_html(theme, width, height, variant, grid, klass)
     else:
@@ -16,7 +23,8 @@ def svg_inline(svg_target, theme=None, width=None, height=None, variant=None, gr
 
 
 @register.simple_tag
-def svg_preview(svg_target, theme=None, width=None, height=None, variant=None, grid=False):
+def svg_preview(svg_target, theme=SVG_DEFAULT_THEME, width=SVG_DEFAULT_WIDTH, height=SVG_DEFAULT_HEIGHT,
+                variant=SVG_DEFAULT_VARIANT, grid=False):
     if isinstance(svg_target, Svg):
         return svg_target.render_preview(theme, width, height, variant, grid)
     else:
@@ -26,7 +34,8 @@ def svg_preview(svg_target, theme=None, width=None, height=None, variant=None, g
 
 
 @register.simple_tag
-def svg_django(svg_target, theme=None, width=None, height=None, variant=None):
+def svg_django(svg_target, theme=SVG_DEFAULT_THEME, width=SVG_DEFAULT_WIDTH, height=SVG_DEFAULT_HEIGHT,
+               variant=SVG_DEFAULT_VARIANT):
     if isinstance(svg_target, Svg):
         return svg_target.render_django(theme, width, height, variant)
     else:
@@ -45,8 +54,8 @@ def svg_stylesheets(*bundles):
     ret = ""
     for bundle in bundles:
         ret += ("<link rel=\"stylesheet\" href=\"%s%s-%s.css\">" % (
-            settings.BASE_URL_CSS,
+            svg_settings.BASE_URL_CSS,
             bundle,
-            settings.VERSION
+            svg_settings.VERSION
         ))
     return ret
