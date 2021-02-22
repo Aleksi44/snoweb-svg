@@ -1,7 +1,10 @@
 {% load svg %}
 
-<div style="display: flex; flex-wrap: wrap; align-items: center;">
-    {% for svg in svg_set %}
-        {% svg_preview svg theme 60 60 variant %}
-    {% endfor %}
-</div>
+{% for svg in svg_set %}
+    <a style="text-decoration: none" href="{% url 'app:svg' svg.group.collection.key svg.group.key svg.key %}">
+            <span style="display: inline-block; text-decoration: none;" class="svg-trigger">
+                {% svg_inline svg theme 60 60 variant=variant %}
+            </span>
+    </a>
+{% endfor %}
+

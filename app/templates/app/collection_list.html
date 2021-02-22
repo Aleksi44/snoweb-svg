@@ -12,15 +12,8 @@
                 <h2><code>{{ collection.key }}</code></h2>
             </a>
             {% for group in collection.groupsvg_set.all %}
-                {% for svg in group.svg_set.all %}
-                    <a style="text-decoration: none" href="{% url 'app:svg' collection.key svg.group.key svg.key  %}">
-                    <span style="display: inline-block; text-decoration: none;" class="svg-trigger">
-                        {% svg_inline svg theme 60 60 variant=variant %}
-                    </span>
-                    </a>
-                {% endfor %}
+                {% include 'app/common/svg_set.html' with svg_set=group.svg_set.all %}
             {% endfor %}
-
         {% endfor %}
     {% endwith %}
 {% endblock %}

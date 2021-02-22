@@ -1,5 +1,5 @@
 {% extends 'app/base.html' %}
-{% load i18n svg %}
+{% load i18n svg beautifulsoup %}
 
 {% block title %}{% trans 'Free SVG' %}{% if object_list.0 %} {{ object_list.0 }}{% endif %} | {{ block.super }}{% endblock %}
 {% block description %}{% trans 'Free SVG' %}{% if object_list.0 %} {{ object_list.0 }}{% endif %} {% trans 'animated and built in HTML and CSS.' %}
@@ -10,7 +10,9 @@
     {% with theme=request.session.theme variant=request.session.variant %}
         {% for svg in object_list %}
             <h1>SVG <code>{{ svg.key_composer }}</code></h1>
-            {% svg_preview svg theme 200 200 variant True %}
+            <div class="svg-trigger">
+                {% svg_preview svg theme 200 200 variant True %}
+            </div>
             <h2>{% trans 'Attributes' %}</h2>
             <ul>
                 <li>
@@ -43,7 +45,7 @@
             <textarea id="code-styles-{{ svg.key_composer }}">{% collection_styles svg.group.collection %}</textarea>
             <button type="button" onclick="document.getElementById('code-styles-{{ svg.key_composer }}').select();document.execCommand('copy');">{% trans 'Copy' %}</button>
             <h3>HTML</h3>
-            <textarea id="code-html-{{ svg.key_composer }}">{% svg_preview svg theme 100 100 %}</textarea>
+            <textarea id="code-html-{{ svg.key_composer }}">{% svg_preview svg theme 100 100 as html %}{{ html|prettify }}</textarea>
             <button type="button" onclick="document.getElementById('code-html-{{ svg.key_composer }}').select();document.execCommand('copy');">{% trans 'Copy' %}</button>
             <h3>Django</h3>
             <textarea id="code-django-{{ svg.key_composer }}" style="height: 110px">{% svg_django svg theme 100 100 variant=variant %}</textarea>

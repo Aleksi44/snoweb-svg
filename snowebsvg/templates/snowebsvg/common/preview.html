@@ -1,4 +1,2 @@
 {% load svg %}
-<a style="text-decoration: none" href="{% url 'app:svg' self.group.collection.key self.group.key self.key %}" class="svg-trigger">
-    {% block preview_content %}{% svg_inline self theme width height variant grid %}{% endblock %}
-</a>
+{% block preview_content %}{% svg_inline self theme width height variant grid %}{% endblock %}

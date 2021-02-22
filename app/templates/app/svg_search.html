@@ -17,6 +17,7 @@
         </form>
         {% include 'app/common/svg_set.html' with svg_set=object_list %}
     {% endwith %}
-    <button type="button"
-            onclick="document.body.scrollTop = 0;document.documentElement.scrollTop = 0;">{% trans 'Scroll to top' %}</button>
+    <div>
+        <button style="margin: 20px 0;" type="button" onclick="document.body.scrollTop = 0;document.documentElement.scrollTop = 0;">{% trans 'Scroll to top' %}</button>
+    </div>
 {% endblock %}
