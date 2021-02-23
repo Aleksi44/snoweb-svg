@@ -1,0 +1,11 @@
+{% extends 'snowebsvg/common/svg.html' %}
+
+{% load svg_utils %}
+{% block svg_aspect_ratio %}none{% endblock %}
+
+{% block svg_content %}
+    <rect {% variant_manager variant self 'attrs' %}
+            class="svg-fill-primary"
+            x="5" y="5" width="90" height="90" rx="15" ry="15">
+    </rect>
+{% endblock %}

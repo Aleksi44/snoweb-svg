@@ -1,0 +1,8 @@
+{% extends 'snowebsvg/collections/separator_top/wave/right.html' %}
+{% load svg_utils %}
+
+{% block svg_content %}
+    <g transform="{% scale 1 -1 %}">
+        {{ block.super }}
+    </g>
+{% endblock %}

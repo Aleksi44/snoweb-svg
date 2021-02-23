@@ -15,7 +15,7 @@
     animation-duration: $animation-duration;
 
     &.svg-slow {
-      animation-duration: #{$animation-duration * 2};
+      animation-duration: #{$animation-duration * 5};
     }
   }
 
