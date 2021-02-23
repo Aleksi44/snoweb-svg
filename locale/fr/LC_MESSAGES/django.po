@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-08 11:25+0000\n"
+"POT-Creation-Date: 2021-02-23 19:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -68,28 +68,34 @@ msgstr "Couleur hexadécimale, linear-gradient, radial-gradient"
 msgid "Color theme dark background body"
 msgstr "Couleur de fond avec le thème sombre"
 
-#: app/templates/app/base.html:118
+#: app/templates/app/base.html:10
+msgid "Choose and embed web-optimized SVGs in your HTML or with Django."
+msgstr ""
+"Choisissez et intégrez des SVG optimisés pour le web dans votre HTML ou avec "
+"Django."
+
+#: app/templates/app/base.html:117
 msgid "Home"
 msgstr "Accueil"
 
-#: app/templates/app/base.html:121 app/templates/app/svg_search.html:11
+#: app/templates/app/base.html:120 app/templates/app/svg_search.html:11
 #: app/templates/app/svg_search.html:16
 msgid "Search"
 msgstr "Recherche"
 
-#: app/templates/app/base.html:124 app/templates/app/svg_settings.html:11
+#: app/templates/app/base.html:123 app/templates/app/svg_settings.html:11
 msgid "Settings"
 msgstr "Paramètres"
 
-#: app/templates/app/base.html:133
+#: app/templates/app/base.html:132
 msgid "Related links"
 msgstr "Liens connexes"
 
-#: app/templates/app/base.html:135
+#: app/templates/app/base.html:134
 msgid "Documentation"
 msgstr ""
 
-#: app/templates/app/base.html:140
+#: app/templates/app/base.html:139
 msgid "Made with ❤"
 msgstr "Fabriqué avec ❤"
 
@@ -126,7 +132,7 @@ msgstr ""
 msgid "Groups"
 msgstr "Groupes"
 
-#: app/templates/app/groupsvg_list.html:18 app/templates/app/svg_search.html:21
+#: app/templates/app/groupsvg_list.html:19 app/templates/app/svg_search.html:21
 msgid "Scroll to top"
 msgstr "Défiler vers le haut"
 
@@ -138,36 +144,36 @@ msgstr "SVG gratuit"
 msgid "animated and built in HTML and CSS."
 msgstr "de SVG animés construit en HTML et CSS."
 
-#: app/templates/app/svg_list.html:14
+#: app/templates/app/svg_list.html:16
 msgid "Attributes"
 msgstr "Attributs"
 
-#: app/templates/app/svg_list.html:17
+#: app/templates/app/svg_list.html:19
 msgid "Collection"
 msgstr ""
 
-#: app/templates/app/svg_list.html:22
+#: app/templates/app/svg_list.html:24
 msgid "Group"
 msgstr "Groupe"
 
-#: app/templates/app/svg_list.html:26
+#: app/templates/app/svg_list.html:28
 msgid "Builder"
 msgstr "Constructeur"
 
-#: app/templates/app/svg_list.html:29
+#: app/templates/app/svg_list.html:31
 msgid "Code"
 msgstr ""
 
-#: app/templates/app/svg_list.html:33
+#: app/templates/app/svg_list.html:35
 msgid "Getting started with HTML"
 msgstr "Premiers pas avec HTML"
 
-#: app/templates/app/svg_list.html:38
+#: app/templates/app/svg_list.html:40
 msgid "Getting started with Django"
 msgstr "Premiers pas avec Django"
 
-#: app/templates/app/svg_list.html:44 app/templates/app/svg_list.html:47
-#: app/templates/app/svg_list.html:50
+#: app/templates/app/svg_list.html:46 app/templates/app/svg_list.html:49
+#: app/templates/app/svg_list.html:52
 msgid "Copy"
 msgstr "Copie"
 
@@ -217,11 +223,12 @@ msgstr "Thèmes du site internet"
 msgid "Reset"
 msgstr "Réinitialiser"
 
-#: snowebsvg/models.py:13 snowebsvg/models.py:61 snowebsvg/models.py:113
+#: snowebsvg/models.py:13 snowebsvg/models.py:65 snowebsvg/models.py:117
 msgid "Key"
 msgstr "Clé"
 
 #: snowebsvg/templates/snowebsvg/collections/brand/_preview.html:1
+#: snowebsvg/templates/snowebsvg/collections/heroicons/_preview.html:1
 msgid ""
 "WARNING This work includes material that may be protected as a trademark in "
 "some jurisdictions. If you want to use it, you have to ensure that you have "

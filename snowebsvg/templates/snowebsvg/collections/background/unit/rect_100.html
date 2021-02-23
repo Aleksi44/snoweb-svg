@@ -1,7 +1,7 @@
 {% extends 'snowebsvg/common/svg.html' %}
 {% load svg_utils %}
 
-{% block svg_viewbox %}0 0 1000 1000{% endblock %}
+{% block svg_viewbox %}0 0 100 100{% endblock %}
 {% block svg_aspect_ratio %}xMidYMid slice{% endblock %}
 
 {% block svg_content %}
@@ -9,8 +9,13 @@
     <defs>
         <pattern id="unit-{{ id }}" x="0" y="0" width="10" height="10"
                  patternUnits="userSpaceOnUse">
-            <circle cx="5" cy="5" r="2" class="svg-fill-primary"></circle>
+            <rect {% variant_manager variant self 'attrs' %}
+                    x="4"
+                    y="4"
+                    height="2"
+                    width="2"
+                    class="svg-fill-primary"></rect>
         </pattern>
     </defs>
-    <rect width="1000" height="1000" fill="url(#unit-{{ id }})"></rect>
+    <rect width="100" height="100" fill="url(#unit-{{ id }})"></rect>
 {% endblock %}
