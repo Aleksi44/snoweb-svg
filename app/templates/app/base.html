@@ -31,9 +31,9 @@
         {% for lang_code, lang_name in languages %}
             {% with href=request|alternate_href:lang_code %}
                 {% if lang_code == LANGUAGE_CODE %}
-                    <link rel="alternate" hreflang="x-default" href="{{ href }}"/>
+                    <link rel="alternate" hreflang="x-default" href="https://{{ request.get_host }}{{ href }}"/>
                 {% endif %}
-                <link rel="alternate" hreflang="{{ lang_code }}" href="{{ href }}">
+                <link rel="alternate" hreflang="{{ lang_code }}" href="https://{{ request.get_host }}{{ href }}">
             {% endwith %}
         {% endfor %}
         {% block css %}
@@ -82,7 +82,6 @@
                     --form-text: gray;
                     --variable: {{ secondary }};
                     --highlight: {{ secondary }};
-
                 {% settings_by_key request 'theme_light_primary' as primary %}
                 {% settings_by_key request 'theme_light_secondary' as secondary %}
                 {% settings_by_key request 'theme_light_tertiary' as tertiary %}
@@ -104,9 +103,9 @@
 
     <a href="{% url 'app:collection' %}">
         {% if theme == 'light' %}
-            <img style="width: 200px" src="https://static.snoweb.fr/documents/logo-light.svg" alt="Logo Snoweb">
+            <img width="200px" height="100%" src="https://static.snoweb.fr/documents/logo-light.svg" alt="Logo Snoweb">
         {% else %}
-            <img style="width: 200px" src="https://static.snoweb.fr/documents/logo-dark.svg" alt="Logo Snoweb">
+            <img width="200px" height="100%" src="https://static.snoweb.fr/documents/logo-dark.svg" alt="Logo Snoweb">
         {% endif %}
     </a>
     <hr/>
