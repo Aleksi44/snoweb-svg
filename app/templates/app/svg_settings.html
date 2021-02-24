@@ -11,11 +11,19 @@
         <h1>{% trans 'Settings' %} SVG</h1>
 
         <h2>{% trans 'Preview' %}</h2>
-        {% svg_preview 'essential-cube-basic_2' theme 100 100 variant False %}
-        {% svg_preview 'essential-cube-circle_2' theme 100 100 variant False %}
-        {% svg_preview 'essential-cube-rect_2' theme 100 100 variant False %}
-        {% svg_preview 'essential-cube-line_2' theme 100 100 variant False %}
 
+        <span class="svg-trigger">
+            {% svg_preview 'northernlight-urban-basic' theme 100 100 variant False %}
+        </span>
+        <span class="svg-trigger">
+            {% svg_preview 'northernlight-urban-circle' theme 100 100 variant False %}
+        </span>
+        <span class="svg-trigger">
+            {% svg_preview 'northernlight-urban-rect' theme 100 100 variant False %}
+        </span>
+        <span class="svg-trigger">
+            {% svg_preview 'northernlight-urban-line' theme 100 100 variant False %}
+        </span>
         <h2>{% trans 'Themes' %} SVG</h2>
 
         <form method="GET" style="display: flex">
