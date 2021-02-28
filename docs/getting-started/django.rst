@@ -4,12 +4,15 @@ Integration with Django
 =======================
 
 
-Setup
------
+1 - Setup
+---------
 
-1 - Install with pip :
+1 - Install with pip
 
-``pip install snowebsvg``
+::
+
+    pip install snowebsvg
+
 
 2 - Add ``snowebsvg`` to django apps installed :
 
@@ -20,22 +23,28 @@ Setup
         'snowebsvg',
     ]
 
-3 - Run migrations :
+3 - Run migrations
 
-``python manage.py migrate``
+::
 
-4 - Build SVG :
+    python manage.py migrate
 
-``python manage.py svg_build``
+4 - Build SVG
 
-Add CSS Files
--------------
+::
 
-You have 2 options :
+    python manage.py svg_build
 
-1 - You can add css files :doc:`in your html <html>`.
+Now, you have the list of available svg in your database.
 
-2 - You can use django templatetags :
+2 - Add CSS files
+-----------------
+
+There are 2 different methods to configure CSS files with Django :
+
+- You can add css files like the :doc:`HTML getting started <html>`.
+
+- Or you can use django templatetags as below :
 
 ::
 
@@ -48,23 +57,26 @@ You have 2 options :
         ...
 
         {% autoescape off %}
-            {% svg_stylesheets 'themes' 'essential' 'effect' %}
+            {% svg_stylesheets 'themes' 'core' %}
         {% endautoescape %}
-
     </head>
 
 
-Add SVG Content
----------------
+The version of css files is determined based on the pypi package installed.
 
-With :
+You also need to configure :doc:`colors <html>` and :doc:`animations <html>` as needed.
 
-- ``<svg_key>`` : choose at `www.snoweb-svg.com <https://www.snoweb-svg.com/en/>`_.
-- ``<theme>`` : 'light' or 'dark', see more :doc:`here <../references/css>`.
-- ``<width>`` : 100, 100%, auto, ect...
-- ``<height>`` : 100, 100%, auto, ect...
-- ``<variant>`` : 'none' or 'glass', see more :doc:`here <../references/settings>`.
-- ``<grid>`` : True or False, display a grid preview.
+3 - Add SVG in your Django HTML template
+----------------------------------------
+
+You can use ``svg_inline`` to include an SVG in your template with these parameters :
+
+- ``<svg_key>`` : choose at `Snoweb SVG <https://www.snoweb-svg.com/en/>`_.
+- ``<theme>`` : ``'light'`` or ``'dark'``, see more :doc:`here <../references/css>`.
+- ``<width>`` : ``100``, ``100%``, ``auto``, see more at `SVG width <https://developer.mozilla.org/fr/docs/Web/SVG/Attribute/width>`_.
+- ``<height>`` : ``100``, ``100%``, ``auto``, see more at `SVG height <https://developer.mozilla.org/fr/docs/Web/SVG/Attribute/height>`_.
+- ``<variant>`` : ``'none'`` or ``'glass'``, see more :doc:`here <../references/settings>`.
+- ``<grid>`` : ``True`` or ``False``, display a grid preview.
 - ``<klass>`` : Add extra css classes to <svg> element.
 
 

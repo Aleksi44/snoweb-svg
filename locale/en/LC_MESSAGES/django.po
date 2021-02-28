@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-23 19:34+0000\n"
+"POT-Creation-Date: 2021-02-28 20:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -72,28 +72,28 @@ msgstr ""
 msgid "Choose and embed web-optimized SVGs in your HTML or with Django."
 msgstr ""
 
-#: app/templates/app/base.html:117
+#: app/templates/app/base.html:118
 msgid "Home"
 msgstr ""
 
-#: app/templates/app/base.html:120 app/templates/app/svg_search.html:11
+#: app/templates/app/base.html:121 app/templates/app/svg_search.html:11
 #: app/templates/app/svg_search.html:16
 msgid "Search"
 msgstr ""
 
-#: app/templates/app/base.html:123 app/templates/app/svg_settings.html:11
+#: app/templates/app/base.html:124 app/templates/app/svg_settings.html:11
 msgid "Settings"
 msgstr ""
 
-#: app/templates/app/base.html:132
+#: app/templates/app/base.html:133
 msgid "Related links"
 msgstr ""
 
-#: app/templates/app/base.html:134
+#: app/templates/app/base.html:135
 msgid "Documentation"
 msgstr ""
 
-#: app/templates/app/base.html:139
+#: app/templates/app/base.html:140
 msgid "Made with ❤"
 msgstr ""
 
@@ -169,8 +169,12 @@ msgstr ""
 msgid "Getting started with Django"
 msgstr ""
 
-#: app/templates/app/svg_list.html:46 app/templates/app/svg_list.html:49
-#: app/templates/app/svg_list.html:52
+#: app/templates/app/svg_list.html:45
+msgid "Getting started with Wagtail"
+msgstr ""
+
+#: app/templates/app/svg_list.html:51 app/templates/app/svg_list.html:54
+#: app/templates/app/svg_list.html:57
 msgid "Copy"
 msgstr ""
 
@@ -198,24 +202,24 @@ msgstr ""
 msgid "Preview"
 msgstr ""
 
-#: app/templates/app/svg_settings.html:19
+#: app/templates/app/svg_settings.html:27
 msgid "Themes"
 msgstr ""
 
-#: app/templates/app/svg_settings.html:26
+#: app/templates/app/svg_settings.html:34
 msgid "Variant"
 msgstr ""
 
-#: app/templates/app/svg_settings.html:37
-#: app/templates/app/svg_settings.html:46
+#: app/templates/app/svg_settings.html:45
+#: app/templates/app/svg_settings.html:54
 msgid "Save"
 msgstr ""
 
-#: app/templates/app/svg_settings.html:40
+#: app/templates/app/svg_settings.html:48
 msgid "Themes App"
 msgstr ""
 
-#: app/templates/app/svg_settings.html:49
+#: app/templates/app/svg_settings.html:57
 msgid "Reset"
 msgstr ""
 

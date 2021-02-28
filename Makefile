@@ -11,7 +11,7 @@ superuser:
 	python manage.py createsuperuser
 
 loc:
-	python manage.py makemessages --ignore build -l en -l fr && python manage.py compilemessages
+	python manage.py makemessages --ignore build -l en -l fr -l de && python manage.py compilemessages
 
 deploy:
 	rm -rf dist/*

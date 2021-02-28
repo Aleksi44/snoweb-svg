@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
@@ -15,150 +16,151 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: app/forms.py:14
 #, python-format
 msgid "%(value)s is not a hexadecimal color"
-msgstr "%(value)s n'est pas une couleur hexadécimale"
+msgstr "%(value)s ist keine hexadezimale Farbe"
 
 #: app/forms.py:26
 #, python-format
 msgid "%(value)s is not a valid css property"
-msgstr "%(value)s n'est pas une propriété css valide"
+msgstr "%(value)s ist keine gültige CSS-Eigenschaft"
 
 #: app/forms.py:45
 msgid "Color theme light primary"
-msgstr "Couleur thème claire 1"
+msgstr "Farbthema Licht primär"
 
 #: app/forms.py:46 app/forms.py:51 app/forms.py:56 app/forms.py:64
 #: app/forms.py:69 app/forms.py:74
 msgid "Hexadecimal color"
-msgstr "Couleur hexadécimale"
+msgstr "Hexadezimale Farbe"
 
 #: app/forms.py:50
 msgid "Color theme light secondary"
-msgstr "Couleur thème claire 2"
+msgstr "Farbthema Licht sekundär"
 
 #: app/forms.py:55
 msgid "Color theme light tertiary"
-msgstr "Couleur thème claire 3"
+msgstr "Farbthema Licht tertiär"
 
 #: app/forms.py:63
 msgid "Color theme dark primary"
-msgstr "Couleur thème sombre 1"
+msgstr "Farbthema dunkel primär"
 
 #: app/forms.py:68
 msgid "Color theme dark secondary"
-msgstr "Couleur thème sombre 2"
+msgstr "Farbthema dunkel sekundär"
 
 #: app/forms.py:73
 msgid "Color theme dark tertiary"
-msgstr "Couleur thème sombre 3"
+msgstr "Farbthema dunkel tertiär"
 
 #: app/forms.py:83
 msgid "Color theme light background body"
-msgstr "Couleur de fond avec le thème claire"
+msgstr "Farbhintergrund heller Hintergrundkörper"
 
 #: app/forms.py:84 app/forms.py:92
 msgid "Hexadecimal color, linear-gradient, radial-gradient"
-msgstr "Couleur hexadécimale, linear-gradient, radial-gradient"
+msgstr "Hexadezimalfarbe, linearer Farbverlauf, radialer Farbverlauf"
 
 #: app/forms.py:91
 msgid "Color theme dark background body"
-msgstr "Couleur de fond avec le thème sombre"
+msgstr "Dunkler Hintergrundkörper des Farbthemas"
 
 #: app/templates/app/base.html:10
 msgid "Choose and embed web-optimized SVGs in your HTML or with Django."
 msgstr ""
-"Choisissez et intégrez des SVG optimisés pour le web dans votre HTML ou avec "
-"Django."
+"Wählen Sie weboptimierte SVGs aus und binden Sie sie in Ihr HTML oder mit "
+"Django ein."
 
 #: app/templates/app/base.html:118
 msgid "Home"
-msgstr "Accueil"
+msgstr "Zuhause"
 
 #: app/templates/app/base.html:121 app/templates/app/svg_search.html:11
 #: app/templates/app/svg_search.html:16
 msgid "Search"
-msgstr "Recherche"
+msgstr "Suche"
 
 #: app/templates/app/base.html:124 app/templates/app/svg_settings.html:11
 msgid "Settings"
-msgstr "Paramètres"
+msgstr "Einstellungen"
 
 #: app/templates/app/base.html:133
 msgid "Related links"
-msgstr "Liens connexes"
+msgstr "Ähnliche Links"
 
 #: app/templates/app/base.html:135
 msgid "Documentation"
-msgstr ""
+msgstr "Dokumentation"
 
 #: app/templates/app/base.html:140
 msgid "Made with ❤"
-msgstr "Fabriqué avec ❤"
+msgstr "Gemacht mit ❤"
 
 #: app/templates/app/collection_list.html:4
 msgid "Free SVG collections for web"
-msgstr "Collections de SVG gratuites pour le web"
+msgstr "Kostenlose SVG-Sammlungen für das Web"
 
 #: app/templates/app/collection_list.html:5
 msgid "Get free collections of SVGs animated built in HTML and CSS."
 msgstr ""
-"Obtenez des collections gratuites de SVG animés construits en HTML et CSS."
+"Holen Sie sich kostenlose Sammlungen von SVGs, die in HTML und CSS animiert "
+"sind."
 
 #: app/templates/app/collection_list.html:9
 msgid "collections"
-msgstr ""
+msgstr "Sammlungen"
 
 #: app/templates/app/groupsvg_list.html:4
 msgid "Free SVG collection"
-msgstr "Collection SVG gratuite"
+msgstr "Kostenlose SVG-Sammlung"
 
 #: app/templates/app/groupsvg_list.html:5
 msgid "Get free collection"
-msgstr "Obtenez une collection gratuite"
+msgstr "Holen Sie sich kostenlose Sammlung"
 
 #: app/templates/app/groupsvg_list.html:5
 msgid "of SVGs animated built in HTML and CSS."
-msgstr "de SVG animés intégrés en HTML et CSS."
+msgstr "von SVGs animiert in HTML und CSS gebaut."
 
 #: app/templates/app/groupsvg_list.html:9
 msgid "collection"
-msgstr ""
+msgstr "Sammlung"
 
 #: app/templates/app/groupsvg_list.html:12
 msgid "Groups"
-msgstr "Groupes"
+msgstr "Gruppen"
 
 #: app/templates/app/groupsvg_list.html:19 app/templates/app/svg_search.html:21
 msgid "Scroll to top"
-msgstr "Défiler vers le haut"
+msgstr "Nach oben scrollen"
 
 #: app/templates/app/svg_list.html:4 app/templates/app/svg_list.html:5
 msgid "Free SVG"
-msgstr "SVG gratuit"
+msgstr "Kostenlose SVG"
 
 #: app/templates/app/svg_list.html:5
 msgid "animated and built in HTML and CSS."
-msgstr "de SVG animés construit en HTML et CSS."
+msgstr "animiert und in HTML und CSS gebaut."
 
 #: app/templates/app/svg_list.html:16
 msgid "Attributes"
-msgstr "Attributs"
+msgstr "Attribute"
 
 #: app/templates/app/svg_list.html:19
 msgid "Collection"
-msgstr ""
+msgstr "Sammlung"
 
 #: app/templates/app/svg_list.html:24
 msgid "Group"
-msgstr "Groupe"
+msgstr "Gruppe"
 
 #: app/templates/app/svg_list.html:28
 msgid "Builder"
-msgstr "Constructeur"
+msgstr "Baumeisterin"
 
 #: app/templates/app/svg_list.html:31
 msgid "Code"
@@ -166,49 +168,50 @@ msgstr ""
 
 #: app/templates/app/svg_list.html:35
 msgid "Getting started with HTML"
-msgstr "Premiers pas avec HTML"
+msgstr "Erste Schritte mit HTML"
 
 #: app/templates/app/svg_list.html:40
 msgid "Getting started with Django"
-msgstr "Premiers pas avec Django"
+msgstr "Erste Schritte mit Django"
 
 #: app/templates/app/svg_list.html:45
 msgid "Getting started with Wagtail"
-msgstr "Premiers pas avec Wagtail"
+msgstr "Erste Schritte mit Wagtail"
 
 #: app/templates/app/svg_list.html:51 app/templates/app/svg_list.html:54
 #: app/templates/app/svg_list.html:57
 msgid "Copy"
-msgstr "Copie"
+msgstr "Kopieren"
 
 #: app/templates/app/svg_search.html:4
 msgid "Search free SVG for web"
-msgstr "Recherche de SVG gratuit pour le web"
+msgstr "Suche kostenlose SVG für Web"
 
 #: app/templates/app/svg_search.html:6
 msgid "Search for free SVGs animated built in HTML and CSS."
-msgstr "Recherchez des SVG gratuits et animés en HTML et CSS."
+msgstr "Suchen Sie nach kostenlosen SVGs, die in HTML und CSS animiert sind."
 
 #: app/templates/app/svg_search.html:11
 msgid "by key"
-msgstr "par clé"
+msgstr "per Schlüssel"
 
 #: app/templates/app/svg_settings.html:4
 msgid "Settings SVG for web"
-msgstr "Paramètres SVG pour le web"
+msgstr "Einstellungen SVG für Web"
 
 #: app/templates/app/svg_settings.html:5
 msgid "Configure settings and get free SVGs animated built in HTML and CSS."
 msgstr ""
-"Obtenez des collections gratuites de SVG animés construits en HTML et CSS."
+"Konfigurieren Sie Einstellungen und erhalten Sie kostenlose SVGs, die in "
+"HTML und CSS animiert sind."
 
 #: app/templates/app/svg_settings.html:13
 msgid "Preview"
-msgstr "Aperçu"
+msgstr "Vorschau"
 
 #: app/templates/app/svg_settings.html:27
 msgid "Themes"
-msgstr "Thèmes"
+msgstr "Themen"
 
 #: app/templates/app/svg_settings.html:34
 msgid "Variant"
@@ -217,19 +220,19 @@ msgstr "Variante"
 #: app/templates/app/svg_settings.html:45
 #: app/templates/app/svg_settings.html:54
 msgid "Save"
-msgstr "Enregistrer"
+msgstr "speichern"
 
 #: app/templates/app/svg_settings.html:48
 msgid "Themes App"
-msgstr "Thèmes du site internet"
+msgstr "Themen App"
 
 #: app/templates/app/svg_settings.html:57
 msgid "Reset"
-msgstr "Réinitialiser"
+msgstr "Zurücksetzen"
 
 #: snowebsvg/models.py:13 snowebsvg/models.py:65 snowebsvg/models.py:117
 msgid "Key"
-msgstr "Clé"
+msgstr "Schlüssel"
 
 #: snowebsvg/templates/snowebsvg/collections/brand/_preview.html:1
 #: snowebsvg/templates/snowebsvg/collections/heroicons/_preview.html:1
@@ -241,10 +244,9 @@ msgid ""
 "holder by Snoweb SVG, nor vice versa. See the trademark owner for rules "
 "about appropriate use of their trademarks."
 msgstr ""
-"AVERTISSEMENT Ce travail comprend du matériel qui peut être protégé en tant "
-"que marque commerciale dans certaines juridictions. Si vous souhaitez "
-"l'utiliser, vous devez vous assurer que vous avez le droit légal de le faire "
-"et que vous ne violez aucun droit de marque. L'utilisation de ces marques "
-"n'indique pas l'approbation  du titulaire de la marque par Snoweb SVG, ni "
-"vice versa. Consultez le propriétaire de la marque pour connaître les règles "
-"relatives à l'utilisation appropriée de ses marques."
+"WARNUNG Diese Arbeit enthält Material, das in einigen Ländern möglicherweise "
+"als Marke geschützt ist. Wenn Sie es verwenden möchten, müssen Sie "
+"sicherstellen, dass Sie das gesetzliche Recht dazu haben und keine "
+"Markenrechte verletzen. Die Verwendung dieser Marken bedeutet weder eine "
+"Billigung des Markeninhabers durch Snoweb SVG noch umgekehrt. Informationen "
+"zur angemessenen Verwendung ihrer Marken erhalten Sie beim Markeninhaber."

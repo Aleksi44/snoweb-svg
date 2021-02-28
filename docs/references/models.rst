@@ -1,8 +1,8 @@
 .. _references_models:
 
 
-Models
-======
+Django models
+=============
 
 Collection
 ----------

@@ -1,7 +1,7 @@
 .. _references_settings:
 
-Settings
-========
+Django settings
+===============
 
 SVG_DEFAULT_THEME
 -----------------

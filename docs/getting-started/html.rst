@@ -4,49 +4,77 @@
 Integration with HTML
 =====================
 
+1 - Choose your theme method
+----------------------------
 
-Add CSS Files
--------------
+Themes manage colors of SVGs on a dark or light background.
 
-With :
+There are 2 different methods to configure themes :
 
-- <version> : current version is |version|
+- with css class (svg-theme-light or svg-theme-dark)
+- with `prefers-color-scheme <https://developer.mozilla.org/fr/docs/Web/CSS/@media/prefers-color-scheme>`_
 
-.. image:: https://img.shields.io/pypi/v/snowebsvg
-    :target: https://pypi.org/project/snowebsvg/
 
+With css class
+**************
 
 ::
 
-    <head>
+    <link rel="stylesheet" href="https://static.snoweb.fr/snowebsvg/dist/css/themes-<version>.css">
 
-        ...
+To use the latest version, replace <version> with |version|
 
-        <!--Themes (not required) : manage dark and light mode with class-->
-        <link rel="stylesheet" href="https://static.snoweb.fr/snowebsvg/dist/css/themes-<version>.css">
+With prefers-color-scheme
+*************************
 
-        <!--Themes auto (not required) : manage dark and light mode with prefers-color-scheme-->
-        <link rel="stylesheet" href="https://static.snoweb.fr/snowebsvg/dist/css/themesauto-<version>.css">
+::
 
-        <!--Builders (required for some collections) : add animations builders -->
-        <link rel="stylesheet" href="https://static.snoweb.fr/snowebsvg/dist/css/core-<version>.css">
+    <link rel="stylesheet" href="https://static.snoweb.fr/snowebsvg/dist/css/themesauto-<version>.css">
 
-        <!--Configure colors (not required if you don't use theme) -->
-        <style>
-            :root {
-                --svg-theme-light-primary: #14253A;
-                --svg-theme-light-secondary: #E63946;
-                --svg-theme-light-tertiary: #f7f7f7;
-
-                --svg-theme-dark-primary: #F7F7F7;
-                --svg-theme-dark-secondary: #E63946;
-                --svg-theme-dark-tertiary: #112032;
-            }
-        </style>
-    </head>
+To use the latest version, replace <version> with |version|
 
 
-Add SVG Content
----------------
+2 - Configure colors
+--------------------
 
-Choose and add your SVG content in your html at `www.snoweb-svg.com <https://www.snoweb-svg.com/en/>`_.
+To define the colors of your SVGs, set your css variables as below :
+
+::
+
+    <style>
+        :root {
+            --svg-theme-light-primary: #14253A;
+            --svg-theme-light-secondary: #E63946;
+            --svg-theme-light-tertiary: #F7F7F7;
+
+            --svg-theme-dark-primary: #F7F7F7;
+            --svg-theme-dark-secondary: #E63946;
+            --svg-theme-dark-tertiary: #112032;
+        }
+    </style>
+
+
+The primary color is determined as the most used. Same logic for secondary and tertiary.
+
+
+3 - Use animations
+------------------
+
+To use an animated SVG, you need to include the "Core" code in the `<head>` part as below :
+
+::
+
+    <link rel="stylesheet" href="https://static.snoweb.fr/snowebsvg/dist/css/core-<version>.css">
+
+
+To use the latest version, replace <version> with |version|
+
+
+
+
+4 - Add SVG Content
+-------------------
+
+On your html page, add the SVG code.
+
+SVG collections available can be found `here <https://www.snoweb-svg.com/en/>`_.

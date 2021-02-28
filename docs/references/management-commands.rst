@@ -1,8 +1,8 @@
 .. _references_management-commands:
 
 
-Management commands
-===================
+Django management commands
+==========================
 
 Build
 -----

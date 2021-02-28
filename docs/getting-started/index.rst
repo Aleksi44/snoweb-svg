@@ -9,3 +9,4 @@ Getting started
 
    html
    django
+   wagtail

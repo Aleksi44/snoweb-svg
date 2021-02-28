@@ -3,7 +3,7 @@
 Configure development environment
 =================================
 
-``snowebsvg`` works with :
+Snoweb SVG works with :
 
 - `Django <https://docs.djangoproject.com/>`_
 - `SASS <https://sass-lang.com/>`_

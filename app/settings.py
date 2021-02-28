@@ -158,6 +158,7 @@ LANGUAGE_CODE = 'en'
 LANGUAGES = [
     ('en', "English"),
     ('fr', "French"),
+    ('de', "Deutsch"),
 ]
 
 DJANGO_CSS_INLINE_ENABLE = not DEBUG
