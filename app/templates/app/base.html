@@ -122,8 +122,8 @@
         </a>
     </div>
 
-    {% cache_page request %}{% block body %}{% endblock %}{% endcache_page %}
     {% block body_no_cache %}{% endblock %}
+    {% cache_page request %}{% block body %}{% endblock %}{% endcache_page %}
 
     <hr/>
 

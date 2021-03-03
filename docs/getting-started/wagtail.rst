@@ -40,7 +40,6 @@ Here is an example of a chooser block to be able to choose an SVG from the Wagta
 
         class Meta:
             icon = 'image'
-            max_num = 1
 
 
 Now, you can include ``SnowebSvgChooserBlock`` like :
