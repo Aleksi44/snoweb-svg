@@ -11,7 +11,7 @@
 
     <g clip-path="url(#clip-path-{{ id }})">
 
-        <rect {% variant_manager variant self 'attrs' %}
+        <rect {% variant_manager variant 'attrs' %}
                 class="svg-fill-primary"
                 x="0" y="0"
                 width="100"
@@ -20,7 +20,7 @@
 
         {% parse "0;0 0;25 0;50 0;75 0;100 25;0 25;25 25;50 25;75 25;100 50;0 50;25 50;50 50;75 50;100 75;0 75;25 75;50 75;75 75;100 100;0 100;25 100;50 100;75; 100;100" as props %}
         {% for prop in props %}
-            <circle {% variant_manager variant self 'attrs' %}
+            <circle {% variant_manager variant 'attrs' %}
                     transform="{% scale 0.5 x=prop.0|to_int y=prop.1|to_int %}"
                     style="mix-blend-mode: screen;"
                     class="svg-fill-primary svg-builder-circle svg-slow svg-keep"

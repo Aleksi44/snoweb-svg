@@ -7,4 +7,4 @@
      {% if height %}height="{{ height }}"{% endif %}
      viewBox="{% block svg_viewbox %}0 0 100 100{% endblock %}"
      preserveAspectRatio="{% block svg_aspect_ratio %}xMidYMid meet{% endblock %}"
->{% if variant %}{% variant_manager variant self %}{% endif %}{% block svg_content %}{% endblock %}{% if grid %}{% include 'snowebsvg/common/grid.html' %}{% endif %}</svg>
+>{% block svg_content %}{% endblock %}{% if grid %}{% include 'snowebsvg/common/grid.html' %}{% endif %}</svg>

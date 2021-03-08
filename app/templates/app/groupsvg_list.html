@@ -1,11 +1,12 @@
 {% extends 'app/base.html' %}
-{% load i18n svg %}
+{% load i18n svg svg_utils %}
 
 {% block title %}{% trans 'Free SVG collection' %}{% if object_list.0 %} {{ object_list.0.collection }}{% endif %} | {{ block.super }}{% endblock %}
 {% block description %}{% trans 'Get free collection' %} {% if object_list.0 %} {{ object_list.0.collection }}{% endif %} {% trans 'of SVGs animated built in HTML and CSS.' %} {{ block.super }}{% endblock %}
 
 {% block body %}
     {% with theme=request.session.theme first_group=object_list.0 variant=request.session.variant %}
+        {% variant_manager variant %}
         <h1>SVG {% trans 'collection' %}{% if first_group %}
             <a href="{% url 'app:group' first_group.collection.key %}"><code>{{ first_group.collection.key }}</code></a>{% endif %}
         </h1>

@@ -1,5 +1,5 @@
 {% extends 'app/base.html' %}
-{% load i18n svg beautifulsoup %}
+{% load i18n svg svg_utils beautifulsoup %}
 
 {% block title %}{% trans 'Free SVG' %}{% if object_list.0 %} {{ object_list.0 }}{% endif %} | {{ block.super }}{% endblock %}
 {% block description %}{% trans 'Free SVG' %}{% if object_list.0 %} {{ object_list.0 }}{% endif %} {% trans 'animated and built in HTML and CSS.' %}
@@ -8,6 +8,7 @@
 
 {% block body %}
     {% with theme=request.session.theme variant=request.session.variant %}
+        {% variant_manager variant %}
         {% for svg in object_list %}
             <h1>SVG <code>{{ svg.key_composer }}</code></h1>
             <div class="svg-trigger">

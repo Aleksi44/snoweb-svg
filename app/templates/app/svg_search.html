@@ -1,5 +1,5 @@
 {% extends 'app/base.html' %}
-{% load i18n svg %}
+{% load i18n svg svg_utils %}
 
 {% block title %}{% trans 'Search free SVG for web' %}{% if key %} like "{{ key }}"{% endif %} |
     {{ block.super }}{% endblock %}
@@ -7,6 +7,7 @@
     {{ block.super }}{% endblock %}
 
 {% block body_no_cache %}
+    {% variant_manager request.session.variant %}
     <h1>{% trans 'Search' %} SVG{% if key %} {% trans 'by key' %} <code>{{ key }}</code>{% endif %}</h1>
 
     <form method="POST" style="display: flex">

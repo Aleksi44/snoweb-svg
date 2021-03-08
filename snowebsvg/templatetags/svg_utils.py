@@ -33,16 +33,14 @@ def to_int(value):
 
 
 @register.simple_tag
-def variant_manager(variant=None, svg=None, variant_part='defs'):
-    if variant and svg:
+def variant_manager(variant=None, variant_part='defs'):
+    if variant:
         try:
             svg_template = get_template("snowebsvg/common/variants/%s/%s.html" % (
                 variant,
                 variant_part
             ))
-            return svg_template.render({
-                'self': svg,
-            })
+            return svg_template.render()
         except TemplateDoesNotExist:
             return ''
     return ''

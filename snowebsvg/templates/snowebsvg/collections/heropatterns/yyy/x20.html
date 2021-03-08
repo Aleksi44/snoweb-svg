@@ -1,0 +1,17 @@
+{% extends 'snowebsvg/common/svg.html' %}
+{% load svg_utils %}
+
+{% block svg_viewbox %}0 0 1200 1920{% endblock %}
+{% block svg_aspect_ratio %}xMidYMid slice{% endblock %}
+
+{% block svg_content %}
+    {% unique_id as id %}
+    <defs>
+        <pattern id="unit-{{ id }}" x="0" y="0" width="60" height="96"
+                 patternUnits="userSpaceOnUse">
+            <path fill-rule="evenodd" class="svg-fill-primary"
+                  d="M36 10a6 6 0 0 1 12 0v12a6 6 0 0 1-6 6 6 6 0 0 0-6 6 6 6 0 0 1-12 0 6 6 0 0 0-6-6 6 6 0 0 1-6-6V10a6 6 0 1 1 12 0 6 6 0 0 0 12 0zm24 78a6 6 0 0 1-6-6 6 6 0 0 0-6-6 6 6 0 0 1-6-6V58a6 6 0 1 1 12 0 6 6 0 0 0 6 6v24zM0 88V64a6 6 0 0 0 6-6 6 6 0 0 1 12 0v12a6 6 0 0 1-6 6 6 6 0 0 0-6 6 6 6 0 0 1-6 6z"/>
+        </pattern>
+    </defs>
+    <rect width="1200" height="1920" fill="url(#unit-{{ id }})"></rect>
+{% endblock %}

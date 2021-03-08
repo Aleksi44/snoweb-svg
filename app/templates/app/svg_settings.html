@@ -1,5 +1,5 @@
 {% extends 'app/base.html' %}
-{% load i18n svg %}
+{% load i18n svg svg_utils %}
 
 {% block title %}{% trans 'Settings SVG for web' %} | {{ block.super }}{% endblock %}
 {% block description %}{% trans 'Configure settings and get free SVGs animated built in HTML and CSS.' %}
@@ -7,6 +7,7 @@
 
 
 {% block body_no_cache %}
+    {% variant_manager request.session.variant %}
     {% with theme=request.session.theme variant=request.session.variant %}
         <h1>{% trans 'Settings' %} SVG</h1>
 
