@@ -80,3 +80,6 @@ class SnowebSvgTest(TestCase):
                 settings.VERSION
             )
         )
+
+    def test_key_decomposer_not_found(self):
+        svg_inline('this_key_does_not_exist')

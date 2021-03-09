@@ -159,12 +159,27 @@ class Svg(index.Indexed, models.Model):
         """
         :return svg: Svg instance by key composer
         """
-        collection_key, group_key, key = key_composer.split('-')
-        return Svg.objects.get(
-            key=key,
-            group__key=group_key,
-            group__collection__key=collection_key
-        )
+        try:
+            collection_key, group_key, key = key_composer.split('-')
+            return Svg.objects.get(
+                key=key,
+                group__key=group_key,
+                group__collection__key=collection_key
+            )
+        except (Svg.DoesNotExist, ValueError):
+            collection_key, group_key, key = settings.SVG_DEFAULT_KEY.split('-')
+            collection, _ = Collection.objects.get_or_create(
+                key=collection_key
+            )
+            group, _ = GroupSvg.objects.get_or_create(
+                key=group_key,
+                collection_id=collection.id
+            )
+            svg, _ = Svg.objects.get_or_create(
+                key=key,
+                group_id=group.id
+            )
+            return svg
 
     def render_django(self, theme=settings.SVG_DEFAULT_THEME, width=settings.SVG_DEFAULT_WIDTH,
                       height=settings.SVG_DEFAULT_HEIGHT, variant=settings.SVG_DEFAULT_VARIANT):
