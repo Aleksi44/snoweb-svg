@@ -5,24 +5,24 @@ register = template.Library()
 
 variants_settings = {
     'default': (
-        ('theme_light_primary', '#14253A'),
-        ('theme_light_secondary', '#E63946'),
-        ('theme_light_tertiary', '#F7F7F7'),
-        ('theme_dark_primary', '#F7F7F7'),
-        ('theme_dark_secondary', '#E63946'),
-        ('theme_dark_tertiary', '#112032'),
-        ('theme_light_background_body', '#FFFFFF'),
-        ('theme_dark_background_body', 'radial-gradient(ellipse at top, #173049, #020A11)'),
+        ('theme_light_primary', '#111827'),
+        ('theme_light_secondary', '#D1D5DB'),
+        ('theme_light_tertiary', '#E5E7EB'),
+        ('theme_dark_primary', '#C9CED8'),
+        ('theme_dark_secondary', '#020D21'),
+        ('theme_dark_tertiary', '#08233E'),
+        ('theme_light_background_body', '#F9FAFB'),
+        ('theme_dark_background_body', '#0C3157'),
     ),
     'glass': (
-        ('theme_light_primary', '#14253A'),
-        ('theme_light_secondary', '#F7F7F7'),
-        ('theme_light_tertiary', '#F7F7F7'),
-        ('theme_dark_primary', '#F7F7F7'),
-        ('theme_dark_secondary', '#F7F7F7'),
-        ('theme_dark_tertiary', '#F7F7F7'),
-        ('theme_light_background_body', 'linear-gradient(to left, #E7C2F4, #80EAEE)'),
-        ('theme_dark_background_body', 'linear-gradient(to left, #FA5DE8, #3CB7DC)'),
+        ('theme_light_primary', '#111827'),
+        ('theme_light_secondary', '#FFF'),
+        ('theme_light_tertiary', '#FFF'),
+        ('theme_dark_primary', '#C9CED8'),
+        ('theme_dark_secondary', '#FFF'),
+        ('theme_dark_tertiary', '#FFF'),
+        ('theme_light_background_body', '#F9FAFB'),
+        ('theme_dark_background_body', '#0C3157'),
     )
 }
 

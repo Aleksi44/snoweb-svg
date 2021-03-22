@@ -1,28 +1,15 @@
 {% extends 'app/base.html' %}
 {% load i18n svg svg_utils %}
 
-{% block title %}{% trans 'Search free SVG for web' %}{% if key %} like "{{ key }}"{% endif %} |
-    {{ block.super }}{% endblock %}
-{% block description %}{% trans 'Search for free SVGs animated built in HTML and CSS.' %}
-    {{ block.super }}{% endblock %}
+{% block title %}{% trans 'Search free SVG for web' %}{% if key %} like "{{ key }}"{% endif %} | {{ block.super }}{% endblock %}
+{% block description %}{% trans 'Search for free SVGs animated built in HTML and CSS.' %}{{ block.super }}{% endblock %}
 
-{% block body_no_cache %}
-    {% variant_manager request.session.variant %}
-    <h1>{% trans 'Search' %} SVG{% if key %} {% trans 'by key' %} <code>{{ key }}</code>{% endif %}</h1>
+{% block header_title %}{% trans 'Search' %} SVG{% if key %} {% trans 'by key' %} {{ key }}{% endif %}{% endblock %}
 
-    <form method="POST" style="display: flex">
-        {% csrf_token %}
-        <input type="text" name="key" placeholder="back" value="{% if key %}{{ key }}{% endif %}">
-        <input type="submit" value="{% trans 'Search' %}">
-    </form>
-{% endblock %}
-
-{% block body %}
-    {% with theme=request.session.theme variant=request.session.variant %}
-        {% include 'app/common/svg_set.html' with svg_set=object_list %}
-    {% endwith %}
-    <div>
-        <button style="margin: 20px 0;" type="button"
-                onclick="document.body.scrollTop = 0;document.documentElement.scrollTop = 0;">{% trans 'Scroll to top' %}</button>
+{% block body_content %}
+    <div class="flex flex-wrap">
+        {% with theme=request.session.theme variant=request.session.variant %}
+            {% include 'app/common/svg_set.html' with svg_set=object_list %}
+        {% endwith %}
     </div>
 {% endblock %}

@@ -1,10 +1,8 @@
 {% load svg %}
 
 {% for svg in svg_set %}
-    <a style="text-decoration: none" href="{% url 'app:svg' svg.group.collection.key svg.group.key svg.key %}">
-            <span style="display: inline-block; text-decoration: none;" class="svg-trigger">
-                {% svg_inline svg theme 60 60 variant=variant %}
-            </span>
+    <a class="svg-trigger preview mr-3 mb-3"
+       href="{% url 'app:svg' svg.group.collection.key svg.group.key svg.key %}">
+        {% svg_inline svg theme 60 60 variant=variant %}
     </a>
 {% endfor %}
-

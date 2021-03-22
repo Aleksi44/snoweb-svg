@@ -17,5 +17,5 @@ except pkg_resources.DistributionNotFound:
 SVG_DEFAULT_THEME = 'dark'
 SVG_DEFAULT_WIDTH = 100
 SVG_DEFAULT_HEIGHT = 100
-SVG_DEFAULT_VARIANT = 'glass'
+SVG_DEFAULT_VARIANT = None
 SVG_DEFAULT_KEY = 'decorator-rect-basic'

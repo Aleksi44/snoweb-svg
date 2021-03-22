@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .svg-form {
+    p {
+      @apply my-3;
+    }
+
+    label {
+      @apply block text-sm font-medium text-light-700;
+    }
+
+    input {
+      @apply max-w-lg block w-full shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:max-w-xs sm:text-sm border-light-300 rounded-md;
+    }
+
+    .helptext {
+      @apply mt-2 text-sm text-light-500;
+    }
+  }
+
+  .preview {
+    background: var(--background-body);
+    @apply rounded-lg p-3 shadow-lg;
+  }
+}

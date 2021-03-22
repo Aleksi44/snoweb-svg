@@ -1,13 +1,13 @@
 {% load i18n cache cache_page static settings internationalization css_inline svg_utils %}
 
-{% with theme=request.session.theme %}
+{% with theme=request.session.theme variant=request.session.variant %}
     <!DOCTYPE html>
-    <html style="min-height: 100%" lang="{{ request.LANGUAGE_CODE }}">
+    <html class="{% if theme == 'dark' %}dark{% endif %}" lang="{{ request.LANGUAGE_CODE }}">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Snoweb{% endblock %}</title>
-        <meta name="description"
-              content="{% block description %}{% trans 'Choose and embed web-optimized SVGs in your HTML or with Django.' %}{% endblock %}">
+        <meta name="description" content="
+                {% block description %}{% trans 'Choose and embed web-optimized SVGs in your HTML or with Django.' %}{% endblock %}">
         <meta content="Snoweb" name="author">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" type="image/png" sizes="16x16"
@@ -39,53 +39,22 @@
         {% block css %}
             {% cache None settings.VERSION %}
                 {% css_inline %}
-                    {% with water_css="https://cdn.jsdelivr.net/npm/water.css@2/out/" %}
-                        <link rel="stylesheet" href="{{ water_css }}{% if theme %}{{ theme }}{% else %}dark{% endif %}{% if not debug %}.min{% endif %}.css">
-                    {% endwith %}
                     {% with href="snowebsvg/dist/css/themes-"|add:settings.VERSION|add:".css" %}
                         <link rel="stylesheet" href="{% static href %}">
                     {% endwith %}
                     {% with href="snowebsvg/dist/css/core-"|add:settings.VERSION|add:".css" %}
                         <link rel="stylesheet" href="{% static href %}">
                     {% endwith %}
+                    {% with href="snowebsvg/dist/css/app-"|add:settings.VERSION|add:".css" %}
+                        <link rel="stylesheet" href="{% static href %}">
+                    {% endwith %}
                 {% end_css_inline %}
             {% endcache %}
             <style>
                 :root {
-                {% if theme == 'light' %}
-                    {% settings_by_key request 'theme_light_background_body' as background_body %}
-                    {% settings_by_key request 'theme_light_primary' as primary %}
-                    {% settings_by_key request 'theme_light_secondary' as secondary %}
-                    {% settings_by_key request 'theme_light_tertiary' as tertiary %}
-                {% else %}
-                    {% settings_by_key request 'theme_dark_background_body' as background_body %}
-                    {% settings_by_key request 'theme_dark_primary' as primary %}
-                    {% settings_by_key request 'theme_dark_secondary' as secondary %}
-                    {% settings_by_key request 'theme_dark_tertiary' as tertiary %}
-                {% endif %}
-                    --background-body: {{ background_body }};
-                    --background: {{ tertiary }};
-                    --background-alt: {{ tertiary }};
-                    {% comment %}--selection: {{ secondary }};{% endcomment %}
-                    --text-main: {{ primary }};
-                    --text-bright: {{ primary }};
-                    --text-muted: {{ primary }};
-                    --links: {{ secondary }};
-                    --focus: {{ secondary }};
-                    --border: {{ tertiary }};
-                    --code: gray;
-                    --animation-duration: 0.1s;
-                    --button-hover: {{ secondary }};
-                    {% comment %}--scrollbar-thumb: {{ tertiary }};{% endcomment %}
-                    {% comment %}--scrollbar-thumb-hover: {{ tertiary }};{% endcomment %}
-                    --form-placeholder: {{ primary }};
-                    --form-text: gray;
-                    --variable: {{ secondary }};
-                    --highlight: {{ secondary }};
                 {% settings_by_key request 'theme_light_primary' as primary %}
                 {% settings_by_key request 'theme_light_secondary' as secondary %}
-                {% settings_by_key request 'theme_light_tertiary' as tertiary %}
-                    --svg-theme-light-primary: {{ primary }};
+                {% settings_by_key request 'theme_light_tertiary' as tertiary %} --svg-theme-light-primary: {{ primary }};
                     --svg-theme-light-secondary: {{ secondary }};
                     --svg-theme-light-tertiary: {{ tertiary }};
 
@@ -96,46 +65,333 @@
                     --svg-theme-dark-secondary: {{ secondary }};
                     --svg-theme-dark-tertiary: {{ tertiary }};
                 }
+
+                [x-cloak] {
+                    display: none;
+                }
             </style>
         {% endblock %}
     </head>
-    <body>
 
-    <a href="{% url 'app:collection' %}">
-        {% if theme == 'light' %}
-            <img width="200px" height="100%" src="https://static.snoweb.fr/documents/logo-light.svg" alt="Logo Snoweb">
-        {% else %}
-            <img width="200px" height="100%" src="https://static.snoweb.fr/documents/logo-dark.svg" alt="Logo Snoweb">
-        {% endif %}
-    </a>
-    <hr/>
 
-    <div style="display: flex">
-        <a href="{% url 'app:collection' %}">
-            <button type="button">{% trans 'Home' %}</button>
-        </a>
-        <a href="{% url 'app:svg_search' %}">
-            <button type="button">{% trans 'Search' %}</button>
-        </a>
-        <a href="{% url 'app:svg_settings' %}">
-            <button type="button">{% trans 'Settings' %}</button>
-        </a>
-    </div>
+    <body class="bg-light-0 dark:bg-dark-0">
 
-    {% block body_no_cache %}{% endblock %}
-    {% cache_page request %}{% block body %}{% endblock %}{% endcache_page %}
+    {% cache_page request %}
 
-    <hr/>
+        {% variant_manager variant %}
 
-    <p>{% trans 'Related links' %} :</p>
-    <ul>
-        <li><a href="https://snoweb-svg.readthedocs.io/en/latest/?badge=latest">{% trans 'Documentation' %}</a></li>
-        <li><a href="https://github.com/Aleksi44/snoweb-svg">Github</a></li>
-        <li><a href="https://pypi.org/project/snowebsvg/">PyPI</a></li>
-    </ul>
+        <div x-data="{ mobileMenuOpen: false }" class="h-screen flex overflow-hidden bg-light-0 dark:bg-dark-0">
+            <div class="lg:hidden" x-show="mobileMenuOpen" x-cloak>
+                <div class="fixed inset-0 flex z-40">
+                    <div x-show="mobileMenuOpen"
+                         x-transition:enter="transition-opacity ease-linear duration-300"
+                         x-transition:enter-start="opacity-0"
+                         x-transition:enter-end="opacity-100"
+                         x-transition:leave="transition-opacity ease-linear duration-300"
+                         x-transition:leave-start="opacity-100"
+                         x-transition:leave-end="opacity-0"
+                         @click="mobileMenuOpen = false"
+                         class="fixed inset-0"
+                         aria-hidden="true">
+                        <div class="absolute inset-0 bg-light-600 dark:bg-dark-600 dark:bg-dark-600 opacity-75"></div>
+                    </div>
+                    <div x-show="mobileMenuOpen"
+                         class="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-light-0 dark:bg-dark-0"
+                         x-transition:enter="transition ease-in-out duration-300 transform"
+                         x-transition:enter-start="-translate-x-full"
+                         x-transition:enter-end="translate-x-0"
+                         x-transition:leave="transition ease-in-out duration-300 transform"
+                         x-transition:leave-start="translate-x-0"
+                         x-transition:leave-end="-translate-x-full">
+                        <div class="absolute top-0 right-0 -mr-12 pt-2">
+                            <button @click="mobileMenuOpen = false"
+                                    class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none">
+                                <span class="sr-only">Close sidebar</span>
+                                <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                     viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M6 18L18 6M6 6l12 12"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="flex-shrink-0 flex items-center px-4">
+                            <a href="{% url 'app:collection' %}">
+                                {% if theme == 'light' %}
+                                    <img class="h-8 w-auto" width="100%" height="100%"
+                                         src="https://static.snoweb.fr/documents/logo-light.svg"
+                                         alt="Logo Snoweb">
+                                {% else %}
+                                    <img class="h-8 w-auto" width="100%" height="100%"
+                                         src="https://static.snoweb.fr/documents/logo-dark.svg"
+                                         alt="Logo Snoweb">
+                                {% endif %}
+                            </a>
+                        </div>
 
-    <small>{% trans 'Made with ❤' %} | <a href="https://www.snoweb.fr/">Snoweb</a></small>
+                        <div class="mt-5 flex-1 h-0 overflow-y-auto">
+                            <nav class="px-2">
+                                <div class="space-y-1">
 
+                                    <a href="{% url 'app:collection' %}"
+                                       class="text-light-600 dark:text-dark-600 hover:text-light-900 dark:text-dark-900 hover:bg-light-50 dark:bg-dark-50 group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md"
+                                       aria-current="page">
+                                        <svg class="text-light-400 dark:text-dark-400 group-hover:text-light-500 dark:text-dark-500 mr-3 h-6 w-6"
+                                             xmlns="http://www.w3.org/2000/svg"
+                                             fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                                        </svg>
+                                        {% trans 'Home' %}
+                                    </a>
+
+                                    <a href="{% url 'app:svg_settings' %}"
+                                       class="text-light-600 dark:text-dark-600 hover:text-light-900 dark:text-dark-900 hover:bg-light-50 dark:bg-dark-50 group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md">
+                                        <svg class="text-light-400 dark:text-dark-400 group-hover:text-light-500 dark:text-dark-500 mr-3 h-6 w-6"
+                                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                             stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                  d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        </svg>
+                                        {% trans 'Settings' %}
+                                    </a>
+
+                                    <a href="https://snoweb-svg.readthedocs.io/en/latest/?badge=latest"
+                                       class="text-light-600 dark:text-dark-600 hover:text-light-900 dark:text-dark-900 hover:bg-light-50 dark:bg-dark-50 group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md">
+
+                                        <svg class="text-light-400 dark:text-dark-400 group-hover:text-light-500 dark:text-dark-500 mr-3 h-6 w-6"
+                                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                             stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                        </svg>
+                                        {% trans 'Documentation' %}
+                                    </a>
+
+                                    <a href="https://github.com/Aleksi44/snoweb-svg"
+                                       class="text-light-600 dark:text-dark-600 hover:text-light-900 dark:text-dark-900 hover:bg-light-50 dark:bg-dark-50 group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md">
+                                        <svg class="text-light-400 dark:text-dark-400 group-hover:text-light-500 dark:text-dark-500 mr-3 h-6 w-6"
+                                             height="100"
+                                             fill="currentColor" preserveaspectratio="xMidYMid meet"
+                                             viewbox="0 0 100 100"
+                                             width="100" x="0"
+                                             xmlns="http://www.w3.org/2000/svg" y="0">
+                                            <path d="M50,1.23A50,50,0,0,0,34.2,98.68c2.5.46,3.41-1.09,3.41-2.41s0-4.33-.07-8.5c-13.91,3-16.84-6.71-16.84-6.71-2.28-5.77-5.55-7.31-5.55-7.31-4.54-3.1.34-3,.34-3,5,.35,7.66,5.15,7.66,5.15C27.61,83.5,34.85,81.3,37.7,80a10.72,10.72,0,0,1,3.17-6.69C29.77,72.07,18.1,67.78,18.1,48.62A19.34,19.34,0,0,1,23.25,35.2c-.52-1.26-2.23-6.34.49-13.23,0,0,4.19-1.34,13.75,5.13a47.18,47.18,0,0,1,25,0C72.07,20.63,76.26,22,76.26,22c2.72,6.89,1,12,.49,13.23a19.28,19.28,0,0,1,5.14,13.42c0,19.21-11.69,23.44-22.83,24.67,1.8,1.55,3.4,4.6,3.4,9.26,0,6.69-.06,12.08-.06,13.72,0,1.34.9,2.89,3.44,2.4A50,50,0,0,0,50,1.23Z">
+                                            </path>
+                                        </svg>
+                                        Github
+                                    </a>
+
+                                </div>
+
+                                {% if collections %}
+                                    <div class="mt-8">
+                                        <h3 class="px-3 text-xs font-semibold text-light-500 dark:text-dark-500 uppercase tracking-wider">{% trans 'collections' %}</h3>
+                                        <div class="mt-1 space-y-1" role="group" aria-labelledby="teams-headline">
+                                            {% for object in collections %}
+                                                <a href="{% url 'app:group' object.key %}"
+                                                   class="group flex items-center px-3 py-2 text-base leading-5 font-medium text-light-600 dark:text-dark-600 rounded-md hover:text-light-900 dark:text-dark-900 hover:bg-light-50 dark:bg-dark-50">
+                                            <span class="w-2.5 h-2.5 mr-4 bg-primary-500 rounded-full"
+                                                  aria-hidden="true"></span>
+                                                    <span class="truncate">{{ object.key }}</span>
+                                                </a>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="flex-shrink-0 w-14" aria-hidden="true"></div>
+                </div>
+            </div>
+
+            <div class="hidden lg:flex lg:flex-shrink-0">
+                <div class="flex flex-col w-64 border-r border-light-200 dark:border-dark-200 pt-5 pb-4 bg-light-100 dark:bg-dark-100">
+                    <div class="flex items-center flex-shrink-0 px-6">
+                        <a href="{% url 'app:collection' %}">
+                            {% if theme == 'light' %}
+                                <img class="h-8 w-auto" width="100%" height="100%"
+                                     src="https://static.snoweb.fr/documents/logo-light.svg"
+                                     alt="Logo Snoweb">
+                            {% else %}
+                                <img class="h-8 w-auto" width="100%" height="100%"
+                                     src="https://static.snoweb.fr/documents/logo-dark.svg"
+                                     alt="Logo Snoweb">
+                            {% endif %}
+                        </a>
+                    </div>
+                    <div class="h-0 flex-1 flex flex-col overflow-y-auto">
+
+                        <div class="px-3 mt-5">
+                            <label for="search" class="sr-only">{% trans 'Search' %}</label>
+                            <div class="mt-1 relative rounded-md shadow-sm">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                                     aria-hidden="true">
+                                    <svg class="mr-3 h-4 w-4 text-light-400 dark:text-dark-400"
+                                         xmlns="http://www.w3.org/2000/svg"
+                                         viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd"
+                                              d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                              clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <form action="{% url 'app:svg_search' %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="text"
+                                           name="key"
+                                           value="{% if key %}{{ key }}{% endif %}"
+                                           class="bg-light-0 dark:bg-dark-0 text-light-900 dark:text-dark-900 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-9 sm:text-sm border-light-300 dark:border-dark-300 rounded-md"
+                                           placeholder="{% trans 'Search' %}">
+                                </form>
+                            </div>
+                        </div>
+
+                        <nav class="px-3 mt-6">
+                            <div class="space-y-1">
+                                <a href="{% url 'app:collection' %}"
+                                   class="text-light-700 dark:text-dark-700 hover:text-light-900 dark:hover:text-dark-900 hover:bg-light-50 dark:hover:bg-dark-50 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                                    <svg class="text-light-400 dark:text-dark-400 group-hover:text-light-500 dark:text-dark-500 mr-3 h-6 w-6"
+                                         xmlns="http://www.w3.org/2000/svg" fill="none"
+                                         viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                                    </svg>
+                                    {% trans 'Home' %}
+                                </a>
+
+                                <a href="{% url 'app:svg_settings' %}"
+                                   class="text-light-700 dark:text-dark-700 hover:text-light-900 dark:hover:text-dark-900 hover:bg-light-50 dark:hover:bg-dark-50 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                                    <svg class="text-light-400 dark:text-dark-400 group-hover:text-light-500 dark:text-dark-500 mr-3 h-6 w-6"
+                                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                         stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                              d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    </svg>
+                                    {% trans 'Settings' %}
+                                </a>
+
+                                <a href="https://snoweb-svg.readthedocs.io/en/latest/?badge=latest"
+                                   class="text-light-700 dark:text-dark-700 hover:text-light-900 dark:hover:text-dark-900 hover:bg-light-50 dark:hover:bg-dark-50 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                                    <svg class="text-light-400 dark:text-dark-400 group-hover:text-light-500 dark:text-dark-500 mr-3 h-6 w-6"
+                                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                         stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                    </svg>
+                                    {% trans 'Documentation' %}
+                                </a>
+
+                                <a href="https://github.com/Aleksi44/snoweb-svg"
+                                   class="text-light-700 dark:text-dark-700 hover:text-light-900 dark:hover:text-dark-900 hover:bg-light-50 dark:hover:bg-dark-50 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                                    <svg class="text-light-400 dark:text-dark-400 group-hover:text-light-500 dark:text-dark-500 mr-3 h-6 w-6"
+                                         height="100"
+                                         fill="currentColor" preserveaspectratio="xMidYMid meet" viewbox="0 0 100 100"
+                                         width="100" x="0"
+                                         xmlns="http://www.w3.org/2000/svg" y="0">
+                                        <path d="M50,1.23A50,50,0,0,0,34.2,98.68c2.5.46,3.41-1.09,3.41-2.41s0-4.33-.07-8.5c-13.91,3-16.84-6.71-16.84-6.71-2.28-5.77-5.55-7.31-5.55-7.31-4.54-3.1.34-3,.34-3,5,.35,7.66,5.15,7.66,5.15C27.61,83.5,34.85,81.3,37.7,80a10.72,10.72,0,0,1,3.17-6.69C29.77,72.07,18.1,67.78,18.1,48.62A19.34,19.34,0,0,1,23.25,35.2c-.52-1.26-2.23-6.34.49-13.23,0,0,4.19-1.34,13.75,5.13a47.18,47.18,0,0,1,25,0C72.07,20.63,76.26,22,76.26,22c2.72,6.89,1,12,.49,13.23a19.28,19.28,0,0,1,5.14,13.42c0,19.21-11.69,23.44-22.83,24.67,1.8,1.55,3.4,4.6,3.4,9.26,0,6.69-.06,12.08-.06,13.72,0,1.34.9,2.89,3.44,2.4A50,50,0,0,0,50,1.23Z">
+                                        </path>
+                                    </svg>
+                                    Github
+                                </a>
+
+                            </div>
+
+                            {% if collections %}
+                                <div class="mt-8">
+                                    <h3 class="px-3 text-xs font-semibold text-light-500 dark:text-dark-500 uppercase tracking-wider"
+                                        id="teams-headline">{% trans 'collections' %}</h3>
+                                    <div class="mt-1 space-y-1" role="group" aria-labelledby="teams-headline">
+                                        {% for object in collections %}
+                                            <a href="{% url 'app:group' object.key %}"
+                                               class="group flex items-center px-3 py-2 text-sm font-medium text-light-700 dark:text-dark-700 rounded-md hover:text-light-900 dark:hover:text-dark-900 hover:bg-light-50 dark:hover:bg-dark-50">
+                                        <span class="w-2.5 h-2.5 mr-4 bg-primary-500 rounded-full"
+                                              aria-hidden="true"></span>
+                                                <span class="truncate">{{ object.key }}</span>
+                                            </a>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                            <div class="mt-8">
+                                <p class="px-3 text-xs text-light-500 dark:text-dark-500 tracking-wider">{% trans 'Made with ❤' %}
+                                    | <a class="text-primary-700" href="https://www.snoweb.fr/">Snoweb</a></p>
+                            </div>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main column -->
+            <div class="flex flex-col w-0 flex-1 overflow-hidden">
+
+                <div class="relative z-10 flex-shrink-0 flex h-16 bg-light-0 dark:bg-dark-0 border-b border-light-200 dark:border-dark-200 lg:hidden">
+
+                    <button @click="mobileMenuOpen = true"
+                            class="px-4 border-r border-light-200 dark:border-dark-200 text-light-500 dark:text-dark-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-500 lg:hidden">
+                        <span class="sr-only">Open sidebar</span>
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                             stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M4 6h16M4 12h8m-8 6h16"/>
+                        </svg>
+                    </button>
+
+                    <div class="flex-1 flex justify-between">
+                        <div class="flex-1 flex">
+                            <form class="w-full flex md:ml-0" action="{% url 'app:svg_search' %}" method="POST">
+                                {% csrf_token %}
+                                <label for="search_field" class="sr-only">{% trans 'Search' %}</label>
+                                <div class="relative w-full text-light-400 dark:text-dark-400 focus-within:text-light-600 dark:text-dark-600">
+                                    <div class="absolute inset-y-0 left-2 flex items-center pointer-events-none">
+                                        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                             fill="currentColor" aria-hidden="true">
+                                            <path fill-rule="evenodd"
+                                                  d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                                  clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                    <input name="key"
+                                           value="{% if key %}{{ key }}{% endif %}"
+                                           class="border-none bg-light-0 dark:bg-dark-0 text-light-900 dark:text-dark-900 block w-full h-full pl-10 pr-3 py-2 border-transparent text-light-900 dark:text-dark-900 placeholder-light-500 dark:placeholder-dark-500 focus:outline-none focus:ring-0 focus:border-transparent focus:placeholder-light-400 dark:placeholder-dark-400 sm:text-sm"
+                                           placeholder="{% trans 'Search' %}" type="search">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+                <main class="flex-1 relative z-0 overflow-y-auto focus:outline-none" tabindex="0">
+                    <div class="border-b border-light-200 dark:border-dark-200 px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
+                        <div class="flex-1 min-w-0">
+                            <h1 class="text-lg font-medium leading-6 text-light-900 dark:text-dark-900 sm:truncate">
+                                {% block header_title %}{% endblock %}
+                            </h1>
+                        </div>
+                    </div>
+
+                    <div class="px-4 pt-6 sm:px-6 lg:px-8">
+                        {% block body_content %}{% endblock %}
+                    </div>
+
+                </main>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    {% endcache_page %}
+    <script>
+        const tokens = document.querySelectorAll('*[name="csrfmiddlewaretoken"]');
+        tokens.forEach(token => {
+            token.value = "{{ csrf_token }}";
+        });
+    </script>
     </body>
     </html>
 {% endwith %}

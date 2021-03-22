@@ -4,17 +4,17 @@
 {% block title %}{% trans 'Free SVG collections for web' %} | {{ block.super }}{% endblock %}
 {% block description %}{% trans 'Get free collections of SVGs animated built in HTML and CSS.' %} {{ block.super }}{% endblock %}
 
-{% block body %}
-    {% with theme=request.session.theme variant=request.session.variant %}
-        {% variant_manager variant %}
-        <h1>SVG {% trans 'collections' %}</h1>
-        {% for collection in object_list %}
-            <a style="text-decoration: none" href="{% url 'app:group' collection.key %}">
-                <h2><code>{{ collection.key }}</code></h2>
-            </a>
-            {% for group in collection.groupsvg_set.all %}
-                {% include 'app/common/svg_set.html' with svg_set=group.svg_set.all %}
+{% block header_title %}SVG {% trans 'collections' %}{% endblock %}
+
+
+{% block body_content %}
+    <div class="flex flex-wrap">
+        {% with theme=request.session.theme variant=request.session.variant %}
+            {% for collection in collections %}
+                {% for group in collection.groupsvg_set.all %}
+                    {% include 'app/common/svg_set.html' with svg_set=group.svg_set.all %}
+                {% endfor %}
             {% endfor %}
-        {% endfor %}
-    {% endwith %}
+        {% endwith %}
+    </div>
 {% endblock %}

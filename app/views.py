@@ -14,14 +14,23 @@ from app.forms import \
 from app.templatetags.settings import current_settings
 
 
-class CollectionListView(ListView):
-    model = Collection
+class CollectionListView(TemplateView):
     template_name = 'app/collection_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(CollectionListView, self).get_context_data(**kwargs)
+        context['collections'] = Collection.objects.all()
+        return context
 
 
 class GroupSvgListView(ListView):
     model = GroupSvg
     template_name = 'app/groupsvg_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(GroupSvgListView, self).get_context_data(**kwargs)
+        context['collections'] = Collection.objects.all()
+        return context
 
     def get_queryset(self):
         collection_key = self.kwargs.get('collection_key')
@@ -33,6 +42,11 @@ class GroupSvgListView(ListView):
 class SvgListView(ListView):
     model = Svg
     template_name = 'app/svg_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(SvgListView, self).get_context_data(**kwargs)
+        context['collections'] = Collection.objects.all()
+        return context
 
     def get_queryset(self):
         group_key = self.kwargs.get('group_key')
@@ -64,6 +78,7 @@ class SvgSearchView(ListView):
     def get_context_data(self, **kwargs):
         context = super(SvgSearchView, self).get_context_data(**kwargs)
         context['key'] = self.kwargs.get('key')
+        context['collections'] = Collection.objects.all()
         return context
 
     def post(self, request, *args, **kwargs):
@@ -88,6 +103,7 @@ class SvgSettingsView(TemplateView):
         context = {}
         for form_key, form in self.forms:
             context[form_key] = form(current_settings(request))
+        context['collections'] = Collection.objects.all()
         return context
 
     def get(self, request, *args, **kwargs):

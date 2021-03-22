@@ -2,65 +2,80 @@
 {% load i18n svg svg_utils %}
 
 {% block title %}{% trans 'Settings SVG for web' %} | {{ block.super }}{% endblock %}
-{% block description %}{% trans 'Configure settings and get free SVGs animated built in HTML and CSS.' %}
-    {{ block.super }}{% endblock %}
+{% block description %}{% trans 'Configure settings and get free SVGs animated built in HTML and CSS.' %}{{ block.super }}{% endblock %}
 
+{% block header_title %}{% trans 'Settings' %} SVG{% endblock %}
 
-{% block body_no_cache %}
-    {% variant_manager request.session.variant %}
+{% block body_content %}
     {% with theme=request.session.theme variant=request.session.variant %}
-        <h1>{% trans 'Settings' %} SVG</h1>
+        <h2 class="text-light-500 dark:text-dark-500 text-xs font-medium uppercase tracking-wide">{% trans 'Preview' %}</h2>
+        <ul class="flex flex-wrap mt-6 preview">
 
-        <h2>{% trans 'Preview' %}</h2>
+            <li class="svg-trigger mr-6">
+                {% svg_preview 'northernlight-urban-basic' theme 100 100 variant False %}
+            </li>
 
-        <span class="svg-trigger">
-            {% svg_preview 'northernlight-urban-basic' theme 100 100 variant False %}
-        </span>
-        <span class="svg-trigger">
-            {% svg_preview 'northernlight-urban-circle' theme 100 100 variant False %}
-        </span>
-        <span class="svg-trigger">
-            {% svg_preview 'northernlight-urban-rect' theme 100 100 variant False %}
-        </span>
-        <span class="svg-trigger">
-            {% svg_preview 'northernlight-urban-line' theme 100 100 variant False %}
-        </span>
-        <h2>{% trans 'Themes' %} SVG</h2>
+            <li class="svg-trigger mr-6">
+                {% svg_preview 'northernlight-urban-circle' theme 100 100 variant False %}
+            </li>
 
-        <form method="GET" style="display: flex">
-            <input {% if theme == 'dark' %}style="border: 1px solid gray; background: transparent"{% endif %} type="submit" name="theme" value="dark">
-            <input {% if theme == 'light' %}style="border: 1px solid gray; background: transparent"{% endif %} type="submit" name="theme" value="light">
+            <li class="svg-trigger mr-6">
+                {% svg_preview 'northernlight-urban-rect' theme 100 100 variant False %}
+            </li>
+
+            <li class="svg-trigger mr-6">
+                {% svg_preview 'northernlight-urban-line' theme 100 100 variant False %}
+            </li>
+
+        </ul>
+
+        <h2 class="mt-6 text-light-500 dark:text-dark-500 text-xs font-medium uppercase tracking-wide">{% trans 'Themes' %}
+            SVG</h2>
+
+        <form method="GET" class="mt-6 flex">
+            <input class="{% if theme == 'dark' %}text-white bg-primary-600 hover:bg-primary-700{% else %}text-light-700 bg-white hover:bg-light-50 border-light-300 border{% endif %} mr-3 cursor-pointer px-4 py-2 shadow-sm text-sm font-medium rounded-md focus:outline-none"
+                   type="submit" name="theme" value="dark">
+            <input class="{% if theme == 'light' %}text-white bg-primary-600 hover:bg-primary-700{% else %}text-light-700 bg-white hover:bg-light-50 border-light-300 border{% endif %} mr-3 cursor-pointer px-4 py-2 shadow-sm text-sm font-medium rounded-md focus:outline-none"
+                   type="submit" name="theme" value="light">
         </form>
 
-        <h2>{% trans 'Variant' %} SVG</h2>
+        <h2 class="mt-6 text-light-500 dark:text-dark-500 text-xs font-medium uppercase tracking-wide">{% trans 'Variant' %}
+            SVG</h2>
 
-        <form method="GET" style="display: flex">
-            <input {% if not variant %}style="border: 1px solid gray; background: transparent"{% endif %} type="submit" name="variant" value="none">
-            <input {% if variant == 'glass' %}style="border: 1px solid gray; background: transparent"{% endif %} type="submit" name="variant" value="glass">
+        <form method="GET" class="mt-6 flex">
+            <input class="{% if not variant %}text-white bg-primary-600 hover:bg-primary-700{% else %}text-light-700 bg-white hover:bg-light-50 border-light-300 border{% endif %} mr-3 cursor-pointer px-4 py-2 shadow-sm text-sm font-medium rounded-md focus:outline-none"
+                   type="submit"
+                   name="variant" value="none">
+            <input class="{% if variant == 'glass' %}text-white bg-primary-600 hover:bg-primary-700{% else %}text-light-700 bg-white hover:bg-light-50 border-light-300 border{% endif %} mr-3 cursor-pointer px-4 py-2 shadow-sm text-sm font-medium rounded-md focus:outline-none"
+                   type="submit" name="variant" value="glass">
         </form>
 
-        <form method="POST" action="{% url 'app:svg_settings' %}">
+        <form class="svg-form mt-6" method="POST" action="{% url 'app:svg_settings' %}">
             {% csrf_token %}
             <input type="hidden" name="form_key" value="form_theme_{{ theme }}">
             {% if theme == 'light' %}{{ form_theme_light.as_p }}{% else %}{{ form_theme_dark.as_p }}{% endif %}
-            <input type="submit" value="{% trans 'Save' %}">
+            <input class="cursor-pointer px-4 py-2 shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none"
+                   type="submit" value="{% trans 'Save' %}">
         </form>
 
-        <h2>{% trans 'Themes App' %}</h2>
+        <h2 class="mt-6 text-light-500 dark:text-dark-500 text-xs font-medium uppercase tracking-wide">{% trans 'Themes App' %}</h2>
 
-        <form method="POST" action="{% url 'app:svg_settings' %}">
+        <form class="svg-form mt-6" method="POST" action="{% url 'app:svg_settings' %}">
             {% csrf_token %}
             <input type="hidden" name="form_key" value="form_theme_{{ theme }}_app">
             {% if theme == 'light' %}{{ form_theme_light_app.as_p }}{% else %}{{ form_theme_dark_app.as_p }}{% endif %}
-            <input type="submit" value="{% trans 'Save' %}">
+            <input class="cursor-pointer px-4 py-2 shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none"
+                   type="submit" value="{% trans 'Save' %}">
         </form>
 
-        <h2>{% trans 'Reset' %}</h2>
-        <form method="POST" style="display: flex">
+        <h2 class="mt-6 text-light-500 dark:text-dark-500 text-xs font-medium uppercase tracking-wide">{% trans 'Reset' %}</h2>
+
+        <form method="POST" class="mt-6">
             {% csrf_token %}
-            <input type="submit" name="reset" value="reset">
+            <input class="cursor-pointer px-4 py-2 shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none"
+                   type="submit"
+                   name="reset"
+                   value="reset">
         </form>
-
-
     {% endwith %}
 {% endblock %}

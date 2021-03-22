@@ -1,7 +1,5 @@
 from django.contrib.sitemaps.views import sitemap
 from django.urls import path
-from django.conf import settings
-from django.views.generic import TemplateView
 
 from app.views import \
     CollectionListView, \

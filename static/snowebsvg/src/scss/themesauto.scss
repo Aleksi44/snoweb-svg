@@ -1,15 +1,3 @@
-// Fallback theme dark
-
-:root {
-  --svg-theme-light-primary: #14253A;
-  --svg-theme-light-secondary: #E63946;
-  --svg-theme-light-tertiary: #f7f7f7;
-
-  --svg-theme-dark-primary: #F7F7F7;
-  --svg-theme-dark-secondary: #E63946;
-  --svg-theme-dark-tertiary: #112032;
-}
-
 @media (prefers-color-scheme: dark) {
   .svg-fill-primary {
     fill: var(--svg-theme-dark-primary);

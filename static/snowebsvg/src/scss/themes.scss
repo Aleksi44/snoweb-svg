@@ -1,83 +1,51 @@
-// Fallback theme dark
+.svg-theme-light {
+  .svg-fill-primary {
+    fill: var(--svg-theme-light-primary);
+  }
 
-:root {
-  --svg-theme-light-primary: #14253A;
-  --svg-theme-light-secondary: #E63946;
-  --svg-theme-light-tertiary: #f7f7f7;
+  .svg-fill-secondary {
+    fill: var(--svg-theme-light-secondary);
+  }
 
-  --svg-theme-dark-primary: #F7F7F7;
-  --svg-theme-dark-secondary: #E63946;
-  --svg-theme-dark-tertiary: #112032;
-}
+  .svg-fill-tertiary {
+    fill: var(--svg-theme-light-tertiary);
+  }
 
-$themes: (
-        dark: (
-                primary: var(--svg-theme-dark-primary),
-                secondary: var(--svg-theme-dark-secondary),
-                tertiary: var(--svg-theme-dark-tertiary),
-        ),
-        light: (
-                primary: var(--svg-theme-light-primary),
-                secondary: var(--svg-theme-light-secondary),
-                tertiary: var(--svg-theme-light-tertiary),
-        ),
-);
+  .svg-stroke-primary {
+    stroke: var(--svg-theme-light-primary);
+  }
 
-@mixin theme($themes: $themes) {
-  @each $theme, $map in $themes {
-    .svg-theme-#{$theme} & {
-      $theme-map: () !global;
-      @each $key, $submap in $map {
-        $value: map-get(map-get($themes, $theme), '#{$key}');
-        $theme-map: map-merge($theme-map, ($key: $value)) !global;
-      }
+  .svg-stroke-secondary {
+    stroke: var(--svg-theme-light-secondary);
+  }
 
-      @content;
-      $theme-map: null !global;
-    }
+  .svg-stroke-tertiary {
+    stroke: var(--svg-theme-light-tertiary);
   }
 }
 
-@function t($key) {
-  @return map-get($theme-map, $key);
-}
-
-/* Fill */
-
-.svg-fill-primary {
-  @include theme($themes) {
-    fill: t('primary');
+.svg-theme-dark {
+  .svg-fill-primary {
+    fill: var(--svg-theme-dark-primary);
   }
-}
 
-.svg-fill-secondary {
-  @include theme($themes) {
-    fill: t('secondary');
+  .svg-fill-secondary {
+    fill: var(--svg-theme-dark-secondary);
   }
-}
 
-.svg-fill-tertiary {
-  @include theme($themes) {
-    fill: t('tertiary');
+  .svg-fill-tertiary {
+    fill: var(--svg-theme-dark-tertiary);
   }
-}
 
-/* Stroke */
-
-.svg-stroke-primary {
-  @include theme($themes) {
-    stroke: t('primary');
+  .svg-stroke-primary {
+    stroke: var(--svg-theme-dark-primary);
   }
-}
 
-.svg-stroke-secondary {
-  @include theme($themes) {
-    stroke: t('secondary');
+  .svg-stroke-secondary {
+    stroke: var(--svg-theme-dark-secondary);
   }
-}
 
-.svg-stroke-tertiary {
-  @include theme($themes) {
-    stroke: t('tertiary');
+  .svg-stroke-tertiary {
+    stroke: var(--svg-theme-dark-tertiary);
   }
 }

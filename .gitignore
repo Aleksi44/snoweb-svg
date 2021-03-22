@@ -100,3 +100,4 @@ mediafiles/
 media/
 
 staticfiles/
+cache/

@@ -43,17 +43,20 @@ class ThemeLightForm(Form):
     theme_light_primary = HexFormField(
         required=False,
         label=_('Color theme light primary'),
-        help_text=_('Hexadecimal color')
+        help_text=_('Hexadecimal color'),
+        widget=forms.TextInput(attrs={'class': 'bg-light-0 dark:bg-dark-0 text-light-900 dark:text-dark-900'})
     )
     theme_light_secondary = HexFormField(
         required=False,
         label=_('Color theme light secondary'),
-        help_text=_('Hexadecimal color')
+        help_text=_('Hexadecimal color'),
+        widget=forms.TextInput(attrs={'class': 'bg-light-0 dark:bg-dark-0 text-light-900 dark:text-dark-900'})
     )
     theme_light_tertiary = HexFormField(
         required=False,
         label=_('Color theme light tertiary'),
-        help_text=_('Hexadecimal color')
+        help_text=_('Hexadecimal color'),
+        widget=forms.TextInput(attrs={'class': 'bg-light-0 dark:bg-dark-0 text-light-900 dark:text-dark-900'})
     )
 
 
@@ -61,17 +64,20 @@ class ThemeDarkForm(Form):
     theme_dark_primary = HexFormField(
         required=False,
         label=_('Color theme dark primary'),
-        help_text=_('Hexadecimal color')
+        help_text=_('Hexadecimal color'),
+        widget=forms.TextInput(attrs={'class': 'bg-light-0 dark:bg-dark-0 text-light-900 dark:text-dark-900'})
     )
     theme_dark_secondary = HexFormField(
         required=False,
         label=_('Color theme dark secondary'),
-        help_text=_('Hexadecimal color')
+        help_text=_('Hexadecimal color'),
+        widget=forms.TextInput(attrs={'class': 'bg-light-0 dark:bg-dark-0 text-light-900 dark:text-dark-900'})
     )
     theme_dark_tertiary = HexFormField(
         required=False,
         label=_('Color theme dark tertiary'),
-        help_text=_('Hexadecimal color')
+        help_text=_('Hexadecimal color'),
+        widget=forms.TextInput(attrs={'class': 'bg-light-0 dark:bg-dark-0 text-light-900 dark:text-dark-900'})
     )
 
 
@@ -81,7 +87,8 @@ class ThemeLightAppForm(Form):
     theme_light_background_body = BackgroundColorFormField(
         required=False,
         label=_('Color theme light background body'),
-        help_text=_('Hexadecimal color, linear-gradient, radial-gradient')
+        help_text=_('Hexadecimal color, linear-gradient, radial-gradient'),
+        widget=forms.TextInput(attrs={'class': 'bg-light-0 dark:bg-dark-0 text-light-900 dark:text-dark-900'})
     )
 
 
@@ -89,5 +96,6 @@ class ThemeDarkAppForm(Form):
     theme_dark_background_body = BackgroundColorFormField(
         required=False,
         label=_('Color theme dark background body'),
-        help_text=_('Hexadecimal color, linear-gradient, radial-gradient')
+        help_text=_('Hexadecimal color, linear-gradient, radial-gradient'),
+        widget=forms.TextInput(attrs={'class': 'bg-light-0 dark:bg-dark-0 text-light-900 dark:text-dark-900'})
     )
