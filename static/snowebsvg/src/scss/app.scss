@@ -15,10 +15,10 @@
     input {
       @apply max-w-lg block w-full shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:max-w-xs sm:text-sm border-light-300 rounded-md;
     }
+  }
 
-    .helptext {
-      @apply mt-2 text-sm text-light-500;
-    }
+  .helptext {
+    @apply mt-2 text-sm text-light-500 dark:text-dark-500;
   }
 
   .preview {
