@@ -3,6 +3,7 @@ from django.db.models import Q
 from django.shortcuts import redirect
 from django.template.defaultfilters import slugify
 from django.shortcuts import render
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 from snowebsvg.settings import SVG_DEFAULT_VARIANT, SVG_DEFAULT_THEME
 from snowebsvg.models import Collection, GroupSvg, Svg
@@ -13,9 +14,22 @@ from app.forms import \
     ThemeDarkAppForm
 from app.templatetags.settings import current_settings
 
-
+MAX_SVG_RESULTS = 275
 class CollectionListView(TemplateView):
     template_name = 'app/collection_list.html'
+
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
+        page = request.GET.get('page', 1)
+        paginator = Paginator(Svg.objects.all(), MAX_SVG_RESULTS)
+        try:
+            search_results = paginator.page(page)
+        except PageNotAnInteger:
+            search_results = paginator.page(1)
+        except EmptyPage:
+            search_results = paginator.page(paginator.num_pages)
+        context['search_results'] = search_results
+        return self.render_to_response(context)
 
     def get_context_data(self, **kwargs):
         context = super(CollectionListView, self).get_context_data(**kwargs)
