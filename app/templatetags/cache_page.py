@@ -43,7 +43,7 @@ class CachePage(Node):
         })
         fragment_name = 'page_%s_%s' % (
             settings.VERSION,
-            request.path
+            request.get_full_path()
         )
         cache_key = make_template_fragment_key(fragment_name, vary_on)
         value = fragment_cache.get(cache_key)
