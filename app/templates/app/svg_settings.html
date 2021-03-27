@@ -1,6 +1,11 @@
 {% extends 'app/base.html' %}
 {% load i18n svg svg_utils %}
 
+{% comment %}
+Tailwind purge:
+- helptext
+{% endcomment %}
+
 {% block title %}{% trans 'Settings SVG for web' %} | {{ block.super }}{% endblock %}
 {% block description %}{% trans 'Configure settings and get free SVGs animated built in HTML and CSS.' %}{{ block.super }}{% endblock %}
 
