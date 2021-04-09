@@ -15,19 +15,19 @@ Snoweb SVG
 .. image:: https://coveralls.io/repos/github/Aleksi44/snoweb-svg/badge.svg?branch=master
     :target: https://coveralls.io/github/Aleksi44/snoweb-svg?branch=master
 
-.. image:: https://static.snoweb.fr/documents/snoweb-svg-github.gif
 
-Snoweb SVG is an open source project with SVGs optimized and animated built in HTML and CSS.
+Snoweb SVG is a database of SVGs optimized and animated built in HTML and CSS.
 
 
 Features
 ********
 
-- Animation on hover
 - Svg code in html and css
 - No javascript required
-- Theme dark and light (with css class or prefers-color-scheme)
-- Possible integration with Django
+- Themes with css class or prefers-color-scheme
+- Variant manager with Glassmorphism
+- Possible integration with Django and Wagtail
+- Animation on hover
 
 Find all Svg at `www.snoweb-svg.com <https://www.snoweb-svg.com/en/>`_.
 
