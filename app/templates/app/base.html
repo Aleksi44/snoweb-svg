@@ -54,16 +54,20 @@
                 :root {
                 {% settings_by_key request 'theme_light_primary' as primary %}
                 {% settings_by_key request 'theme_light_secondary' as secondary %}
-                {% settings_by_key request 'theme_light_tertiary' as tertiary %} --svg-theme-light-primary: {{ primary }};
+                {% settings_by_key request 'theme_light_tertiary' as tertiary %}
+                {% settings_by_key request 'theme_light_background_body' as theme_light_background_body %}
+                    --svg-theme-light-primary: {{ primary }};
                     --svg-theme-light-secondary: {{ secondary }};
                     --svg-theme-light-tertiary: {{ tertiary }};
-
+                    --app-theme-light-background-body: {{ theme_light_background_body }};
                 {% settings_by_key request 'theme_dark_primary' as primary %}
                 {% settings_by_key request 'theme_dark_secondary' as secondary %}
                 {% settings_by_key request 'theme_dark_tertiary' as tertiary %}
+                {% settings_by_key request 'theme_dark_background_body' as theme_dark_background_body %}
                     --svg-theme-dark-primary: {{ primary }};
                     --svg-theme-dark-secondary: {{ secondary }};
                     --svg-theme-dark-tertiary: {{ tertiary }};
+                    --app-theme-dark-background-body: {{ theme_dark_background_body }};
                 }
 
                 [x-cloak] {

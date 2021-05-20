@@ -6,7 +6,7 @@
 
 <g clip-path="url(#clip-path-{{ id }})">
     {% comment %}We transform here because of `stdDeviation` of blur{% endcomment %}
-    {% if variant == 'glass' %}<g transform="{% scale 0.8 %}">{% endif %}
+    {% if variant == 'glass' %}<g transform="{% scale 1 %}">{% endif %}
     <rect {% variant_manager variant 'attrs' %}
             class="svg-fill-tertiary"
             x="0"

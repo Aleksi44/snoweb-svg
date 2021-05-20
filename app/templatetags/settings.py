@@ -16,8 +16,8 @@ variants_settings = {
     ),
     'glass': (
         ('theme_light_primary', '#111827'),
-        ('theme_light_secondary', '#FFF'),
-        ('theme_light_tertiary', '#FFF'),
+        ('theme_light_secondary', '#D1D5DB'),
+        ('theme_light_tertiary', '#D1D5DB'),
         ('theme_dark_primary', '#C9CED8'),
         ('theme_dark_secondary', '#FFF'),
         ('theme_dark_tertiary', '#FFF'),

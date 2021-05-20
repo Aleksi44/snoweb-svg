@@ -14,7 +14,7 @@ Tailwind purge:
 {% block body_content %}
     {% with theme=request.session.theme variant=request.session.variant %}
         <h2 class="text-light-500 dark:text-dark-500 text-xs font-medium uppercase tracking-wide">{% trans 'Preview' %}</h2>
-        <ul class="flex flex-wrap mt-6 preview">
+        <ul class="flex flex-wrap mt-6 preview" style="background: var(--app-theme-{{ theme }}-background-body)">
 
             <li class="svg-trigger mr-6">
                 {% svg_preview 'northernlight-urban-basic' theme 100 100 variant False %}
