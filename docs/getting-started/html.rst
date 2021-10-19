@@ -20,7 +20,7 @@ With css class
 
 ::
 
-    <link rel="stylesheet" href="https://static.snoweb.fr/snowebsvg/dist/css/themes-<version>.css">
+    <link rel="stylesheet" href="https://static.snoweb.io/snowebsvg/dist/css/themes-<version>.css">
 
 To use the latest version, replace <version> with |version|
 
@@ -29,7 +29,7 @@ With prefers-color-scheme
 
 ::
 
-    <link rel="stylesheet" href="https://static.snoweb.fr/snowebsvg/dist/css/themesauto-<version>.css">
+    <link rel="stylesheet" href="https://static.snoweb.io/snowebsvg/dist/css/themesauto-<version>.css">
 
 To use the latest version, replace <version> with |version|
 
@@ -64,7 +64,7 @@ To use an animated SVG, you need to include the "Core" code in the `<head>` part
 
 ::
 
-    <link rel="stylesheet" href="https://static.snoweb.fr/snowebsvg/dist/css/core-<version>.css">
+    <link rel="stylesheet" href="https://static.snoweb.io/snowebsvg/dist/css/core-<version>.css">
 
 
 To use the latest version, replace <version> with |version|

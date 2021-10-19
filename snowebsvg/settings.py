@@ -2,7 +2,7 @@ import os
 import json
 import pkg_resources
 
-BASE_URL_CSS = "https://static.snoweb.fr/snowebsvg/dist/css/"
+BASE_URL_CSS = "https://static.snoweb.io/snowebsvg/dist/css/"
 
 try:
     #  Production part

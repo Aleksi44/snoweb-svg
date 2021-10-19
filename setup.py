@@ -17,7 +17,7 @@ setup(
     version=version,
     url='https://github.com/Aleksi44/snoweb-svg',
     author="Alexis Le Baron",
-    author_email="hello@snoweb.fr",
+    author_email="hello@snoweb.io",
     description="Snoweb SVG",
     long_description=long_description,
     keywords="svg django snoweb",
