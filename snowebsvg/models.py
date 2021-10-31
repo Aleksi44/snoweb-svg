@@ -5,7 +5,6 @@ from django.template.loader import get_template
 from django.utils.functional import cached_property
 from django.template.loaders.app_directories import Loader
 from django.template.exceptions import TemplateDoesNotExist
-from wagtail.search import index
 from snowebsvg import settings
 
 
@@ -113,7 +112,19 @@ class GroupSvg(models.Model):
             pass
 
 
-class Svg(index.Indexed, models.Model):
+if settings.WAGTAIL_INSTALL:
+    from wagtail.search import index
+
+    class AbstractSvg(index.Indexed, models.Model):
+        class Meta:
+            abstract = True
+else:
+    class AbstractSvg(models.Model):
+        class Meta:
+            abstract = True
+
+
+class Svg(AbstractSvg):
     key = models.CharField(max_length=255, verbose_name=_("Key"))
     group = models.ForeignKey(
         GroupSvg,
@@ -122,10 +133,10 @@ class Svg(index.Indexed, models.Model):
         null=True
     )
 
-    # Wagtail index
-    search_fields = [
-        index.SearchField('key_composer', partial_match=True),
-    ]
+    if settings.WAGTAIL_INSTALL:
+        search_fields = [
+            index.SearchField('key_composer', partial_match=True),
+        ]
 
     class Meta:
         ordering = ('key',)

@@ -2,7 +2,13 @@
 
 from django.db import migrations, models
 import django.db.models.deletion
-import wagtail.search.index
+from snowebsvg import settings
+
+if settings.WAGTAIL_INSTALL:
+    import wagtail.search.index
+    bases_svg = (wagtail.search.index.Indexed, models.Model)
+else:
+    bases_svg = (models.Model,)
 
 
 class Migration(migrations.Migration):
@@ -44,6 +50,6 @@ class Migration(migrations.Migration):
             options={
                 'ordering': ('key',),
             },
-            bases=(wagtail.search.index.Indexed, models.Model),
+            bases=bases_svg,
         ),
     ]

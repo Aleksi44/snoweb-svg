@@ -19,3 +19,9 @@ SVG_DEFAULT_WIDTH = 100
 SVG_DEFAULT_HEIGHT = 100
 SVG_DEFAULT_VARIANT = None
 SVG_DEFAULT_KEY = 'decorator-rect-basic'
+
+try:
+    import wagtail
+    WAGTAIL_INSTALL = True
+except ImportError:
+    WAGTAIL_INSTALL = False
