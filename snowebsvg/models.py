@@ -166,6 +166,22 @@ class Svg(AbstractSvg):
             self.key
         )
 
+    @cached_property
+    def default_svg(self):
+        collection_key, group_key, key = settings.SVG_DEFAULT_KEY.split('-')
+        collection, _ = Collection.objects.get_or_create(
+            key=collection_key
+        )
+        group, _ = GroupSvg.objects.get_or_create(
+            key=group_key,
+            collection_id=collection.id
+        )
+        svg, _ = Svg.objects.get_or_create(
+            key=key,
+            group_id=group.id
+        )
+        return svg
+
     def key_decomposer(self, key_composer):
         """
         :return svg: Svg instance by key composer
@@ -178,19 +194,7 @@ class Svg(AbstractSvg):
                 group__collection__key=collection_key
             )
         except (Svg.DoesNotExist, ValueError):
-            collection_key, group_key, key = settings.SVG_DEFAULT_KEY.split('-')
-            collection, _ = Collection.objects.get_or_create(
-                key=collection_key
-            )
-            group, _ = GroupSvg.objects.get_or_create(
-                key=group_key,
-                collection_id=collection.id
-            )
-            svg, _ = Svg.objects.get_or_create(
-                key=key,
-                group_id=group.id
-            )
-            return svg
+            return self.default_svg
 
     def render_django(self, theme=settings.SVG_DEFAULT_THEME, width=settings.SVG_DEFAULT_WIDTH,
                       height=settings.SVG_DEFAULT_HEIGHT, variant=settings.SVG_DEFAULT_VARIANT):
@@ -234,9 +238,14 @@ class Svg(AbstractSvg):
         :param variant: Variant, defaults :ref:`SVG_DEFAULT_VARIANT <references_settings>`
         :param klass: extra css class
         """
-        svg_template = get_template(self.path_entry)
+        try:
+            svg = self
+            svg_template = get_template(self.path_entry)
+        except TemplateDoesNotExist:
+            svg = self.default_svg
+            svg_template = get_template(svg.path_entry)
         return svg_template.render({
-            'self': self,
+            'self': svg,
             'theme': theme,
             'width': width,
             'height': height,
