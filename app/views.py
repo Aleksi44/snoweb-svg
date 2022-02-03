@@ -4,6 +4,7 @@ from django.shortcuts import redirect
 from django.template.defaultfilters import slugify
 from django.shortcuts import render
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.http import Http404
 
 from snowebsvg.settings import SVG_DEFAULT_VARIANT, SVG_DEFAULT_THEME
 from snowebsvg.models import Collection, GroupSvg, Svg
@@ -51,7 +52,10 @@ class GroupSvgListView(ListView):
     def get_queryset(self):
         collection_key = self.kwargs.get('collection_key')
         if collection_key:
-            return self.model.objects.filter(collection__key=collection_key)
+            objects = self.model.objects.filter(collection__key=collection_key)
+            if objects.count() == 0:
+                raise Http404
+            return objects
         return self.model.objects.all()
 
 
@@ -69,11 +73,15 @@ class SvgListView(ListView):
         collection_key = self.kwargs.get('collection_key')
         svg_key = self.kwargs.get('svg_key')
         if group_key and collection_key and svg_key:
-            return self.model.objects.filter(
+            objects = self.model.objects.filter(
                 group__key=group_key,
                 group__collection__key=collection_key,
                 key=svg_key
             )
+            if objects.count() == 0:
+                raise Http404
+            return objects
+
         return self.model.objects.all()
 
 
