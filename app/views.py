@@ -15,13 +15,15 @@ from app.forms import \
 from app.templatetags.settings import current_settings
 
 MAX_SVG_RESULTS = 275
+
+
 class CollectionListView(TemplateView):
     template_name = 'app/collection_list.html'
 
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
         page = request.GET.get('page', 1)
-        paginator = Paginator(Svg.objects.all(), MAX_SVG_RESULTS)
+        paginator = Paginator(Svg.objects.all().order_by('group__key'), MAX_SVG_RESULTS)
         try:
             search_results = paginator.page(page)
         except PageNotAnInteger:

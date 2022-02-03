@@ -10,46 +10,46 @@
 {% block body_content %}
     {% with theme=request.session.theme variant=request.session.variant %}
         {% for svg in object_list %}
-            <h2 class="text-light-500 text-xs font-medium uppercase tracking-wide">{% trans 'Preview' %}</h2>
+            <h2 class="text-light-600 dark:text-dark-900 text-xs font-medium uppercase tracking-wide">{% trans 'Preview' %}</h2>
             <div class="svg-trigger mt-6 inline-block w-full preview">
                 {% svg_preview svg theme 200 200 variant True %}
             </div>
 
-            <h2 class="mt-6 text-light-500 text-xs font-medium uppercase tracking-wide">{% trans 'Attributes' %}</h2>
+            <h2 class="mt-6 text-light-600 dark:text-dark-900 text-xs font-medium uppercase tracking-wide">{% trans 'Attributes' %}</h2>
 
             <dl class="sm:divide-y sm:divide-light-200">
                 <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-                    <dt class="text-sm font-medium text-light-500">
+                    <dt class="text-sm font-medium text-light-600 dark:text-dark-900">
                         {% trans 'Collection' %}
                     </dt>
-                    <dd class="mt-1 text-sm text-light-900 sm:mt-0 sm:col-span-2">
+                    <dd class="mt-1 text-sm text-light-600 sm:mt-0 sm:col-span-2">
                         <a class="text-sm font-medium text-primary-500"
                            href="{% url 'app:group' svg.group.collection.key %}">{{ svg.group.collection.key }}</a>
                     </dd>
                 </div>
                 <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-                    <dt class="text-sm font-medium text-light-500">
+                    <dt class="text-sm font-medium text-light-600 dark:text-dark-900">
                         {% trans 'Group' %}
                     </dt>
-                    <dd class="mt-1 text-sm text-light-900 sm:mt-0 sm:col-span-2">
+                    <dd class="mt-1 text-sm text-light-600 sm:mt-0 sm:col-span-2">
                         <a class="text-sm font-medium text-primary-500"
                            href="{% url 'app:svg_search' svg.group.key %}">{{ svg.group.key }}</a>
                     </dd>
                 </div>
                 <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-                    <dt class="text-sm font-medium text-light-500">
+                    <dt class="text-sm font-medium text-light-600 dark:text-dark-900">
                         {% trans 'Builder' %}
                     </dt>
-                    <dd class="mt-1 text-sm text-light-900 sm:mt-0 sm:col-span-2">
+                    <dd class="mt-1 text-sm text-light-600 sm:mt-0 sm:col-span-2">
                         <a class="text-sm font-medium text-primary-500"
                            href="{% url 'app:svg_search' svg.key %}">{{ svg.key }}</a>
                     </dd>
                 </div>
                 <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-                    <dt class="text-sm font-medium text-light-500">
+                    <dt class="text-sm font-medium text-light-600 dark:text-dark-900">
                         {% trans 'Documentation' %}
                     </dt>
-                    <dd class="mt-1 text-sm text-light-900 sm:mt-0 sm:col-span-2">
+                    <dd class="mt-1 text-sm text-light-600 sm:mt-0 sm:col-span-2">
                         <ul>
                             <li>
                                 <a class="text-sm font-medium text-primary-500"
@@ -74,23 +74,23 @@
                 </div>
             </dl>
 
-            <h2 class="mt-6 text-light-500 text-xs font-medium uppercase tracking-wide">{% trans 'Code' %}</h2>
+            <h2 class="mt-6 text-light-600 dark:text-dark-900 text-xs font-medium uppercase tracking-wide">{% trans 'Code' %}</h2>
 
             {% comment %}<label class="mt-6 mb-3 block text-sm font-medium text-light-700">CSS</label>
             <textarea rows="10"
-                      class="bg-light-0 dark:bg-dark-0 text-light-900 dark:text-dark-900 shadow-sm focus:ring-primary-500 focus:border-primary-500 block w-full sm:text-sm border-light-300 rounded-md"
+                      class="bg-light-0 dark:bg-dark-0 text-light-600 dark:text-dark-900 shadow-sm focus:ring-primary-500 focus:border-primary-500 block w-full sm:text-sm border-light-300 rounded-md"
                       id="code-styles-{{ svg.key_composer }}">{% collection_styles svg.group.collection %}</textarea>
             <button class="mt-3 px-4 py-2 shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none"
                     type="button"
                     onclick="document.getElementById('code-styles-{{ svg.key_composer }}').select();document.execCommand('copy');">{% trans 'Copy' %}</button>{% endcomment %}
-            <label class="mt-6 mb-3 block text-sm font-medium text-light-700">HTML</label>
+            <label class="mt-6 mb-3 block text-sm font-medium text-light-600 dark:text-dark-900">HTML</label>
             <textarea rows="10"
                       class="bg-light-0 dark:bg-dark-0 text-light-900 dark:text-dark-900 shadow-sm focus:ring-primary-500 focus:border-primary-500 block w-full sm:text-sm border-light-300 rounded-md"
                       id="code-html-{{ svg.key_composer }}">{% svg_preview svg theme 100 100 as html %}{{ html|prettify }}</textarea>
             <button class="mt-3 px-4 py-2 shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none"
                     type="button"
                     onclick="document.getElementById('code-html-{{ svg.key_composer }}').select();document.execCommand('copy');">{% trans 'Copy' %}</button>
-            <label class="mt-6 mb-3 block text-sm font-medium text-light-700">Django</label>
+            <label class="mt-6 mb-3 block text-sm font-medium text-light-600 dark:text-dark-900">Django</label>
             <textarea rows="5"
                       class="bg-light-0 dark:bg-dark-0 text-light-900 dark:text-dark-900 shadow-sm focus:ring-primary-500 focus:border-primary-500 block w-full sm:text-sm border-light-300 rounded-md"
                       id="code-django-{{ svg.key_composer }}">{% svg_django svg theme 100 100 variant=variant %}</textarea>

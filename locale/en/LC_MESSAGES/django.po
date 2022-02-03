@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-28 20:18+0000\n"
+"POT-Creation-Date: 2022-02-03 13:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,40 +31,40 @@ msgstr ""
 msgid "Color theme light primary"
 msgstr ""
 
-#: app/forms.py:46 app/forms.py:51 app/forms.py:56 app/forms.py:64
-#: app/forms.py:69 app/forms.py:74
+#: app/forms.py:46 app/forms.py:52 app/forms.py:58 app/forms.py:67
+#: app/forms.py:73 app/forms.py:79
 msgid "Hexadecimal color"
 msgstr ""
 
-#: app/forms.py:50
+#: app/forms.py:51
 msgid "Color theme light secondary"
 msgstr ""
 
-#: app/forms.py:55
+#: app/forms.py:57
 msgid "Color theme light tertiary"
 msgstr ""
 
-#: app/forms.py:63
+#: app/forms.py:66
 msgid "Color theme dark primary"
 msgstr ""
 
-#: app/forms.py:68
+#: app/forms.py:72
 msgid "Color theme dark secondary"
 msgstr ""
 
-#: app/forms.py:73
+#: app/forms.py:78
 msgid "Color theme dark tertiary"
 msgstr ""
 
-#: app/forms.py:83
+#: app/forms.py:89
 msgid "Color theme light background body"
 msgstr ""
 
-#: app/forms.py:84 app/forms.py:92
+#: app/forms.py:90 app/forms.py:99
 msgid "Hexadecimal color, linear-gradient, radial-gradient"
 msgstr ""
 
-#: app/forms.py:91
+#: app/forms.py:98
 msgid "Color theme dark background body"
 msgstr ""
 
@@ -72,30 +72,34 @@ msgstr ""
 msgid "Choose and embed web-optimized SVGs in your HTML or with Django."
 msgstr ""
 
-#: app/templates/app/base.html:118
+#: app/templates/app/base.html:148 app/templates/app/base.html:266
 msgid "Home"
 msgstr ""
 
-#: app/templates/app/base.html:121 app/templates/app/svg_search.html:11
-#: app/templates/app/svg_search.html:16
-msgid "Search"
-msgstr ""
-
-#: app/templates/app/base.html:124 app/templates/app/svg_settings.html:11
+#: app/templates/app/base.html:161 app/templates/app/base.html:279
+#: app/templates/app/svg_settings.html:12
 msgid "Settings"
 msgstr ""
 
-#: app/templates/app/base.html:133
-msgid "Related links"
-msgstr ""
-
-#: app/templates/app/base.html:135
+#: app/templates/app/base.html:173 app/templates/app/base.html:290
+#: app/templates/app/svg_list.html:50
 msgid "Documentation"
 msgstr ""
 
-#: app/templates/app/base.html:140
-msgid "Made with ❤"
+#: app/templates/app/base.html:194 app/templates/app/base.html:311
+#: app/templates/app/collection_list.html:8
+msgid "collections"
 msgstr ""
+
+#: app/templates/app/base.html:233 app/templates/app/base.html:251
+#: app/templates/app/base.html:354 app/templates/app/base.html:367
+#: app/templates/app/svg_search.html:7
+msgid "Search"
+msgstr ""
+
+#: app/templates/app/base.html:326
+msgid "Made with ❤"
+msgstr "Made with 💚"
 
 #: app/templates/app/collection_list.html:4
 msgid "Free SVG collections for web"
@@ -103,10 +107,6 @@ msgstr ""
 
 #: app/templates/app/collection_list.html:5
 msgid "Get free collections of SVGs animated built in HTML and CSS."
-msgstr ""
-
-#: app/templates/app/collection_list.html:9
-msgid "collections"
 msgstr ""
 
 #: app/templates/app/groupsvg_list.html:4
@@ -121,60 +121,55 @@ msgstr ""
 msgid "of SVGs animated built in HTML and CSS."
 msgstr ""
 
-#: app/templates/app/groupsvg_list.html:9
+#: app/templates/app/groupsvg_list.html:7
 msgid "collection"
 msgstr ""
 
-#: app/templates/app/groupsvg_list.html:12
-msgid "Groups"
-msgstr ""
-
-#: app/templates/app/groupsvg_list.html:19 app/templates/app/svg_search.html:21
-msgid "Scroll to top"
-msgstr ""
-
-#: app/templates/app/svg_list.html:4 app/templates/app/svg_list.html:5
+#: app/templates/app/svg_list.html:4 app/templates/app/svg_list.html:6
 msgid "Free SVG"
 msgstr ""
 
-#: app/templates/app/svg_list.html:5
+#: app/templates/app/svg_list.html:6
 msgid "animated and built in HTML and CSS."
 msgstr ""
 
-#: app/templates/app/svg_list.html:16
+#: app/templates/app/svg_list.html:13 app/templates/app/svg_settings.html:16
+msgid "Preview"
+msgstr ""
+
+#: app/templates/app/svg_list.html:18
 msgid "Attributes"
 msgstr ""
 
-#: app/templates/app/svg_list.html:19
+#: app/templates/app/svg_list.html:23
 msgid "Collection"
 msgstr ""
 
-#: app/templates/app/svg_list.html:24
+#: app/templates/app/svg_list.html:32
 msgid "Group"
 msgstr ""
 
-#: app/templates/app/svg_list.html:28
+#: app/templates/app/svg_list.html:41
 msgid "Builder"
 msgstr ""
 
-#: app/templates/app/svg_list.html:31
-msgid "Code"
-msgstr ""
-
-#: app/templates/app/svg_list.html:35
+#: app/templates/app/svg_list.html:57
 msgid "Getting started with HTML"
 msgstr ""
 
-#: app/templates/app/svg_list.html:40
+#: app/templates/app/svg_list.html:63
 msgid "Getting started with Django"
 msgstr ""
 
-#: app/templates/app/svg_list.html:45
+#: app/templates/app/svg_list.html:69
 msgid "Getting started with Wagtail"
 msgstr ""
 
-#: app/templates/app/svg_list.html:51 app/templates/app/svg_list.html:54
-#: app/templates/app/svg_list.html:57
+#: app/templates/app/svg_list.html:77
+msgid "Code"
+msgstr ""
+
+#: app/templates/app/svg_list.html:93 app/templates/app/svg_list.html:100
 msgid "Copy"
 msgstr ""
 
@@ -182,48 +177,44 @@ msgstr ""
 msgid "Search free SVG for web"
 msgstr ""
 
-#: app/templates/app/svg_search.html:6
+#: app/templates/app/svg_search.html:5
 msgid "Search for free SVGs animated built in HTML and CSS."
 msgstr ""
 
-#: app/templates/app/svg_search.html:11
+#: app/templates/app/svg_search.html:7
 msgid "by key"
 msgstr ""
 
-#: app/templates/app/svg_settings.html:4
+#: app/templates/app/svg_settings.html:9
 msgid "Settings SVG for web"
 msgstr ""
 
-#: app/templates/app/svg_settings.html:5
+#: app/templates/app/svg_settings.html:10
 msgid "Configure settings and get free SVGs animated built in HTML and CSS."
 msgstr ""
 
-#: app/templates/app/svg_settings.html:13
-msgid "Preview"
-msgstr ""
-
-#: app/templates/app/svg_settings.html:27
+#: app/templates/app/svg_settings.html:37
 msgid "Themes"
 msgstr ""
 
-#: app/templates/app/svg_settings.html:34
+#: app/templates/app/svg_settings.html:47
 msgid "Variant"
 msgstr ""
 
-#: app/templates/app/svg_settings.html:45
-#: app/templates/app/svg_settings.html:54
+#: app/templates/app/svg_settings.html:63
+#: app/templates/app/svg_settings.html:73
 msgid "Save"
 msgstr ""
 
-#: app/templates/app/svg_settings.html:48
+#: app/templates/app/svg_settings.html:66
 msgid "Themes App"
 msgstr ""
 
-#: app/templates/app/svg_settings.html:57
+#: app/templates/app/svg_settings.html:76
 msgid "Reset"
 msgstr ""
 
-#: snowebsvg/models.py:13 snowebsvg/models.py:65 snowebsvg/models.py:117
+#: snowebsvg/models.py:12 snowebsvg/models.py:64 snowebsvg/models.py:128
 msgid "Key"
 msgstr ""
 

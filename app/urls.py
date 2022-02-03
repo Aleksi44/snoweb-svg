@@ -1,6 +1,7 @@
 from django.contrib.sitemaps.views import sitemap
 from django.urls import path
-
+from django.views.generic import RedirectView
+from django.urls import reverse_lazy
 from app.views import \
     CollectionListView, \
     GroupSvgListView, \
@@ -24,7 +25,8 @@ sitemaps = {
 }
 
 urlpatterns = [
-    path('', CollectionListView.as_view(), name='collection'),
+    path('', RedirectView.as_view(permanent=True, url=reverse_lazy('app:collection')), name='home'),
+    path('collection/', CollectionListView.as_view(), name='collection'),
     path('collection/<collection_key>/', GroupSvgListView.as_view(), name='group'),
     path('svg/<collection_key>/<group_key>/<svg_key>/', SvgListView.as_view(), name='svg'),
     path('search/', SvgSearchView.as_view(), name='svg_search'),
