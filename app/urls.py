@@ -32,6 +32,6 @@ urlpatterns = [
     path('search/', SvgSearchView.as_view(), name='svg_search'),
     path('search/<key>/', SvgSearchView.as_view(), name='svg_search'),
     path('settings/', SvgSettingsView.as_view(), name='svg_settings'),
-    path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
+    path('collection/sitemap.xml', sitemap, {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap')
 ]
