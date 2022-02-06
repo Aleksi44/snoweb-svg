@@ -81,7 +81,6 @@ class SvgListView(ListView):
             if objects.count() == 0:
                 raise Http404
             return objects
-
         return self.model.objects.all()
 
 

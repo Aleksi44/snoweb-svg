@@ -3,6 +3,10 @@
 
 {% block title %}{% trans 'Search free SVG for web' %}{% if key %} like "{{ key }}"{% endif %} | {{ block.super }}{% endblock %}
 {% block description %}{% trans 'Search for free SVGs animated built in HTML and CSS.' %}{{ block.super }}{% endblock %}
+{% block meta %}
+    {{ block.super }}
+    <meta name="robots" content="noindex">
+{% endblock %}
 
 {% block header_title %}{% trans 'Search' %} SVG{% if key %} {% trans 'by key' %} {{ key }}{% endif %}{% endblock %}
 
