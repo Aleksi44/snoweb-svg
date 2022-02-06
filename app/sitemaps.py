@@ -2,7 +2,7 @@ from django.contrib import sitemaps
 from django.urls import reverse
 from django.contrib.sites.models import Site
 
-from snowebsvg.models import Collection, GroupSvg, Svg
+from snowebsvg.models import Collection, Svg
 
 
 class BaseSitemap(sitemaps.Sitemap):
@@ -18,7 +18,7 @@ class BaseSitemap(sitemaps.Sitemap):
 class StaticSitemap(BaseSitemap):
 
     def items(self):
-        return ['app:collection', 'app:svg_search']
+        return ['app:collection']
 
     def location(self, item):
         return reverse(item)
@@ -31,15 +31,6 @@ class CollectionSitemap(BaseSitemap):
 
     def location(self, item):
         return reverse('app:group', kwargs={'collection_key': item.key})
-
-
-class GroupSvgSitemap(BaseSitemap):
-
-    def items(self):
-        return GroupSvg.objects.all()
-
-    def location(self, item):
-        return reverse('app:svg_search', kwargs={'key': item.key})
 
 
 class SvgSitemap(BaseSitemap):

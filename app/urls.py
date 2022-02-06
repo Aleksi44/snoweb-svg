@@ -12,7 +12,6 @@ from app.views import \
 from app.sitemaps import \
     StaticSitemap, \
     CollectionSitemap, \
-    GroupSvgSitemap, \
     SvgSitemap
 
 app_name = 'app'
@@ -21,7 +20,6 @@ sitemaps = {
     'static': StaticSitemap,
     'collection': CollectionSitemap,
     'svg': SvgSitemap,
-    'group_svg': GroupSvgSitemap,
 }
 
 urlpatterns = [
