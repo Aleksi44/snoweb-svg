@@ -107,6 +107,8 @@ class SvgSearchView(ListView):
     def post(self, request, *args, **kwargs):
         key = request.POST.get('key', None)
         if key:
+            key = key.replace(' ', '_')
+            key = key.replace('-', '_')
             key_slug = slugify(key)
             if key_slug:
                 return redirect('app:svg_search', key=key_slug)
