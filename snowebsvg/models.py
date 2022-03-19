@@ -161,8 +161,8 @@ class Svg(AbstractSvg):
         :return string: Unique Identifier of Svg
         """
         return "%s-%s-%s" % (
-            self.group.collection.key,
-            self.group.key,
+            self.group.collection.key if self.group and self.group.collection else '',
+            self.group.key if self.group else '',
             self.key
         )
 

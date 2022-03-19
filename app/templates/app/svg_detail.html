@@ -1,0 +1,102 @@
+{% extends 'app/base.html' %}
+{% load svg svg_utils beautifulsoup %}
+
+{% block title %}Free SVG{% if object_list.0 %} {{ object_list.0 }}{% endif %} |
+    {{ block.super }}{% endblock %}
+{% block description %}Free SVG{% if object_list.0 %} {{ object_list.0 }}{% endif %} animated and built in HTML and CSS.{% endblock %}
+
+{% block header_title %}SVG {{ object_list.0.key_composer }}{% endblock %}
+
+{% block body_content %}
+    {% with theme=request.session.theme variant=request.session.variant %}
+        {% for svg in object_list %}
+            <h2 class="text-light-600 dark:text-dark-900 text-xs font-medium uppercase tracking-wide">Preview</h2>
+            <div class="svg-trigger mt-6 inline-block w-full preview">
+                {% svg_preview svg theme 200 200 variant True %}
+            </div>
+
+            <h2 class="mt-6 text-light-600 dark:text-dark-900 text-xs font-medium uppercase tracking-wide">Attributes</h2>
+
+            <dl class="sm:divide-y sm:divide-light-200">
+                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+                    <dt class="text-sm font-medium text-light-600 dark:text-dark-900">
+                        Collection
+                    </dt>
+                    <dd class="mt-1 text-sm text-light-600 sm:mt-0 sm:col-span-2">
+                        <a class="text-sm font-medium text-primary-500"
+                           href="{% url 'app:svg_search' svg.group.collection.key %}">{{ svg.group.collection.key }}</a>
+                    </dd>
+                </div>
+                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+                    <dt class="text-sm font-medium text-light-600 dark:text-dark-900">
+                        Group
+                    </dt>
+                    <dd class="mt-1 text-sm text-light-600 sm:mt-0 sm:col-span-2">
+                        <a class="text-sm font-medium text-primary-500"
+                           href="{% url 'app:svg_search' svg.group.key %}">{{ svg.group.key }}</a>
+                    </dd>
+                </div>
+                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+                    <dt class="text-sm font-medium text-light-600 dark:text-dark-900">
+                        Builder
+                    </dt>
+                    <dd class="mt-1 text-sm text-light-600 sm:mt-0 sm:col-span-2">
+                        <a class="text-sm font-medium text-primary-500"
+                           href="{% url 'app:svg_search' svg.key %}">{{ svg.key }}</a>
+                    </dd>
+                </div>
+                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+                    <dt class="text-sm font-medium text-light-600 dark:text-dark-900">
+                        Documentation
+                    </dt>
+                    <dd class="mt-1 text-sm text-light-600 sm:mt-0 sm:col-span-2">
+                        <ul>
+                            <li>
+                                <a class="text-sm font-medium text-primary-500"
+                                   href="https://snoweb-svg.readthedocs.io/en/latest/getting-started/html.html">
+                                    Getting started with HTML
+                                </a>
+                            </li>
+                            <li>
+                                <a class="text-sm font-medium text-primary-500"
+                                   href="https://snoweb-svg.readthedocs.io/en/latest/getting-started/django.html">
+                                    Getting started with Django
+                                </a>
+                            </li>
+                            <li>
+                                <a class="text-sm font-medium text-primary-500"
+                                   href="https://snoweb-svg.readthedocs.io/en/latest/getting-started/wagtail.html">
+                                    Getting started with Wagtail
+                                </a>
+                            </li>
+                        </ul>
+                    </dd>
+                </div>
+            </dl>
+
+            <h2 class="mt-6 text-light-600 dark:text-dark-900 text-xs font-medium uppercase tracking-wide">Code</h2>
+
+            {% comment %}<label class="mt-6 mb-3 block text-sm font-medium text-light-700">CSS</label>
+            <textarea rows="10"
+                      class="bg-light-0 dark:bg-dark-0 text-light-600 dark:text-dark-900 shadow-sm focus:ring-primary-500 focus:border-primary-500 block w-full sm:text-sm border-light-300 rounded-md"
+                      id="code-styles-{{ svg.key_composer }}">{% collection_styles svg.group.collection %}</textarea>
+            <button class="mt-3 px-4 py-2 shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none"
+                    type="button"
+                    onclick="document.getElementById('code-styles-{{ svg.key_composer }}').select();document.execCommand('copy');">Copy</button>{% endcomment %}
+            <label class="mt-6 mb-3 block text-sm font-medium text-light-600 dark:text-dark-900">HTML</label>
+            <textarea rows="10"
+                      class="bg-light-0 dark:bg-dark-0 text-light-900 dark:text-dark-900 shadow-sm focus:ring-primary-500 focus:border-primary-500 block w-full sm:text-sm border-light-300 rounded-md"
+                      id="code-html-{{ svg.key_composer }}">{% svg_preview svg theme 100 100 as html %}{{ html|prettify }}</textarea>
+            <button class="mt-3 px-4 py-2 shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none"
+                    type="button"
+                    onclick="document.getElementById('code-html-{{ svg.key_composer }}').select();document.execCommand('copy');">Copy</button>
+            <label class="mt-6 mb-3 block text-sm font-medium text-light-600 dark:text-dark-900">Django</label>
+            <textarea rows="5"
+                      class="bg-light-0 dark:bg-dark-0 text-light-900 dark:text-dark-900 shadow-sm focus:ring-primary-500 focus:border-primary-500 block w-full sm:text-sm border-light-300 rounded-md"
+                      id="code-django-{{ svg.key_composer }}">{% svg_django svg theme 100 100 variant=variant %}</textarea>
+            <button class="my-3 px-4 py-2 shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none"
+                    type="button"
+                    onclick="document.getElementById('code-django-{{ svg.key_composer }}').select();document.execCommand('copy');">Copy</button>
+        {% endfor %}
+    {% endwith %}
+{% endblock %}

@@ -5,9 +5,10 @@ from django.template.defaultfilters import slugify
 from django.shortcuts import render
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.http import Http404
+from django.db.models import Count
 
 from snowebsvg.settings import SVG_DEFAULT_VARIANT, SVG_DEFAULT_THEME
-from snowebsvg.models import Collection, GroupSvg, Svg
+from snowebsvg.models import Collection, Svg
 from app.forms import \
     ThemeDarkForm, \
     ThemeLightForm, \
@@ -18,54 +19,13 @@ from app.templatetags.settings import current_settings
 MAX_SVG_RESULTS = 275
 
 
-class CollectionListView(TemplateView):
-    template_name = 'app/collection_list.html'
-
-    def get(self, request, *args, **kwargs):
-        context = self.get_context_data(**kwargs)
-        page = request.GET.get('page', 1)
-        paginator = Paginator(Svg.objects.all().order_by('group__key'), MAX_SVG_RESULTS)
-        try:
-            search_results = paginator.page(page)
-        except PageNotAnInteger:
-            search_results = paginator.page(1)
-        except EmptyPage:
-            search_results = paginator.page(paginator.num_pages)
-        context['search_results'] = search_results
-        return self.render_to_response(context)
-
-    def get_context_data(self, **kwargs):
-        context = super(CollectionListView, self).get_context_data(**kwargs)
-        context['collections'] = Collection.objects.all()
-        return context
-
-
-class GroupSvgListView(ListView):
-    model = GroupSvg
-    template_name = 'app/groupsvg_list.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(GroupSvgListView, self).get_context_data(**kwargs)
-        context['collections'] = Collection.objects.all()
-        return context
-
-    def get_queryset(self):
-        collection_key = self.kwargs.get('collection_key')
-        if collection_key:
-            objects = self.model.objects.filter(collection__key=collection_key)
-            if objects.count() == 0:
-                raise Http404
-            return objects
-        return self.model.objects.all()
-
-
 class SvgListView(ListView):
     model = Svg
-    template_name = 'app/svg_list.html'
+    template_name = 'app/svg_detail.html'
 
     def get_context_data(self, **kwargs):
         context = super(SvgListView, self).get_context_data(**kwargs)
-        context['collections'] = Collection.objects.all()
+        context['tag_related'] = Collection.objects.all()
         return context
 
     def get_queryset(self):
@@ -84,24 +44,48 @@ class SvgListView(ListView):
         return self.model.objects.all()
 
 
-class SvgSearchView(ListView):
-    model = Svg
-    template_name = 'app/svg_search.html'
+class SvgSearchView(TemplateView):
+    template_name = 'app/svg_list.html'
+
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
+        page = request.GET.get('page', 1)
+        paginator = Paginator(context['qs'], MAX_SVG_RESULTS)
+        try:
+            search_results = paginator.page(page)
+        except PageNotAnInteger:
+            search_results = paginator.page(1)
+        except EmptyPage:
+            search_results = paginator.page(paginator.num_pages)
+        context['object_list'] = search_results
+        return self.render_to_response(context)
 
     def get_queryset(self):
         key = self.kwargs.get('key')
         if key:
-            return self.model.objects.filter(
+            qs = Svg.objects.filter(
                 Q(key__icontains=key) |
                 Q(group__key__icontains=key) |
                 Q(group__collection__key__icontains=key)
             )
-        return self.model.objects.all()
+        else:
+            qs = Svg.objects.all()
+        return qs.order_by('group__key')
 
     def get_context_data(self, **kwargs):
         context = super(SvgSearchView, self).get_context_data(**kwargs)
-        context['key'] = self.kwargs.get('key')
-        context['collections'] = Collection.objects.all()
+        key = self.kwargs.get('key')
+        qs = self.get_queryset()
+        if key:
+            context['key_title'] = key.replace('_', ' ').title()
+            # qs_group_key = qs.values('group__key').annotate(Count('group__key')).order_by('-group__key__count')
+            # context['tag_related'] = [Svg(key=group_key['group__key']) for group_key in qs_group_key]
+        else:
+            pass
+            # context['tag_related'] = Collection.objects.all()
+        context['tag_related'] = Collection.objects.all()
+        context['key'] = key
+        context['qs'] = qs
         return context
 
     def post(self, request, *args, **kwargs):
@@ -128,7 +112,7 @@ class SvgSettingsView(TemplateView):
         context = {}
         for form_key, form in self.forms:
             context[form_key] = form(current_settings(request))
-        context['collections'] = Collection.objects.all()
+        context['tag_related'] = Collection.objects.all()
         return context
 
     def get(self, request, *args, **kwargs):

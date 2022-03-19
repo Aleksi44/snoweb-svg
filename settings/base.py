@@ -105,8 +105,6 @@ LOGGING = {
     }
 }
 
-# INTERNATIONALIZATION
-
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True
@@ -115,11 +113,6 @@ LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
 )
 LANGUAGE_CODE = 'en'
-LANGUAGES = [
-    ('en', "English"),
-    ('fr', "French"),
-    ('de', "Deutsch"),
-]
 
 INTERNAL_IPS = (
     '127.0.0.1',
