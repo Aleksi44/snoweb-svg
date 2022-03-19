@@ -46,10 +46,7 @@ class Command(management.base.BaseCommand):
                 config('DATABASE_NAME', default='postgres'),
                 '5432'
             )
-            response = requests.get(snowebsvg_settings.BASE_URL_CSS + "core-%s.css" % snowebsvg_settings.VERSION)
-            if response.status_code == 200:
-                self.stdout.write("Collect static is already done")
-            else:
+            if settings.AWS_SECRET_ACCESS_KEY and settings.AWS_ACCESS_KEY_ID:
                 self.stdout.write("Step collect static")
                 management.call_command('collectstatic', interactive=False)
 
