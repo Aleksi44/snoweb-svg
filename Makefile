@@ -7,9 +7,6 @@ shell:
 mm:
 	python manage.py migrate
 
-superuser:
-	python manage.py createsuperuser
-
 loc:
 	python manage.py makemessages --ignore build -l en -l fr -l de && python manage.py compilemessages
 
@@ -37,3 +34,10 @@ coverage:
 	coverage report -m
 
 fresh: rm_db mm test svg_build coverage
+
+up:
+	sudo docker-compose up --force-recreate --build
+
+clear:
+	sudo docker context use default
+	sudo docker system prune -a

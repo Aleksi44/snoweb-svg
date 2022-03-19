@@ -1,0 +1,29 @@
+version: "3.3"
+
+services:
+  snowebsvg_memcached:
+    container_name: snowebsvg_memcached
+    image: memcached:latest
+    environment:
+      MEMCACHED_CACHE_SIZE: 1024
+
+  snowebsvg_db:
+    container_name: snowebsvg_db
+    image: postgres:13.1
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+  snowebsvg_app:
+    container_name: snowebsvg_app
+    build: ./
+    image: snowebsvg_app
+    depends_on:
+      - snowebsvg_db
+      - snowebsvg_memcached
+    links:
+      - snowebsvg_db
+      - snowebsvg_memcached
+    ports:
+      - "8001:8000"

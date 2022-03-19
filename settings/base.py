@@ -1,24 +1,6 @@
 import os
-import environ
 
-BASE_DIR = os.environ['BASE_DIR']
-env = environ.Env()
-environ.Env.read_env(BASE_DIR + '/.env')
-
-DEBUG = env.bool('DEBUG', default=True)
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-SECRET_KEY = env.str('SECRET_KEY', default='debug_key')
-
-ALLOWED_HOSTS = [
-                    '127.0.0.1',
-                    'localhost',
-                ] + env.list('DOMAINS', default=[])
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 INSTALLED_APPS = [
     'snowebsvg',
@@ -53,7 +35,6 @@ def constants_processor(request):
     from snowebsvg import settings
     return {
         'settings': settings,
-        'debug': DEBUG,
         'LANGUAGE_CODE': LANGUAGE_CODE
     }
 
@@ -68,7 +49,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'app.settings.constants_processor'
+                'settings.base.constants_processor'
             ],
             'loaders': [
                 'django.template.loaders.filesystem.Loader',
@@ -95,27 +76,6 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
-
-# AWS
-
-
-AWS_ACCESS_KEY_ID = env.str('AWS_ACCESS_KEY_ID', None)
-AWS_SECRET_ACCESS_KEY = env.str('AWS_SECRET_ACCESS_KEY', None)
-AWS_S3_REGION_NAME = env.str('AWS_S3_REGION_NAME', None)
-AWS_S3_CUSTOM_DOMAIN = env.str('AWS_S3_CUSTOM_DOMAIN', None)
-AWS_STORAGE_BUCKET_NAME = env.str('AWS_STORAGE_BUCKET_NAME', None)
-AWS_DISTRIBUTION_ID = env.str('AWS_DISTRIBUTION_ID', None)
-
-if AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY:
-    AWS_IS_GZIPPED = True
-    AWS_DEFAULT_ACL = 'public-read'
-    AWS_S3_FILE_OVERWRITE = False
-    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-    AWS_S3_OBJECT_PARAMETERS = {
-        'CacheControl': 'public, max-age=31536000',
-    }
-    STATIC_URL = 'https://%s/' % AWS_S3_CUSTOM_DOMAIN
-    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 # LOGGING
 
@@ -161,18 +121,6 @@ LANGUAGES = [
     ('de', "Deutsch"),
 ]
 
-DJANGO_CSS_INLINE_ENABLE = not DEBUG
-
-if DEBUG:
-    CACHES = {
-        'default': {
-            'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
-        }
-    }
-else:
-    CACHES = {
-        'default': {
-            'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-            'LOCATION': os.path.join(BASE_DIR, 'cache'),
-        }
-    }
+INTERNAL_IPS = (
+    '127.0.0.1',
+)

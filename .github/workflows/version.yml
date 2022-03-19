@@ -11,28 +11,46 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v1
 
-      - name: Make fresh
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          make fresh
-
-      - name: Coveralls
-        uses: AndreMiras/coveralls-python-action@develop
+      - name: Test Build Stack
+        run: docker-compose up -d --build
+      - name: Test OnStart
+        run: docker-compose exec -T snowebsvg_app python manage.py on_start --settings=settings.production
+      - name: Test Django
+        run: docker-compose exec -T snowebsvg_app python manage.py test --settings=settings.production
+      - name: ECR Configure credentials
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          parallel: true
-          flag-name: Unit Test
-
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-west-3
+      - name: ECR Login
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+      - name: ECR Build tag and push image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: snowebsvg
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
       - name: Deployment
         uses: appleboy/ssh-action@master
+        env:
+          SHA: ${{ github.sha }}
         with:
           host: www.snoweb-svg.com
           username: debian
           key: ${{ secrets.KEY }}
           port: 22
+          command_timeout: 200m
+          envs: SHA
           script: |
-            cd /home/debian/bin/ && ./snowebsvg_deploy.sh
-
+            $(aws ecr get-login --region eu-west-3 --profile=snowpark --no-include-email)
+            cd /home/debian/compose/snowebsvg
+            SHA=$SHA docker-compose up --force-recreate --build -d --remove-orphans
+            sudo docker exec snowebsvg_app python manage.py on_start --settings=settings.production
+            yes | sudo docker image prune -a
 
   coveralls_finish:
     needs: version

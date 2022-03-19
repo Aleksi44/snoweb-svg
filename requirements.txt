@@ -10,3 +10,9 @@ coverage==5.3.1
 wagtail==2.12
 django-css-inline==0.0.4
 beautifulsoup4
+sentry-sdk==1.5.8
+python-decouple==3.4
+django-anymail[sendgrid]
+gevent==21.1.2
+psycopg2-binary==2.8.6
+python-memcached==1.59
