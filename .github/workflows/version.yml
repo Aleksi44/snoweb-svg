@@ -46,7 +46,7 @@ jobs:
           command_timeout: 200m
           envs: SHA
           script: |
-            $(aws ecr get-login --region eu-west-3 --profile=snowpark --no-include-email)
+            sudo $(aws ecr get-login --region eu-west-3 --profile=snowpark --no-include-email)
             cd /home/debian/compose/snowebsvg
             sudo SHA=$SHA docker-compose up --force-recreate --build -d --remove-orphans
             sudo docker exec snowebsvg_app python manage.py on_start --settings=settings.production
