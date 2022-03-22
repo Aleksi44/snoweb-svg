@@ -32,3 +32,5 @@ Features
 Find all Svg at `www.snoweb-svg.com <https://www.snoweb-svg.com/en/>`_.
 
 Documentation available `here <https://snoweb-svg.readthedocs.io/en/latest/>`_.
+
+Made with ❤ by `Snoweb <https://www.snoweb.io/fr/>`_.
