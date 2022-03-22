@@ -71,7 +71,7 @@ You also need to configure :doc:`colors <html>` and :doc:`animations <html>` as 
 
 You can use ``svg_inline`` to include an SVG in your template with these parameters :
 
-- ``<svg_key>`` : choose at `Snoweb SVG <https://www.snoweb-svg.com/en/>`_.
+- ``<svg_key>`` : choose at `Snoweb SVG <https://www.snoweb-svg.com/svg/>`_.
 - ``<theme>`` : ``'light'`` or ``'dark'``, see more :doc:`here <../references/css>`.
 - ``<width>`` : ``100``, ``100%``, ``auto``, see more at `SVG width <https://developer.mozilla.org/fr/docs/Web/SVG/Attribute/width>`_.
 - ``<height>`` : ``100``, ``100%``, ``auto``, see more at `SVG height <https://developer.mozilla.org/fr/docs/Web/SVG/Attribute/height>`_.

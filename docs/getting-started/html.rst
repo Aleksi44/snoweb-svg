@@ -77,4 +77,4 @@ To use the latest version, replace <version> with |version|
 
 On your html page, add the SVG code.
 
-SVG collections available can be found `here <https://www.snoweb-svg.com/en/>`_.
+SVG collections available can be found `here <https://www.snoweb-svg.com/svg/>`_.
