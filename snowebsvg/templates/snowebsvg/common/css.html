@@ -1,0 +1,38 @@
+{% load settings %}
+<defs>
+    <style>
+        {% if theme == 'dark' %}
+            {% settings_by_key request 'theme_dark_primary' as primary %}
+            {% settings_by_key request 'theme_dark_secondary' as secondary %}
+            {% settings_by_key request 'theme_dark_tertiary' as tertiary %}
+        {% else %}
+            {% settings_by_key request 'theme_light_primary' as primary %}
+            {% settings_by_key request 'theme_light_secondary' as secondary %}
+            {% settings_by_key request 'theme_light_tertiary' as tertiary %}
+        {% endif %}
+
+        .svg-fill-primary {
+            fill: {{ primary }};
+        }
+
+        .svg-fill-secondary {
+            fill: {{ secondary }};
+        }
+
+        .svg-fill-tertiary {
+            fill: {{ tertiary }};
+        }
+
+        .svg-stroke-primary {
+            stroke: {{ primary }};
+        }
+
+        .svg-stroke-secondary {
+            stroke: {{ secondary }};
+        }
+
+        .svg-stroke-tertiary {
+            stroke: {{ tertiary }};
+        }
+    </style>
+</defs>

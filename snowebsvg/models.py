@@ -5,6 +5,7 @@ from django.template.loader import get_template
 from django.utils.functional import cached_property
 from django.template.loaders.app_directories import Loader
 from django.template.exceptions import TemplateDoesNotExist
+from django.urls import reverse
 from snowebsvg import settings
 
 
@@ -114,6 +115,7 @@ class GroupSvg(models.Model):
 
 if settings.WAGTAIL_INSTALL:
     from wagtail.search import index
+
 
     class AbstractSvg(index.Indexed, models.Model):
         class Meta:
@@ -255,7 +257,8 @@ class Svg(AbstractSvg):
         })
 
     def render_preview(self, theme=settings.SVG_DEFAULT_THEME, width=settings.SVG_DEFAULT_WIDTH,
-                       height=settings.SVG_DEFAULT_HEIGHT, variant=settings.SVG_DEFAULT_VARIANT, grid=False):
+                       height=settings.SVG_DEFAULT_HEIGHT, variant=settings.SVG_DEFAULT_VARIANT,
+                       grid=False, klass=None):
         """
         Method for rendering a preview of Svg to HTML
 
@@ -267,7 +270,7 @@ class Svg(AbstractSvg):
         :param height: Height, defaults :ref:`SVG_DEFAULT_HEIGHT <references_settings>`
         :param grid: Grid, add grid for debugging SVG, defaults to False`
         :param variant: Variant, defaults :ref:`SVG_DEFAULT_VARIANT <references_settings>`
-
+        :param klass: extra css class
         """
         context = {
             'self': self,
@@ -275,7 +278,8 @@ class Svg(AbstractSvg):
             'width': width,
             'height': height,
             'grid': grid,
-            'variant': variant
+            'variant': variant,
+            'klass': klass
         }
         try:
             svg_template = get_template("snowebsvg/collections/%s/%s/_preview.html" % (
@@ -286,3 +290,10 @@ class Svg(AbstractSvg):
         except TemplateDoesNotExist:
             svg_template = get_template("snowebsvg/common/preview.html")
             return svg_template.render(context)
+
+    def get_absolute_url(self):
+        return "https://www.snoweb-svg.com" + reverse('app:svg', kwargs={
+            'collection_key': self.group.collection.key,
+            'group_key': self.group.key,
+            'svg_key': self.key
+        })

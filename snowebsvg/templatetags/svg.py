@@ -24,13 +24,13 @@ def svg_inline(svg_target, theme=SVG_DEFAULT_THEME, width=SVG_DEFAULT_WIDTH, hei
 
 @register.simple_tag
 def svg_preview(svg_target, theme=SVG_DEFAULT_THEME, width=SVG_DEFAULT_WIDTH, height=SVG_DEFAULT_HEIGHT,
-                variant=SVG_DEFAULT_VARIANT, grid=False):
+                variant=SVG_DEFAULT_VARIANT, grid=False, klass=None):
     if isinstance(svg_target, Svg):
-        return svg_target.render_preview(theme, width, height, variant, grid)
+        return svg_target.render_preview(theme, width, height, variant, grid, klass)
     else:
         svg = Svg()
         svg_composed = svg.key_decomposer(svg_target)
-        return svg_composed.render_preview(theme, width, height, variant, grid)
+        return svg_composed.render_preview(theme, width, height, variant, grid, klass)
 
 
 @register.simple_tag

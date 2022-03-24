@@ -14,7 +14,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     "django.contrib.sitemaps",
     'storages',
-    'django_css_inline'
+    'django_css_inline',
+    'django_social_share',
 ]
 
 MIDDLEWARE = [

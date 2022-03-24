@@ -1,12 +1,13 @@
-from django.views.generic import ListView, TemplateView
+from django.views.generic import View, TemplateView
 from django.db.models import Q
 from django.shortcuts import redirect
 from django.template.defaultfilters import slugify
 from django.shortcuts import render
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.http import Http404
-from django.db.models import Count
-
+from django.http import HttpResponse
+from django.template.loader import get_template
+from wand.image import Image
 from snowebsvg.settings import SVG_DEFAULT_VARIANT, SVG_DEFAULT_THEME
 from snowebsvg.models import Collection, Svg
 from app.forms import \
@@ -17,31 +18,95 @@ from app.forms import \
 from app.templatetags.settings import current_settings
 
 MAX_SVG_RESULTS = 275
+FORMS = (
+    ('form_theme_dark', ThemeDarkForm),
+    ('form_theme_light', ThemeLightForm),
+    ('form_theme_dark_app', ThemeDarkAppForm),
+    ('form_theme_light_app', ThemeLightAppForm),
+)
 
 
-class SvgListView(ListView):
-    model = Svg
-    template_name = 'app/svg_detail.html'
+class SettingsMixin(TemplateView):
+    forms = (
+        ('form_theme_dark', ThemeDarkForm),
+        ('form_theme_light', ThemeLightForm),
+        ('form_theme_dark_app', ThemeDarkAppForm),
+        ('form_theme_light_app', ThemeLightAppForm),
+    )
 
-    def get_context_data(self, **kwargs):
-        context = super(SvgListView, self).get_context_data(**kwargs)
-        context['tag_related'] = Collection.objects.all()
+    def get_context_data(self, request, **kwargs):
+        context = {}
+        for form_key, form in self.forms:
+            context[form_key] = form(current_settings(request))
+        context['collections'] = Collection.objects.all()
         return context
+
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data(request, **kwargs)
+        return self.render_to_response(context)
+
+    def post(self, request, *args, **kwargs):
+        form_key = request.POST.get('form_key', None)
+        if form_key and any(tuple_form[0] == form_key for tuple_form in self.forms):
+            form = dict(self.forms)[form_key](request.POST)
+            if form.is_valid():
+                for key, value in form.clean().items():
+                    request.session['settings'][key] = value
+                request.session.modified = True
+            else:
+                context = self.get_context_data(request, **kwargs)
+                context[form_key] = form
+                return render(request, self.template_name, context)
+        elif request.POST.get('reset', None) == 'reset':
+            request.session['settings'] = {}
+            request.session['theme'] = SVG_DEFAULT_THEME
+            request.session['variant'] = SVG_DEFAULT_VARIANT
+        return render(
+            request,
+            self.template_name,
+            self.get_context_data(request, **kwargs)
+        )
+
+
+class SvgDetailMixin:
+    kwargs = None
 
     def get_queryset(self):
         group_key = self.kwargs.get('group_key')
         collection_key = self.kwargs.get('collection_key')
         svg_key = self.kwargs.get('svg_key')
         if group_key and collection_key and svg_key:
-            objects = self.model.objects.filter(
+            objects = Svg.objects.filter(
                 group__key=group_key,
                 group__collection__key=collection_key,
                 key=svg_key
             )
-            if objects.count() == 0:
-                raise Http404
-            return objects
-        return self.model.objects.all()
+            if objects.count() == 1:
+                return objects.first()
+        raise Http404
+
+
+class SvgDetailView(SettingsMixin, SvgDetailMixin):
+    template_name = 'app/svg_detail.html'
+
+    def get_context_data(self, request, **kwargs):
+        context = super().get_context_data(request, **kwargs)
+        context['collections'] = Collection.objects.all()
+        svg = self.get_queryset()
+        context['svg'] = svg
+        context['svg_related'] = Svg.objects.filter(group__key=svg.group.key).exclude(key=svg.key)
+        group_related = Svg.objects.filter(group__collection__key=svg.group.collection.key, key=svg.key).exclude(
+            group__collection__key=svg.group.collection.key,
+            group__key=svg.group.key,
+        )
+        if group_related.count() == 0:
+            context['group_related'] = Svg.objects.filter(group__collection__key=svg.group.collection.key).exclude(
+                group__collection__key=svg.group.collection.key,
+                group__key=svg.group.key,
+            )
+        else:
+            context['group_related'] = group_related
+        return context
 
 
 class SvgSearchView(TemplateView):
@@ -78,12 +143,7 @@ class SvgSearchView(TemplateView):
         qs = self.get_queryset()
         if key:
             context['key_title'] = key.replace('_', ' ').title()
-            # qs_group_key = qs.values('group__key').annotate(Count('group__key')).order_by('-group__key__count')
-            # context['tag_related'] = [Svg(key=group_key['group__key']) for group_key in qs_group_key]
-        else:
-            pass
-            # context['tag_related'] = Collection.objects.all()
-        context['tag_related'] = Collection.objects.all()
+        context['collections'] = Collection.objects.all()
         context['key'] = key
         context['qs'] = qs
         return context
@@ -99,44 +159,28 @@ class SvgSearchView(TemplateView):
         return redirect('app:svg_search')
 
 
-class SvgSettingsView(TemplateView):
-    template_name = 'app/svg_settings.html'
-    forms = (
-        ('form_theme_dark', ThemeDarkForm),
-        ('form_theme_light', ThemeLightForm),
-        ('form_theme_dark_app', ThemeDarkAppForm),
-        ('form_theme_light_app', ThemeLightAppForm),
-    )
-
-    def get_context_data(self, request, **kwargs):
-        context = {}
-        for form_key, form in self.forms:
-            context[form_key] = form(current_settings(request))
-        context['tag_related'] = Collection.objects.all()
-        return context
-
-    def get(self, request, *args, **kwargs):
-        context = self.get_context_data(request, **kwargs)
-        return self.render_to_response(context)
-
+class SvgDownloadView(View, SvgDetailMixin):
     def post(self, request, *args, **kwargs):
-        form_key = request.POST.get('form_key', None)
-        if form_key and any(tuple_form[0] == form_key for tuple_form in self.forms):
-            form = dict(self.forms)[form_key](request.POST)
-            if form.is_valid():
-                for key, value in form.clean().items():
-                    request.session['settings'][key] = value
-                request.session.modified = True
-            else:
-                context = self.get_context_data(request, **kwargs)
-                context[form_key] = form
-                return render(request, self.template_name, context)
-        elif request.POST.get('reset', None) == 'reset':
-            request.session['settings'] = {}
-            request.session['theme'] = SVG_DEFAULT_THEME
-            request.session['variant'] = SVG_DEFAULT_VARIANT
-        return render(
-            request,
-            self.template_name,
-            self.get_context_data(request, **kwargs)
-        )
+        svg = self.get_queryset()
+        template = get_template(svg.path_entry)
+        content_svg = template.render({
+            'self': svg,
+            'theme': request.session.get('theme', SVG_DEFAULT_THEME),
+            'width': 100,
+            'height': 100,
+            'grid': False,
+            'variant': request.session.get('variant', SVG_DEFAULT_VARIANT),
+            'css': True,
+            'request': request
+        })
+        extension = request.POST.get('extension', 'svg')
+        filename = svg.key_composer + '.' + extension
+        if extension == 'png':
+            with Image(blob=content_svg.encode(), format='svg', width=400, height=400, background="#FFF") as img:
+                response = HttpResponse(img.make_blob(format='png'), content_type='text/plain')
+                response['Content-Disposition'] = 'attachment; filename={0}'.format(filename)
+                return response
+        else:
+            response = HttpResponse(content_svg, content_type='text/plain')
+            response['Content-Disposition'] = 'attachment; filename={0}'.format(filename)
+            return response

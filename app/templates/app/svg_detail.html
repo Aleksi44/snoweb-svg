@@ -1,102 +1,667 @@
 {% extends 'app/base.html' %}
-{% load svg svg_utils beautifulsoup %}
+{% load svg svg_utils beautifulsoup social_share utils %}
 
-{% block title %}Free SVG{% if object_list.0 %} {{ object_list.0 }}{% endif %} |
+{% block title %}{{ svg.group.key|title_key }} ({{ svg.key|title_key }}) SVG free images, code and JPG, PNG files |
     {{ block.super }}{% endblock %}
-{% block description %}Free SVG{% if object_list.0 %} {{ object_list.0 }}{% endif %} animated and built in HTML and CSS.{% endblock %}
+{% block description %}Free SVG of {{ svg.group.key|title_key }} with optimized files, editable and downloadable.
+    Convert to JPG, PNG.
+    Change background or color lines. Copy the code for your website.{% endblock %}
+{% block og_title %}{{ svg.group.key|title_key }} ({{ svg.key|title_key }}) SVG free images, code and JPG, PNG
+    files{% endblock %}
+{% block og_desc %}Free SVG of {{ svg.group.key|title_key }} with optimized, editable and downloadable. Convert to JPG,
+    PNG. Change
+    background or color lines. Copy the code for your website.{% endblock %}
+{% block twitter_title %}{{ svg.group.key|title_key }} ({{ svg.key|title_key }}) SVG free images, code and JPG, PNG
+    files{% endblock %}
+{% block twitter_desc %}Free SVG of {{ svg.group.key|title_key }} with optimized, editable and downloadable. Convert to
+    JPG, PNG.
+    Change background or color lines. Copy the code for your website.{% endblock %}
 
-{% block header_title %}SVG {{ object_list.0.key_composer }}{% endblock %}
+{% block breadcrumbs %}
+    {{ block.super }}
+    <li>
+        <div class="flex items-center">
+            <svg class="flex-shrink-0 h-5 w-5 text-light-300 dark:text-dark-300" xmlns="http://www.w3.org/2000/svg"
+                 fill="currentColor"
+                 viewBox="0 0 20 20" aria-hidden="true">
+                <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z"/>
+            </svg>
+            <a href="{% url 'app:svg_search' svg.group.collection.key %}"
+               class="ml-4 text-sm font-medium text-light-500 text-dark-500 hover:text-light-700 dark:hover:text-dark-700"
+               aria-current="page">
+                {{ svg.group.collection.key|title_key }}
+            </a>
+        </div>
+    </li>
+    <li class="hidden sm:block">
+        <div class="flex items-center">
+            <svg class="flex-shrink-0 h-5 w-5 text-light-300 dark:text-dark-300" xmlns="http://www.w3.org/2000/svg"
+                 fill="currentColor"
+                 viewBox="0 0 20 20" aria-hidden="true">
+                <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z"/>
+            </svg>
+            <a href="{% url 'app:svg_search' svg.group.key %}"
+               class="ml-4 text-sm font-medium text-light-500 text-dark-500 hover:text-light-700 dark:hover:text-dark-700"
+               aria-current="page">
+                {{ svg.group.key|title_key }}
+            </a>
+        </div>
+    </li>
+    <li class="hidden sm:block">
+        <div class="flex items-center">
+            <svg class="flex-shrink-0 h-5 w-5 text-light-300 dark:text-dark-300" xmlns="http://www.w3.org/2000/svg"
+                 fill="currentColor"
+                 viewBox="0 0 20 20" aria-hidden="true">
+                <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z"/>
+            </svg>
+            <a href="{% url 'app:svg_search' svg.key %}"
+               class="ml-4 text-sm font-medium text-light-500 text-dark-500 hover:text-light-700 dark:hover:text-dark-700"
+               aria-current="page">
+                {{ svg.key|title_key }}
+            </a>
+        </div>
+    </li>
+{% endblock %}
 
 {% block body_content %}
     {% with theme=request.session.theme variant=request.session.variant %}
-        {% for svg in object_list %}
-            <h2 class="text-light-600 dark:text-dark-900 text-xs font-medium uppercase tracking-wide">Preview</h2>
-            <div class="svg-trigger mt-6 inline-block w-full preview">
-                {% svg_preview svg theme 200 200 variant True %}
+        <div class="relative pb-8">
+            <div class="px-4 pt-6 sm:px-6 lg:px-8">
+                <div class="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:gap-y-10">
+                    <div class="px-6">
+                        <div class="border border-light-200 dark:border-dark-200 w-full svg-trigger overflow-hidden mx-auto my-auto">
+                            {% svg_preview svg theme '100%' '100%' variant True klass="mx-auto" %}
+                        </div>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-4">
+                            {% for svg_rel in svg_related %}
+                                <a class="w-full border border-light-200 dark:border-dark-200 svg-trigger mx-auto my-auto"
+                                   href="{% url 'app:svg' svg_rel.group.collection.key svg_rel.group.key svg_rel.key %}">
+                                    {% svg_preview svg_rel theme 100 100 variant True klass="w-full" %}
+                                </a>
+                            {% endfor %}
+                        </div>
+                        <p class="my-6 text-xs text-light-400 dark:text-dark-400 italic text-center">
+                            Move your cursor over the SVG to see the hover animation.
+                        </p>
+                    </div>
+                    <div class="mx-auto mt-14 sm:mt-16 lg:max-w-none lg:mt-0">
+                        <div class="flex flex-col-reverse">
+                            <h1 class="text-2xl font-extrabold tracking-tight text-light-900 dark:text-dark-900 sm:text-3xl">
+                                SVG {{ svg.group.key|title_key }} ({{ svg.key|title_key }}), free download and editable
+                            </h1>
+                        </div>
+                        <div class="mt-4">
+                            <ul role="list" class="flex items-center flex-wrap space-x-6 mt-4">
+                                <li>
+                                    <span class="text-sm font-medium text-light-200 dark:text-dark-300">Share</span>
+                                </li>
+                                <li>
+                                    {% post_to_facebook_url svg as fbq %}
+                                    <a href="{{ fbq.facebook_url }}"
+                                       class="flex items-center justify-center w-5 h-5 text-light-200 dark:text-dark-300 hover:text-light-400 dark:hover:text-dark-400">
+                                        <span class="sr-only">Share on Facebook</span>
+                                        {% svg_inline 'brand-facebook-basic_2' width="100%" height="100%" klass='fill-current w-5 h-5' %}
+                                    </a>
+                                </li>
+                                <li>
+                                    {% post_to_twitter_url svg.key_composer svg as twt %}
+                                    <a href="{{ twt.tweet_url }}"
+                                       class="flex items-center justify-center w-5 h-5 text-light-200 dark:text-dark-300 hover:text-light-400 dark:hover:text-dark-400">
+                                        <span class="sr-only">Share on Twitter</span>
+                                        {% svg_inline 'brand-twitter-basic' width="100%" height="100%" klass='fill-current w-5 h-5' %}
+                                    </a>
+                                </li>
+                                <li>
+                                    {% post_to_whatsapp_url svg as wts %}
+                                    <a href="{{ wts.whatsapp_url }}"
+                                       class="flex items-center justify-center w-5 h-5 text-light-200 dark:text-dark-300 hover:text-light-400 dark:hover:text-dark-400">
+                                        <span class="sr-only">Share on Whatsapp</span>
+                                        {% svg_inline 'brand-whatsapp-basic_2' width="100%" height="100%" klass='fill-current w-5 h-5' %}
+                                    </a>
+                                </li>
+                                <li>
+                                    {% save_to_pinterest_url svg as ptt %}
+                                    <a href="{{ ptt.pinterest_url }}"
+                                       class="flex items-center justify-center w-5 h-5 text-light-200 dark:text-dark-300 hover:text-light-400 dark:hover:text-dark-400">
+                                        <span class="sr-only">Share on Pinterest</span>
+                                        {% svg_inline 'brand-pinterest-basic' width="100%" height="100%" klass='fill-current w-5 h-5' %}
+                                    </a>
+                                </li>
+                                <li>
+                                    {% post_to_reddit_url svg.key_composer svg as rdt %}
+                                    <a href="{{ rdt.reddit_url }}"
+                                       class="flex items-center justify-center w-5 h-5 text-light-200 dark:text-dark-300 hover:text-light-400 dark:hover:text-dark-400">
+                                        <span class="sr-only">Share on Reddit</span>
+                                        {% svg_inline 'brand-reddit-basic' width="100%" height="100%" klass='fill-current w-5 h-5' %}
+                                    </a>
+                                </li>
+                                <li>
+                                    {% post_to_telegram_url svg.key_composer svg as tlg %}
+                                    <a href="{{ tlg.telegram_url }}"
+                                       class="flex items-center justify-center w-5 h-5 text-light-200 dark:text-dark-300 hover:text-light-400 dark:hover:text-dark-400">
+                                        <span class="sr-only">Share on Telegram</span>
+                                        {% svg_inline 'brand-telegram-basic' width="100%" height="100%" klass='fill-current w-5 h-5' %}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <p class="text-light-500 dark:text-dark-500 mt-6">
+                            {{ svg.group.key|title_key }} SVG free, optimized and editable.
+                            Change the colors to fit your needs.
+                            Download the file for your document.
+                            Copy the code to integrate it on your website.
+                            {% if svg.key == 'small' %}
+                                This image is adapted to be displayed with the dimensions 20x20 (form component, text,
+                                buttons and others).
+                            {% elif svg.key == 'circle' or svg.key == 'rect' or svg.key == 'line' %}
+                                This image is adapted for page blocks such as a presentation website.
+                            {% else %}
+                                This image can be used for all purposes.
+                            {% endif %}
+                        </p>
+                        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2">
+                            <form method="POST"
+                                  action="{% url 'app:svg_download' svg.group.collection.key svg.group.key svg.key %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="extension" value="svg">
+                                <input class="cursor-pointer w-full bg-primary-600 rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-primary-700 focus:outline-none"
+                                       value="Download SVG file"
+                                       type="submit">
+                            </form>
+                            <form method="POST"
+                                  action="{% url 'app:svg_download' svg.group.collection.key svg.group.key svg.key %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="extension" value="png">
+                                <input class="cursor-pointer w-full bg-primary-50 rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-primary-700 hover:bg-primary-100 focus:outline-none"
+                                       value="Download PNG file"
+                                       type="submit">
+                            </form>
+                        </div>
+
+                        <div class="w-full max-w-2xl mx-auto mt-16 lg:max-w-none lg:mt-0 lg:col-span-4">
+                            <div x-data="{ activeTab: 1}">
+                                <div class="border-b border-light-200 dark:border-dark-200">
+                                    <div class="-mb-px flex space-x-8" aria-orientation="horizontal" role="tablist">
+                                        <!-- Selected: "border-indigo-600 text-indigo-600", Not Selected: "border-transparent text-gray-700 hover:text-gray-800 hover:border-gray-300" -->
+                                        <button id="tab-svg-settings"
+                                                @click="activeTab = 1"
+                                                :class="{ 'border-primary-600 text-primary-600': activeTab === 1,  'border-transparent text-light-700 dark:text-dark-700 hover:text-light-800 dark:hover:text-dark-800 hover:border-light-300 dark:hover:border-dark-300': activeTab != 1 }"
+                                                class="focus:outline-none border-transparent text-light-700 dark:text-dark-700 hover:text-light-800 dark:hover:text-dark-800 hover:border-light-300 dark:hover:border-dark-300 whitespace-nowrap py-6 border-b-2 font-medium text-sm"
+                                                aria-controls="tab-panel-svg-settings" role="tab" type="button">SVG
+                                        </button>
+                                        <button id="tab-website-settings"
+                                                @click="activeTab = 2"
+                                                :class="{ 'border-primary-600 text-primary-600': activeTab === 2,  'border-transparent text-light-700 dark:text-dark-700 hover:text-light-800 dark:hover:text-dark-800 hover:border-light-300 dark:hover:border-dark-300': activeTab != 2 }"
+                                                class="focus:outline-none border-transparent text-light-700 dark:text-dark-700 hover:text-light-800 dark:hover:text-dark-800 hover:border-light-300 dark:hover:border-dark-300 whitespace-nowrap py-6 border-b-2 font-medium text-sm"
+                                                aria-controls="tab-panel-website-settings" role="tab" type="button">
+                                            Website
+                                        </button>
+                                        <button id="tab-code-html"
+                                                @click="activeTab = 3"
+                                                :class="{ 'border-primary-600 text-primary-600': activeTab === 3,  'border-transparent text-light-700 dark:text-dark-700 hover:text-light-800 dark:hover:text-dark-800 hover:border-light-300 dark:hover:border-dark-300': activeTab != 3 }"
+                                                class="focus:outline-none border-transparent text-light-700 dark:text-dark-700 hover:text-light-800 dark:hover:text-dark-800 hover:border-light-300 dark:hover:border-dark-300 whitespace-nowrap py-6 border-b-2 font-medium text-sm"
+                                                aria-controls="tab-panel-code-html" role="tab" type="button">HTML
+                                        </button>
+                                        <button id="tab-code-django"
+                                                @click="activeTab = 4"
+                                                :class="{ 'border-primary-600 text-primary-600': activeTab === 4,  'border-transparent text-light-700 dark:text-dark-700 hover:text-light-800 dark:hover:text-dark-800 hover:border-light-300 dark:hover:border-dark-300': activeTab != 4 }"
+                                                class="focus:outline-none border-transparent text-light-700 dark:text-dark-700 hover:text-light-800 dark:hover:text-dark-800 hover:border-light-300 dark:hover:border-dark-300 whitespace-nowrap py-6 border-b-2 font-medium text-sm"
+                                                aria-controls="tab-panel-code-django" role="tab" type="button">Django
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div id="tab-panel-svg-settings"
+                                     aria-labelledby="tab-svg-settings"
+                                     role="tabpanel"
+                                     x-show="activeTab === 1"
+                                     tabindex="0">
+                                    <h2 class="sr-only">SVG Settings of {{ svg.group.key|title_key }}
+                                        ({{ svg.key|title_key }})</h2>
+                                    <div class="flex">
+
+                                        <div class="w-full mr-4">
+                                            <form class="svg-form" method="POST"
+                                                  action="{% url 'app:svg' svg.group.collection.key svg.group.key svg.key %}">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="form_key" value="form_theme_{{ theme }}">
+                                                {% if theme == 'light' %}{{ form_theme_light.as_p }}{% else %}
+                                                    {{ form_theme_dark.as_p }}{% endif %}
+                                                <input class="cursor-pointer px-4 py-2 shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none"
+                                                       type="submit" value="Apply">
+                                            </form>
+                                        </div>
+                                        <div class="w-full relative">
+                                            <div class="my-3">
+                                                <h3 class="text-sm font-medium text-primary-600">Theme</h3>
+                                                <form method="GET" class="flex svg-form">
+                                                    <input class="{% if theme == 'dark' %}text-white bg-primary-400 hover:bg-primary-500{% else %}text-light-700 bg-white hover:bg-light-50 border-light-300 border{% endif %} mr-3 cursor-pointer px-4 py-2 shadow-sm text-sm font-medium rounded-md focus:outline-none"
+                                                           type="submit" name="theme" value="dark">
+                                                    <input class="{% if theme == 'light' %}text-white bg-primary-400 hover:bg-primary-500{% else %}text-light-700 bg-white hover:bg-light-50 border-light-300 border{% endif %} mr-3 cursor-pointer px-4 py-2 shadow-sm text-sm font-medium rounded-md focus:outline-none"
+                                                           type="submit" name="theme" value="light">
+                                                </form>
+                                            </div>
+                                            <div class="my-3">
+                                                <h3 class="text-sm font-medium text-primary-600">Variant</h3>
+                                                <form method="GET" class="flex svg-form">
+                                                    <input class="{% if not variant %}text-white bg-primary-400 hover:bg-primary-500{% else %}text-light-700 bg-white hover:bg-light-50 border-light-300 border{% endif %} mr-3 cursor-pointer px-4 py-2 shadow-sm text-sm font-medium rounded-md focus:outline-none"
+                                                           type="submit"
+                                                           name="variant" value="none">
+                                                    <input class="{% if variant == 'glass' %}text-white bg-primary-400 hover:bg-primary-500{% else %}text-light-700 bg-white hover:bg-light-50 border-light-300 border{% endif %} mr-3 cursor-pointer px-4 py-2 shadow-sm text-sm font-medium rounded-md focus:outline-none"
+                                                           type="submit" name="variant" value="glass">
+                                                </form>
+                                            </div>
+                                            <div class="absolute bottom-0 right-0 px-4">
+                                                <form method="POST"
+                                                      action="{% url 'app:svg' svg.group.collection.key svg.group.key svg.key %}">
+                                                    {% csrf_token %}
+                                                    <input class="cursor-pointer text-light-700 px-4 py-2 shadow-sm text-sm font-medium rounded-md text-white focus:outline-none"
+                                                           type="submit"
+                                                           name="reset"
+                                                           value="reset">
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div id="tab-panel-website-settings"
+                                     class="text-sm text-light-500 dark:text-dark-500 relative"
+                                     aria-labelledby="tab-website-settings"
+                                     role="tabpanel"
+                                     x-show="activeTab === 2"
+                                     x-cloak
+                                     tabindex="0">
+                                    <h2 class="sr-only">Website Settings of {{ svg.group.key|title_key }}
+                                        ({{ svg.key|title_key }})</h2>
+
+                                    <form class="svg-form" method="POST"
+                                          action="{% url 'app:svg' svg.group.collection.key svg.group.key svg.key %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="form_key" value="form_theme_{{ theme }}_app">
+                                        {% if theme == 'light' %}{{ form_theme_light_app.as_p }}{% else %}
+                                            {{ form_theme_dark_app.as_p }}{% endif %}
+                                        <input class="cursor-pointer px-4 py-2 shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none"
+                                               type="submit" value="Save">
+                                    </form>
+                                    <form method="POST"
+                                          class="my-3"
+                                          action="{% url 'app:svg' svg.group.collection.key svg.group.key svg.key %}">
+                                        {% csrf_token %}
+                                        <input class="cursor-pointer text-light-700 dark:text-dark-700 px-4 py-2 shadow-sm text-sm font-medium rounded-md text-white focus:outline-none"
+                                               type="submit"
+                                               name="reset"
+                                               value="reset">
+                                    </form>
+                                </div>
+                                <div id="tab-panel-code-html"
+                                     aria-labelledby="tab-code-html"
+                                     role="tabpanel"
+                                     x-show="activeTab === 3"
+                                     x-cloak
+                                     tabindex="0">
+                                    <h2 class="sr-only">Code HTML of {{ svg.group.key|title_key }}
+                                        ({{ svg.key|title_key }})</h2>
+                                    <textarea rows="10"
+                                              class="mt-4 bg-light-0 dark:bg-dark-0 text-light-900 dark:text-dark-900 shadow-sm focus:ring-primary-500 focus:border-primary-500 block w-full sm:text-sm border-light-300 rounded-md"
+                                              id="code-html-{{ svg.key_composer }}">{% svg_preview svg theme 100 100 as html %}{{ html|prettify }}</textarea>
+                                    <button class="w-full mt-3 px-4 py-2 shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none"
+                                            type="button"
+                                            onclick="document.getElementById('code-html-{{ svg.key_composer }}').select();document.execCommand('copy');">
+                                        Copy
+                                    </button>
+                                </div>
+                                <div id="tab-panel-code-django"
+                                     aria-labelledby="tab-code-django"
+                                     role="tabpanel"
+                                     x-show="activeTab === 4"
+                                     x-cloak
+                                     tabindex="0">
+                                    <h2 class="sr-only">Code Django of {{ svg.group.key|title_key }}
+                                        ({{ svg.key|title_key }})</h2>
+                                    <textarea rows="5"
+                                              class="mt-4 bg-light-0 dark:bg-dark-0 text-light-900 dark:text-dark-900 shadow-sm focus:ring-primary-500 focus:border-primary-500 block w-full sm:text-sm border-light-300 rounded-md"
+                                              id="code-django-{{ svg.key_composer }}">{% svg_django svg theme 100 100 variant=variant %}</textarea>
+                                    <button class="w-full my-3 px-4 py-2 shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none"
+                                            type="button"
+                                            onclick="document.getElementById('code-django-{{ svg.key_composer }}').select();document.execCommand('copy');">
+                                        Copy
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-primary-700 relative py-16 sm:py-24">
+            <div class="relative mx-auto max-w-md px-4 text-center sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl">
+                <h2 class="text-2xl sm:text-3xl xl:text-4xl text-white mt-2 font-extrabold tracking-tight">
+                    Documentation of Snoweb SVG
+                </h2>
+                <p class="text-white mt-5 max-w-prose mx-auto text-xl">
+                    Find in detail all the technical information to integrate our SVG library.
+                </p>
+                <div class="mt-12">
+                    <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                        <div class="pt-6">
+                            <div class="flow-root h-full bg-white bg-opacity-30 rounded-lg px-6 pb-8 shadow-lg">
+                                <div class="-mt-6">
+                                    <div>
+                                        <span class="inline-flex items-center justify-center">
+                                            {% svg_inline 'heroicons-document_download-basic' width="100%" height="100%" klass='h-12 w-12 text-primary-200 stroke-current' %}
+                                        </span>
+                                    </div>
+                                    <h3 class="text-white mt-8 text-lg font-semibold tracking-tight">
+                                        HTML documentation
+                                    </h3>
+                                    <p class="text-white prose-primary mt-5 text-base">
+                                        It makes it easy to add and configure color themes in HTML of SVGs. The
+                                        documentation also explains how to use animations.
+                                    </p>
+                                    <a href="https://snoweb-svg.readthedocs.io/en/latest/getting-started/html.html"
+                                       class="bg-primary-700 mt-6 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 rounded-md shadow-sm text-base font-medium text-white">
+                                        See the documentation
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pt-6">
+                            <div class="flow-root h-full bg-white bg-opacity-30 rounded-lg px-6 pb-8 shadow-lg">
+                                <div class="-mt-6">
+                                    <div>
+                                        <span class="inline-flex items-center justify-center">
+                                            {% svg_inline 'heroicons-document_download-basic' width="100%" height="100%" klass='h-12 w-12 text-primary-200 stroke-current' %}
+                                        </span>
+                                    </div>
+                                    <h3 class="text-white mt-8 text-lg font-semibold tracking-tight">
+                                        Django documentation
+                                    </h3>
+                                    <p class="text-white prose-primary mt-5 text-base">
+                                        Guides you to install the library and read an SVG in it. And explains you how to
+                                        configure CSS files with Django.
+                                    </p>
+                                    <a href="https://snoweb-svg.readthedocs.io/en/latest/getting-started/django.html"
+                                       class="bg-primary-700 mt-6 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 rounded-md shadow-sm text-base font-medium text-white">
+                                        See the documentation
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pt-6">
+                            <div class="flow-root h-full bg-white bg-opacity-30 rounded-lg px-6 pb-8 shadow-lg">
+                                <div class="-mt-6">
+                                    <div>
+                                        <span class="inline-flex items-center justify-center">
+                                            {% svg_inline 'heroicons-document_download-basic' width="100%" height="100%" klass='h-12 w-12 text-primary-200 stroke-current' %}
+                                        </span>
+                                    </div>
+                                    <h3 class="text-white mt-8 text-lg font-semibold tracking-tight">
+                                        Wagtail documentation
+                                    </h3>
+                                    <p class="text-white prose-primary mt-5 text-base">
+                                        This documentation explains how to integrate the library in Wagtail. But also
+                                        how to add a SVG in a Wagtail block.
+                                    </p>
+                                    <a href="https://snoweb-svg.readthedocs.io/en/latest/getting-started/wagtail.html"
+                                       class="bg-primary-700 mt-6 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 rounded-md shadow-sm text-base font-medium text-white">
+                                        See the documentation
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-light-0 dark:bg-dark-0 relative">
+            <div class="relative mx-auto py-16 px-4 sm:px-6 lg:px-8">
+                <div class="mx-auto">
+                    <h2 class="text-2xl sm:text-3xl xl:text-4xl text-center font-extrabold text-light-900 dark:text-dark-900">
+                        SVG related of {{ svg.group.key|title_key }} ({{ svg.key|title_key }})
+                    </h2>
+                    <p class="text-center text-light-900 dark:text-dark-900 mt-5 text-xl">
+                        We found {{ group_related.count }} SVG that might interest you.
+                    </p>
+                    <div class="pt-6 flex flex-wrap justify-center">
+                        {% for svg in group_related %}
+                            <a class="svg-trigger preview mr-3 mb-3"
+                               href="{% url 'app:svg' svg.group.collection.key svg.group.key svg.key %}">
+                                {% svg_inline svg theme 60 60 variant=variant %}
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
 
-            <h2 class="mt-6 text-light-600 dark:text-dark-900 text-xs font-medium uppercase tracking-wide">Attributes</h2>
-
-            <dl class="sm:divide-y sm:divide-light-200">
-                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-                    <dt class="text-sm font-medium text-light-600 dark:text-dark-900">
-                        Collection
-                    </dt>
-                    <dd class="mt-1 text-sm text-light-600 sm:mt-0 sm:col-span-2">
-                        <a class="text-sm font-medium text-primary-500"
-                           href="{% url 'app:svg_search' svg.group.collection.key %}">{{ svg.group.collection.key }}</a>
-                    </dd>
-                </div>
-                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-                    <dt class="text-sm font-medium text-light-600 dark:text-dark-900">
-                        Group
-                    </dt>
-                    <dd class="mt-1 text-sm text-light-600 sm:mt-0 sm:col-span-2">
-                        <a class="text-sm font-medium text-primary-500"
-                           href="{% url 'app:svg_search' svg.group.key %}">{{ svg.group.key }}</a>
-                    </dd>
-                </div>
-                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-                    <dt class="text-sm font-medium text-light-600 dark:text-dark-900">
-                        Builder
-                    </dt>
-                    <dd class="mt-1 text-sm text-light-600 sm:mt-0 sm:col-span-2">
-                        <a class="text-sm font-medium text-primary-500"
-                           href="{% url 'app:svg_search' svg.key %}">{{ svg.key }}</a>
-                    </dd>
-                </div>
-                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-                    <dt class="text-sm font-medium text-light-600 dark:text-dark-900">
-                        Documentation
-                    </dt>
-                    <dd class="mt-1 text-sm text-light-600 sm:mt-0 sm:col-span-2">
-                        <ul>
-                            <li>
-                                <a class="text-sm font-medium text-primary-500"
-                                   href="https://snoweb-svg.readthedocs.io/en/latest/getting-started/html.html">
-                                    Getting started with HTML
+            <div class="bg-light-0 dark:bg-dark-0 relative">
+                <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8 relative">
+                    <div class="bg-primary-700 rounded-lg shadow-xl overflow-hidden lg:grid lg:grid-cols-2 lg:gap-4">
+                        <div class="pt-10 pb-12 px-6 sm:pt-16 sm:px-16 lg:py-16 lg:pr-0 xl:py-20 xl:px-20">
+                            <div class="lg:self-center">
+                                <h2 class="text-2xl sm:text-3xl xl:text-4xl text-white font-extrabold">
+                                    <span class="block">Do you need an</span>
+                                    <span class="block ">SVG collection?</span>
+                                </h2>
+                                <p class="text-primary-200 mt-4 text-lg leading-6">We create and add SVGs on demand in
+                                    the
+                                    library.</p>
+                                <a href="/contact/"
+                                   class="bg-white text-primary-600 hover:bg-primary-50 mt-8 rounded-md shadow px-6 py-3 inline-flex items-center text-base font-medium">
+                                    Order my SVG collection
                                 </a>
-                            </li>
-                            <li>
-                                <a class="text-sm font-medium text-primary-500"
-                                   href="https://snoweb-svg.readthedocs.io/en/latest/getting-started/django.html">
-                                    Getting started with Django
-                                </a>
-                            </li>
-                            <li>
-                                <a class="text-sm font-medium text-primary-500"
-                                   href="https://snoweb-svg.readthedocs.io/en/latest/getting-started/wagtail.html">
-                                    Getting started with Wagtail
-                                </a>
-                            </li>
-                        </ul>
-                    </dd>
+                            </div>
+                        </div>
+                        <div>
+                            <picture>
+                                <img src="https://static.snoweb.io/media/cta3.svg"
+                                     alt="Rocket light SVG"
+                                     class="transform translate-x-6 translate-y-6 rounded-md object-cover object-left-top sm:translate-x-16 lg:translate-y-20"
+                                     width="100%" height="100%">
+                            </picture>
+                        </div>
+                    </div>
                 </div>
-            </dl>
+            </div>
 
-            <h2 class="mt-6 text-light-600 dark:text-dark-900 text-xs font-medium uppercase tracking-wide">Code</h2>
-
-            {% comment %}<label class="mt-6 mb-3 block text-sm font-medium text-light-700">CSS</label>
-            <textarea rows="10"
-                      class="bg-light-0 dark:bg-dark-0 text-light-600 dark:text-dark-900 shadow-sm focus:ring-primary-500 focus:border-primary-500 block w-full sm:text-sm border-light-300 rounded-md"
-                      id="code-styles-{{ svg.key_composer }}">{% collection_styles svg.group.collection %}</textarea>
-            <button class="mt-3 px-4 py-2 shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none"
-                    type="button"
-                    onclick="document.getElementById('code-styles-{{ svg.key_composer }}').select();document.execCommand('copy');">Copy</button>{% endcomment %}
-            <label class="mt-6 mb-3 block text-sm font-medium text-light-600 dark:text-dark-900">HTML</label>
-            <textarea rows="10"
-                      class="bg-light-0 dark:bg-dark-0 text-light-900 dark:text-dark-900 shadow-sm focus:ring-primary-500 focus:border-primary-500 block w-full sm:text-sm border-light-300 rounded-md"
-                      id="code-html-{{ svg.key_composer }}">{% svg_preview svg theme 100 100 as html %}{{ html|prettify }}</textarea>
-            <button class="mt-3 px-4 py-2 shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none"
-                    type="button"
-                    onclick="document.getElementById('code-html-{{ svg.key_composer }}').select();document.execCommand('copy');">Copy</button>
-            <label class="mt-6 mb-3 block text-sm font-medium text-light-600 dark:text-dark-900">Django</label>
-            <textarea rows="5"
-                      class="bg-light-0 dark:bg-dark-0 text-light-900 dark:text-dark-900 shadow-sm focus:ring-primary-500 focus:border-primary-500 block w-full sm:text-sm border-light-300 rounded-md"
-                      id="code-django-{{ svg.key_composer }}">{% svg_django svg theme 100 100 variant=variant %}</textarea>
-            <button class="my-3 px-4 py-2 shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none"
-                    type="button"
-                    onclick="document.getElementById('code-django-{{ svg.key_composer }}').select();document.execCommand('copy');">Copy</button>
-        {% endfor %}
+            <div class="bg-light-0 dark:bg-dark-0 relative" x-data="{ openPanel: 0 }">
+                <div class="relative max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+                    <div class="max-w-3xl mx-auto">
+                        <h2 class="text-2xl sm:text-3xl xl:text-4xl text-center font-extrabold text-light-900 dark:text-dark-900">
+                            Frequently asked questions
+                        </h2>
+                        <dl class="mt-6 space-y-6 divide-y divide-light-200 dark:divide-dark-200">
+                            <div class="pt-6">
+                                <dt class="text-lg">
+                                    <button x-description="Expand/collapse question button"
+                                            @click="openPanel = (openPanel === 0 ? null : 0)"
+                                            x-bind:aria-expanded="openPanel === 0"
+                                            class="focus:outline-none text-left w-full flex justify-between items-start text-light-400 dark:text-dark-400"
+                                            aria-expanded="false">
+                                        <h3 class="font-medium text-light-900 dark:text-dark-900">
+                                            Can I use Snoweb SVG only with HTML and CSS?
+                                        </h3>
+                                        <span class="ml-6 h-7 flex items-center">
+                                        <svg x-description="Heroicon name: outline/chevron-down"
+                                             class="h-6 w-6 transform rotate-0" xmlns="http://www.w3.org/2000/svg"
+                                             x-state:on="Open" x-state:off="Closed"
+                                             x-bind:class="{ '-rotate-180': openPanel === 0, 'rotate-0': !(openPanel === 0) }"
+                                             fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                             aria-hidden="true">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                  d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </span>
+                                    </button>
+                                </dt>
+                                <dd x-show="openPanel === 0" class="mt-2 pr-12">
+                                    <p class="text-base text-light-500 dark:text-dark-500">
+                                        Yes, it is possible. You can
+                                        include on your HTML page the CSS system files and then copy the code of the
+                                        elements
+                                        from the SVG library.
+                                    </p>
+                                </dd>
+                            </div>
+                            <div class="pt-6">
+                                <dt class="text-lg">
+                                    <button x-description="Expand/collapse question button"
+                                            @click="openPanel = (openPanel === 1 ? null : 1)"
+                                            x-bind:aria-expanded="openPanel === 0"
+                                            class="focus:outline-none text-left w-full flex justify-between items-start text-light-400 dark:text-dark-400"
+                                            aria-expanded="false">
+                                        <h3 class="font-medium text-light-900 dark:text-dark-900">
+                                            Can I use Snoweb SVG with React?
+                                        </h3>
+                                        <span class="ml-6 h-7 flex items-center">
+                                        <svg x-description="Heroicon name: outline/chevron-down"
+                                             class="h-6 w-6 transform rotate-0" xmlns="http://www.w3.org/2000/svg"
+                                             x-state:on="Open" x-state:off="Closed"
+                                             x-bind:class="{ '-rotate-180': openPanel === 1, 'rotate-0': !(openPanel === 1) }"
+                                             fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                             aria-hidden="true">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                  d="M19 9l-7 7-7-7">
+                                            </path>
+                                        </svg>
+                                    </span>
+                                    </button>
+                                </dt>
+                                <dd x-show="openPanel === 1" class="mt-2 pr-12">
+                                    <p class="text-base text-light-500 dark:text-dark-500">
+                                        Yes, it is possible. It is the same procedure as HTML. You must then convert the
+                                        code of the elements of the library with for example React Svgr.
+                                    </p>
+                                </dd>
+                            </div>
+                            <div class="pt-6">
+                                <dt class="text-lg">
+                                    <button x-description="Expand/collapse question button"
+                                            @click="openPanel = (openPanel === 2 ? null : 2)"
+                                            x-bind:aria-expanded="openPanel === 0"
+                                            class="focus:outline-none text-left w-full flex justify-between items-start text-light-400 dark:text-dark-400"
+                                            aria-expanded="false">
+                                        <h3 class="font-medium text-light-900 dark:text-dark-900">
+                                            Can I add SVGs to the library?
+                                        </h3>
+                                        <span class="ml-6 h-7 flex items-center">
+                                        <svg x-description="Heroicon name: outline/chevron-down"
+                                             class="h-6 w-6 transform rotate-0" xmlns="http://www.w3.org/2000/svg"
+                                             x-state:on="Open" x-state:off="Closed"
+                                             x-bind:class="{ '-rotate-180': openPanel === 2, 'rotate-0': !(openPanel === 2) }"
+                                             fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                  d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </span>
+                                    </button>
+                                </dt>
+                                <dd x-show="openPanel === 2" class="mt-2 pr-12">
+                                    <p class="text-base text-light-500 dark:text-dark-500"> Yes, it is possible. Snoweb
+                                        SVG
+                                        is open source and all SVGs are present in the Github directory. A procedure is
+                                        explained in the documentation how to add a collection and an SVG. We can also
+                                        add
+                                        them
+                                        for you. </p>
+                                </dd>
+                            </div>
+                            <div class="pt-6">
+                                <dt class="text-lg">
+                                    <button x-description="Expand/collapse question button"
+                                            @click="openPanel = (openPanel === 3 ? null : 3)"
+                                            x-bind:aria-expanded="openPanel === 0"
+                                            class="focus:outline-none text-left w-full flex justify-between items-start text-light-400 dark:text-dark-400"
+                                            aria-expanded="false">
+                                        <h3 class="font-medium text-light-900 dark:text-dark-900">
+                                            Can I add a graphic style in the library that would apply to all SVGs?
+                                        </h3>
+                                        <span class="ml-6 h-7 flex items-center">
+                                        <svg x-description="Heroicon name: outline/chevron-down"
+                                             class="h-6 w-6 transform rotate-0" xmlns="http://www.w3.org/2000/svg"
+                                             x-state:on="Open" x-state:off="Closed"
+                                             x-bind:class="{ '-rotate-180': openPanel === 3, 'rotate-0': !(openPanel === 3) }"
+                                             fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                             aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                              d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </span>
+                                    </button>
+                                </dt>
+                                <dd x-show="openPanel === 3" class="mt-2 pr-12" style="display: none;"><p
+                                        class="text-base text-light-500 dark:text-dark-500"> Yes, it is possible. Snoweb
+                                    SVG
+                                    allows you to add graphic styles on all SVGs. There is currently only glassmorphism
+                                    available. You can create a ticket on Github to discuss the implementation. </p>
+                                </dd>
+                            </div>
+                            <div class="pt-6">
+                                <dt class="text-lg">
+                                    <button x-description="Expand/collapse question button"
+                                            @click="openPanel = (openPanel === 4 ? null : 4)"
+                                            x-bind:aria-expanded="openPanel === 0"
+                                            class="focus:outline-none text-left w-full flex justify-between items-start text-light-400 dark:text-dark-400"
+                                            aria-expanded="false">
+                                        <h3 class="font-medium text-light-900 dark:text-dark-900">
+                                            What is the weight of the CSS files to add on my page?
+                                        </h3>
+                                        <span class="ml-6 h-7 flex items-center">
+                                        <svg x-description="Heroicon name: outline/chevron-down"
+                                             class="h-6 w-6 transform rotate-0" xmlns="http://www.w3.org/2000/svg"
+                                             x-state:on="Open" x-state:off="Closed"
+                                             x-bind:class="{ '-rotate-180': openPanel === 4, 'rotate-0': !(openPanel === 4) }"
+                                             fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                             aria-hidden="true">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                  d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </span>
+                                    </button>
+                                </dt>
+                                <dd x-show="openPanel === 4" class="mt-2 pr-12">
+                                    <p class="text-base text-light-500 dark:text-dark-500">
+                                        Snoweb SVG has 2 CSS files. A
+                                        file for themes which is 169 bytes. Another file for animations which is 340
+                                        bytes.
+                                    </p>
+                                </dd>
+                            </div>
+                            <div class="pt-6">
+                                <dt class="text-lg">
+                                    <button x-description="Expand/collapse question button"
+                                            @click="openPanel = (openPanel === 5 ? null : 5)"
+                                            x-bind:aria-expanded="openPanel === 0"
+                                            class="focus:outline-none text-left w-full flex justify-between items-start text-light-400 dark:text-dark-400"
+                                            aria-expanded="false">
+                                        <h3 class="font-medium text-light-900 dark:text-dark-900">
+                                            How are SVG animations built?
+                                        </h3>
+                                        <span class="ml-6 h-7 flex items-center">
+                                        <svg x-description="Heroicon name: outline/chevron-down"
+                                             class="h-6 w-6 transform -rotate-180" xmlns="http://www.w3.org/2000/svg"
+                                             x-state:on="Open" x-state:off="Closed"
+                                             x-bind:class="{ '-rotate-180': openPanel === 5, 'rotate-0': !(openPanel === 5) }"
+                                             fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                             aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                              d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </span>
+                                    </button>
+                                </dt>
+                                <dd x-show="openPanel === 5" class="mt-2 pr-12">
+                                    <p class="text-base text-light-500 dark:text-dark-500">
+                                        The animations are developed with CSS. No javascript code is used.
+                                    </p>
+                                </dd>
+                            </div>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
     {% endwith %}
 {% endblock %}

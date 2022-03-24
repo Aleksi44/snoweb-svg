@@ -1,32 +1,60 @@
 {% extends 'app/base.html' %}
 {% load svg svg_utils %}
 
-{% block title %}{% if key_title %}{{ key_title }} SVG free images{% else %}Free SVG images{% endif %}, code and JPG, PNG files | {{ block.super }}{% endblock %}
-{% block description %}{% if key_title %}Free SVG of {{ key_title }}{% else %}Over +2000 SVG (free){% endif %} with optimized files, editable and downloadable. Convert to JPG, PNG. Change background or color lines. Copy the code for your website.{% endblock %}
-{% block og_title %}{% if key_title %}{{ key_title }} SVG free images{% else %}Free SVG images{% endif %}, code and JPG, PNG files{% endblock %}
-{% block og_desc %}{% if key_title %}Free SVG of {{ key_title }}{% else %}Over +2000 SVG (free){% endif %} with optimized, editable and downloadable. Convert to JPG, PNG. Change background or color lines. Copy the code for your website.{% endblock %}
-{% block twitter_title %}{% if key_title %}{{ key_title }} SVG free images{% else %}Free SVG images{% endif %}, code and JPG, PNG files{% endblock %}
-{% block twitter_desc %}{% if key_title %}Free SVG of {{ key_title }}{% else %}Over +2000 SVG (free){% endif %} with optimized, editable and downloadable. Convert to JPG, PNG. Change background or color lines. Copy the code for your website.{% endblock %}
+{% block title %}{% if key_title %}{{ key_title }} SVG free images{% else %}Free SVG images{% endif %}, code and JPG,
+    PNG files | {{ block.super }}{% endblock %}
+{% block description %}{% if key_title %}Free SVG of {{ key_title }}{% else %}Over +2000 SVG (free){% endif %} with
+    optimized files, editable and downloadable. Convert to JPG, PNG. Change background or color lines. Copy the code for
+    your website.{% endblock %}
+{% block og_title %}{% if key_title %}{{ key_title }} SVG free images{% else %}Free SVG images{% endif %}, code and JPG,
+    PNG files{% endblock %}
+{% block og_desc %}{% if key_title %}Free SVG of {{ key_title }}{% else %}Over +2000 SVG (free){% endif %} with
+    optimized, editable and downloadable. Convert to JPG, PNG. Change background or color lines. Copy the code for your
+    website.{% endblock %}
+{% block twitter_title %}{% if key_title %}{{ key_title }} SVG free images{% else %}Free SVG images{% endif %}, code and
+    JPG, PNG files{% endblock %}
+{% block twitter_desc %}{% if key_title %}Free SVG of {{ key_title }}{% else %}Over +2000 SVG (free){% endif %} with
+    optimized, editable and downloadable. Convert to JPG, PNG. Change background or color lines. Copy the code for your
+    website.{% endblock %}
 
-
-{% block header_title %}Search SVG{% if key %} by key {{ key }}{% endif %}{% endblock %}
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% if key %}
+        <li>
+            <div class="flex items-center">
+                <svg class="flex-shrink-0 h-5 w-5 text-light-300 dark:text-dark-300" xmlns="http://www.w3.org/2000/svg"
+                     fill="currentColor"
+                     viewBox="0 0 20 20" aria-hidden="true">
+                    <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z"/>
+                </svg>
+                <span class="ml-4 text-sm font-medium text-light-500 dark:text-dark-500">{{ key|title }}</span>
+            </div>
+        </li>
+    {% endif %}
+{% endblock %}
 
 {% block body_content %}
-    <div class="flex flex-wrap">
-        {% with theme=request.session.theme variant=request.session.variant %}
-            {% for svg in object_list %}
-                <a class="svg-trigger preview mr-3 mb-3"
-                   href="{% url 'app:svg' svg.group.collection.key svg.group.key svg.key %}">
-                    {% svg_inline svg theme 60 60 variant=variant %}
-                </a>
-            {% endfor %}
-        {% endwith %}
-    </div>
-    {% if object_list.paginator.num_pages > 1 %}
-        <div class="py-10">
+    <div class="px-4 pt-6 sm:px-6 lg:px-8">
+        <div class="flex flex-wrap">
+            {% with theme=request.session.theme variant=request.session.variant %}
+                {% for svg in object_list %}
+                    <a class="svg-trigger preview mr-3 mb-3"
+                       href="{% url 'app:svg' svg.group.collection.key svg.group.key svg.key %}">
+                        {% svg_inline svg theme 60 60 variant=variant %}
+                    </a>
+                {% endfor %}
+            {% endwith %}
+        </div>
+        {% if object_list.paginator.num_pages > 1 %}
+            {% if key %}
+                {% url 'app:svg_search' key as svg_pagination_url %}
+            {% else %}
+                {% url 'app:svg_search' as svg_pagination_url %}
+            {% endif %}
+            <div class="py-10">
             <nav class="relative z-0 rounded-md shadow-sm -space-x-px" aria-label="Pagination">
                 {% if object_list.has_previous %}
-                    <a href="{% url 'app:svg_search' %}?page={{ object_list.previous_page_number }}"
+                    <a href="{{ svg_pagination_url }}?page={{ object_list.previous_page_number }}"
                        class="relative inline-flex items-center px-6 py-2 rounded-l-md border border-light-300 dark:border-dark-300 text-sm font-medium text-light-500 dark:text-dark-500 hover:bg-light-50 dark:hover:bg-dark-50">
                         <
                     </a>
@@ -34,12 +62,12 @@
 
                 {% for i in object_list.paginator.page_range %}
                     {% if object_list.number == i %}
-                        <a href="{% url 'app:svg_search' %}?page={{ i }}"
+                        <a href="{{ svg_pagination_url }}?page={{ i }}"
                            class="bg-primary-700 text-white relative inline-flex items-center px-4 py-2 border border-light-300 dark:border-dark-300 text-sm font-medium hover:bg-light-50 dark:hover:bg-dark-50">
                             {{ i }}
                         </a>
                     {% elif i > object_list.number|add:'-5' and i < object_list.number|add:'5' %}
-                        <a href="{% url 'app:svg_search' %}?page={{ i }}"
+                        <a href="{{ svg_pagination_url }}?page={{ i }}"
                            class="relative inline-flex items-center px-4 py-2 border border-light-300 dark:border-dark-300 text-sm font-medium text-light-700 dark:text-dark-700 hover:bg-light-50 dark:hover:bg-dark-50">
                             {{ i }}
                         </a>
@@ -47,7 +75,7 @@
                 {% endfor %}
 
                 {% if object_list.has_next %}
-                    <a href="{% url 'app:svg_search' %}?page={{ object_list.next_page_number }}"
+                    <a href="{{ svg_pagination_url }}?page={{ object_list.next_page_number }}"
                        class="relative inline-flex items-center px-6 py-2 rounded-r-md border border-light-300 dark:border-dark-300 text-sm font-medium text-light-500 dark:text-dark-500 hover:bg-light-50 dark:hover:bg-dark-50">
                         >
                     </a>
@@ -56,5 +84,6 @@
         {% elif object_list.paginator.count == 0 %}
             <p>No results</p>
         {% endif %}
+        </div>
     </div>
 {% endblock %}

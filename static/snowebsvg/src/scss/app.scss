@@ -3,22 +3,20 @@
 @tailwind utilities;
 
 @layer components {
-  .svg-form {
-    p {
-      @apply my-3;
-    }
+  .svg-form p {
+    @apply my-3;
+  }
 
-    label {
-      @apply block text-sm font-medium text-primary-600;
-    }
+  .svg-form label {
+    @apply block text-sm font-medium text-primary-600;
+  }
 
-    input {
-      @apply max-w-lg block w-full shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:max-w-xs sm:text-sm border-light-300 rounded-md;
-    }
+  .svg-form input {
+    @apply max-w-lg block w-full shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:max-w-xs sm:text-sm border-light-300 rounded-md;
   }
 
   .helptext {
-    @apply mt-2 text-sm text-light-500 dark:text-dark-500;
+    @apply mt-2 text-sm text-light-200 dark:text-dark-300 italic;
   }
 
   .preview {
@@ -26,3 +24,4 @@
     @apply rounded-lg p-3 shadow-lg;
   }
 }
+
