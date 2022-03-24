@@ -44,12 +44,3 @@ class SvgSitemap(BaseSitemap):
             'group_key': item.group.key,
             'svg_key': item.key
         })
-
-
-class StaticSitemap(BaseSitemap):
-
-    def items(self):
-        return ['app:svg_settings']
-
-    def location(self, item):
-        return reverse(item)

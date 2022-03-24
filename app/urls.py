@@ -3,12 +3,11 @@ from django.urls import path
 from django.views.generic import RedirectView
 from django.urls import reverse_lazy
 from app.views import SvgDetailView, SvgSearchView, SvgDownloadView
-from app.sitemaps import StaticSitemap, CollectionSitemap, SvgSitemap, GroupSvgSitemap
+from app.sitemaps import CollectionSitemap, SvgSitemap, GroupSvgSitemap
 
 app_name = 'app'
 
 sitemaps = {
-    'static': StaticSitemap,
     'collection': CollectionSitemap,
     'group': GroupSvgSitemap,
     'svg': SvgSitemap,
