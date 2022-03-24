@@ -255,7 +255,7 @@
                                                 <form method="POST"
                                                       action="{% url 'app:svg' svg.group.collection.key svg.group.key svg.key %}">
                                                     {% csrf_token %}
-                                                    <input class="cursor-pointer text-light-700 px-4 py-2 shadow-sm text-sm font-medium rounded-md text-white focus:outline-none"
+                                                    <input class="cursor-pointer bg-light-100 dark:bg-dark-100 text-light-700 dark:text-dark-700 px-4 py-2 shadow-sm text-sm font-medium rounded-md text-white focus:outline-none"
                                                            type="submit"
                                                            name="reset"
                                                            value="reset">
@@ -288,7 +288,7 @@
                                           class="my-3"
                                           action="{% url 'app:svg' svg.group.collection.key svg.group.key svg.key %}">
                                         {% csrf_token %}
-                                        <input class="cursor-pointer text-light-700 dark:text-dark-700 px-4 py-2 shadow-sm text-sm font-medium rounded-md text-white focus:outline-none"
+                                        <input class="cursor-pointer bg-light-100 dark:bg-dark-100 text-light-700 dark:text-dark-700 px-4 py-2 shadow-sm text-sm font-medium rounded-md text-white focus:outline-none"
                                                type="submit"
                                                name="reset"
                                                value="reset">
