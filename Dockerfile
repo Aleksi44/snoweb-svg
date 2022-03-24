@@ -18,6 +18,7 @@ RUN apt-get install --yes --quiet --no-install-recommends \
     zlib1g-dev \
     libwebp-dev \
     gettext \
+    libmagickwand-dev \
     nodejs \
  && rm -rf /var/lib/apt/lists/*
 
