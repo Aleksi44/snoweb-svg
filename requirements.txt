@@ -18,3 +18,4 @@ psycopg2-binary==2.8.6
 python-memcached==1.59
 Wand==0.6.7
 django-social-share==2.2.1
+Jinja2<3.1
