@@ -1,21 +1,12 @@
 {% extends 'app/base.html' %}
 {% load svg svg_utils beautifulsoup social_share utils %}
 
-{% block title %}{{ svg.group.key|title_key }} ({{ svg.key|title_key }}) SVG free images, code and JPG, PNG files |
-    {{ block.super }}{% endblock %}
-{% block description %}Free SVG of {{ svg.group.key|title_key }} with optimized files, editable and downloadable.
-    Convert to JPG, PNG.
-    Change background or color lines. Copy the code for your website.{% endblock %}
-{% block og_title %}{{ svg.group.key|title_key }} ({{ svg.key|title_key }}) SVG free images, code and JPG, PNG
-    files{% endblock %}
-{% block og_desc %}Free SVG of {{ svg.group.key|title_key }} with optimized, editable and downloadable. Convert to JPG,
-    PNG. Change
-    background or color lines. Copy the code for your website.{% endblock %}
-{% block twitter_title %}{{ svg.group.key|title_key }} ({{ svg.key|title_key }}) SVG free images, code and JPG, PNG
-    files{% endblock %}
-{% block twitter_desc %}Free SVG of {{ svg.group.key|title_key }} with optimized, editable and downloadable. Convert to
-    JPG, PNG.
-    Change background or color lines. Copy the code for your website.{% endblock %}
+{% block title %}{{ svg.group.key|title_key }} ({{ svg.key|title_key }}) SVG free images, code and JPG, PNG files | {{ block.super }}{% endblock %}
+{% block description %}Free SVG of {{ svg.group.key|title_key }} with optimized files, editable and downloadable files. Convert to JPG, PNG. Change background or color lines. Copy the code for your website.{% endblock %}
+{% block og_title %}{{ svg.group.key|title_key }} ({{ svg.key|title_key }}) SVG free images, code and JPG, PNG files{% endblock %}
+{% block og_desc %}Free SVG of {{ svg.group.key|title_key }} with optimized, editable and downloadable. Convert to JPG, PNG. Change background or color lines. Copy the code for your website.{% endblock %}
+{% block twitter_title %}{{ svg.group.key|title_key }} ({{ svg.key|title_key }}) SVG free images, code and JPG, PNG files{% endblock %}
+{% block twitter_desc %}Free SVG of {{ svg.group.key|title_key }} with optimized, editable and downloadable. Convert to JPG, PNG. Change background or color lines. Copy the code for your website.{% endblock %}
 
 {% block og_image %}{% svg_preview_url svg %}{% endblock %}
 {% block twitter_image %}{% svg_preview_url svg %}{% endblock %}
