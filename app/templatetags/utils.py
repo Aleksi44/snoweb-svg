@@ -16,8 +16,8 @@ def title_key(title):
     return title.title()
 
 
-@register.simple_tag()
-def svg_preview_url(svg):
+@register.simple_tag(takes_context=True)
+def svg_preview_url(context, svg):
     image_preview_path = os.path.join('svg-preview', svg.key_composer + '.png')
     try:
         default_storage.open(image_preview_path, 'r')
@@ -31,6 +31,7 @@ def svg_preview_url(svg):
             'grid': False,
             'variant': SVG_DEFAULT_VARIANT,
             'css': True,
+            'request': context.request
         })
         with Image(blob=content_svg.encode(), format='svg', width=100, height=100, background='#FFF') as img:
             return settings.MEDIA_URL + default_storage.save(
