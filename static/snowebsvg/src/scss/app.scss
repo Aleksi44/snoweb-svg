@@ -19,9 +19,12 @@
     @apply mt-2 text-sm text-light-200 dark:text-dark-300 italic;
   }
 
-  .preview {
-    background: var(--background-body);
-    @apply rounded-lg p-3 shadow-lg;
+  .bg-app-light {
+    background: var(--app-theme-light-background-body);
+  }
+
+  .bg-app-dark {
+    background: var(--app-theme-dark-background-body);
   }
 }
 

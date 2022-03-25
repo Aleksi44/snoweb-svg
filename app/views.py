@@ -163,9 +163,10 @@ class SvgDownloadView(View, SvgDetailMixin):
     def post(self, request, *args, **kwargs):
         svg = self.get_queryset()
         template = get_template(svg.path_entry)
+        theme = request.session.get('theme', SVG_DEFAULT_THEME)
         content_svg = template.render({
             'self': svg,
-            'theme': request.session.get('theme', SVG_DEFAULT_THEME),
+            'theme': theme,
             'width': 100,
             'height': 100,
             'grid': False,
@@ -176,7 +177,9 @@ class SvgDownloadView(View, SvgDetailMixin):
         extension = request.POST.get('extension', 'svg')
         filename = svg.key_composer + '.' + extension
         if extension == 'png':
-            with Image(blob=content_svg.encode(), format='svg', width=400, height=400, background="#FFF") as img:
+            session_settings = request.session.get('settings', {})
+            background = session_settings.get(f'theme_{theme}_background_body', '#FFF')
+            with Image(blob=content_svg.encode(), format='svg', width=400, height=400, background=background) as img:
                 response = HttpResponse(img.make_blob(format='png'), content_type='text/plain')
                 response['Content-Disposition'] = 'attachment; filename={0}'.format(filename)
                 return response
