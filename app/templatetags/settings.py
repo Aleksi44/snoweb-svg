@@ -38,8 +38,11 @@ def current_settings(request):
 def settings_by_key(request, session_key):
     try:
         return request.session['settings'][session_key]
-    except KeyError:
-        variant = request.session.get('variant', settings.SVG_DEFAULT_VARIANT)
+    except (KeyError, AttributeError):
+        if request:
+            variant = request.session.get('variant', settings.SVG_DEFAULT_VARIANT)
+        else:
+            variant = settings.SVG_DEFAULT_VARIANT
         try:
             variant_conf = dict(variants_settings[variant])
         except KeyError:
