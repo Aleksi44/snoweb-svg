@@ -66,7 +66,7 @@
 {% block body_content %}
     {% with theme=request.session.theme variant=request.session.variant %}
         <div class="relative pb-8">
-            <div class="px-4 pt-6 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto px-4 pt-6 sm:px-6 lg:px-8">
                 <div class="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:gap-y-10">
                     <div class="px-6">
                         <div class="{% if theme == 'dark' %}bg-app-dark{% else %}bg-app-light{% endif %} border border-light-200 dark:border-dark-200 w-full svg-trigger overflow-hidden mx-auto my-auto">

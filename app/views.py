@@ -18,28 +18,34 @@ from app.forms import \
 from app.templatetags.settings import current_settings
 
 MAX_SVG_RESULTS = 275
-FORMS = (
-    ('form_theme_dark', ThemeDarkForm),
-    ('form_theme_light', ThemeLightForm),
-    ('form_theme_dark_app', ThemeDarkAppForm),
-    ('form_theme_light_app', ThemeLightAppForm),
-)
 
 
-class SettingsMixin(TemplateView):
+class SvgDetailMixin:
+    kwargs = None
+
+    def get_queryset(self):
+        group_key = self.kwargs.get('group_key')
+        collection_key = self.kwargs.get('collection_key')
+        svg_key = self.kwargs.get('svg_key')
+        if group_key and collection_key and svg_key:
+            objects = Svg.objects.filter(
+                group__key=group_key,
+                group__collection__key=collection_key,
+                key=svg_key
+            )
+            if objects.count() == 1:
+                return objects.first()
+        raise Http404
+
+
+class SvgDetailView(TemplateView, SvgDetailMixin):
+    template_name = 'app/svg_detail.html'
     forms = (
         ('form_theme_dark', ThemeDarkForm),
         ('form_theme_light', ThemeLightForm),
         ('form_theme_dark_app', ThemeDarkAppForm),
         ('form_theme_light_app', ThemeLightAppForm),
     )
-
-    def get_context_data(self, request, **kwargs):
-        context = {}
-        for form_key, form in self.forms:
-            context[form_key] = form(current_settings(request))
-        context['collections'] = Collection.objects.all()
-        return context
 
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(request, **kwargs)
@@ -67,35 +73,23 @@ class SettingsMixin(TemplateView):
             self.get_context_data(request, **kwargs)
         )
 
-
-class SvgDetailMixin:
-    kwargs = None
-
-    def get_queryset(self):
-        group_key = self.kwargs.get('group_key')
-        collection_key = self.kwargs.get('collection_key')
-        svg_key = self.kwargs.get('svg_key')
-        if group_key and collection_key and svg_key:
-            objects = Svg.objects.filter(
-                group__key=group_key,
-                group__collection__key=collection_key,
-                key=svg_key
-            )
-            if objects.count() == 1:
-                return objects.first()
-        raise Http404
-
-
-class SvgDetailView(SettingsMixin, SvgDetailMixin):
-    template_name = 'app/svg_detail.html'
-
     def get_context_data(self, request, **kwargs):
-        context = super().get_context_data(request, **kwargs)
+        context = {}
+        for form_key, form in self.forms:
+            context[form_key] = form(current_settings(request))
         context['collections'] = Collection.objects.all()
         svg = self.get_queryset()
         context['svg'] = svg
         context['svg_related'] = Svg.objects.filter(group__key=svg.group.key).exclude(key=svg.key)
-        group_related = Svg.objects.filter(group__collection__key=svg.group.collection.key, key=svg.key).exclude(
+
+        # Tmp monkey patch / replace with real search engine
+        clean_svg_key = svg.key.replace('_1', '')
+        clean_svg_key = clean_svg_key.replace('_2', '')
+        clean_svg_key = clean_svg_key.replace('_3', '')
+        clean_svg_key = clean_svg_key.replace('_4', '')
+
+        group_related = Svg.objects.filter(group__collection__key=svg.group.collection.key,
+                                           key__contains=clean_svg_key).exclude(
             group__collection__key=svg.group.collection.key,
             group__key=svg.group.key,
         )
@@ -183,7 +177,7 @@ class SvgDownloadView(View, SvgDetailMixin):
                 response = HttpResponse(img.make_blob(format='png'), content_type='text/plain')
                 response['Content-Disposition'] = 'attachment; filename={0}'.format(filename)
                 return response
-        else:
+        elif extension == 'svg':
             response = HttpResponse(content_svg, content_type='text/plain')
             response['Content-Disposition'] = 'attachment; filename={0}'.format(filename)
             return response

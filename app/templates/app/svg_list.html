@@ -35,7 +35,7 @@
 
 {% block body_content %}
     <div class="px-4 pt-6 sm:px-6 lg:px-8">
-        <div class="flex flex-wrap justify-center">
+        <div class="flex flex-wrap justify-center sm:justify-start">
             {% with theme=request.session.theme variant=request.session.variant %}
                 {% for svg in object_list %}
                     <a class="rounded-lg p-3 shadow-lg svg-trigger preview mr-3 mb-3 {% if theme == 'dark' %}bg-app-dark{% else %}bg-app-light{% endif %}"
