@@ -32,7 +32,7 @@ def svg_preview_url(svg):
             'variant': SVG_DEFAULT_VARIANT,
             'css': True,
         })
-        with Image(blob=content_svg.encode(), format='svg', width=1000, height=1000, background='#FFF') as img:
+        with Image(blob=content_svg.encode(), format='svg', width=100, height=100, background='#FFF') as img:
             return settings.MEDIA_URL + default_storage.save(
                 image_preview_path,
                 ContentFile(img.make_blob(format='png'))
