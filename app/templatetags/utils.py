@@ -5,6 +5,7 @@ from django.template.loader import get_template
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from wand.image import Image
+from wand.color import Color
 from snowebsvg.settings import SVG_DEFAULT_VARIANT, SVG_DEFAULT_THEME
 
 register = template.Library()
@@ -33,8 +34,11 @@ def svg_preview_url(context, svg):
             'css': True,
             'request': context.request
         })
-        with Image(blob=content_svg.encode(), format='svg', width=100, height=100, background='#FFF') as img:
-            return settings.MEDIA_URL + default_storage.save(
-                image_preview_path,
-                ContentFile(img.make_blob(format='png'))
-            )
+        with Image(blob=content_svg.encode(), format='svg') as img:
+            with Color('#FDFDFD') as white:
+                img.alpha = True
+                img.transparent_color(white, alpha=0.0, fuzz=int(65535 * 0.2))
+                return settings.MEDIA_URL + default_storage.save(
+                    image_preview_path,
+                    ContentFile(img.make_blob(format='png'))
+                )
