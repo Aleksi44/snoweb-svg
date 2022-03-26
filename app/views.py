@@ -172,13 +172,12 @@ class SvgDownloadView(View, SvgDetailMixin):
         extension = request.POST.get('extension', 'svg')
         filename = svg.key_composer + '.' + extension
         if extension == 'png':
-            with Image(blob=content_svg.encode(), format='svg') as img:
-                with Color('#FDFDFD') as white:
-                    img.alpha = True
-                    img.transparent_color(white, alpha=0.0, fuzz=int(65535 * 0.2))
-                    response = HttpResponse(img.make_blob(format='png'), content_type='text/plain')
-                    response['Content-Disposition'] = 'attachment; filename={0}'.format(filename)
-                    return response
+            session_settings = request.session.get('settings', {})
+            background = session_settings.get(f'theme_{theme}_background_body', '#FFF')
+            with Image(blob=content_svg.encode(), format='svg', background=background) as img:
+                response = HttpResponse(img.make_blob(format='png'), content_type='text/plain')
+                response['Content-Disposition'] = 'attachment; filename={0}'.format(filename)
+                return response
         elif extension == 'svg':
             response = HttpResponse(content_svg, content_type='text/plain')
             response['Content-Disposition'] = 'attachment; filename={0}'.format(filename)

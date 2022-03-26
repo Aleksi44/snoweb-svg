@@ -35,10 +35,7 @@ def svg_preview_url(context, svg):
             'request': context.request
         })
         with Image(blob=content_svg.encode(), format='svg') as img:
-            with Color('#FDFDFD') as white:
-                img.alpha = True
-                img.transparent_color(white, alpha=0.0, fuzz=int(65535 * 0.2))
-                return settings.MEDIA_URL + default_storage.save(
-                    image_preview_path,
-                    ContentFile(img.make_blob(format='png'))
-                )
+            return settings.MEDIA_URL + default_storage.save(
+                image_preview_path,
+                ContentFile(img.make_blob(format='png'))
+            )
