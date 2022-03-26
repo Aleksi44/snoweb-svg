@@ -18,7 +18,8 @@ RUN apt-get install --yes --quiet --no-install-recommends \
     zlib1g-dev \
     libwebp-dev \
     gettext \
-    python3-wand \
+    libmagickwand-dev \
+    inkscape \
     nodejs \
  && rm -rf /var/lib/apt/lists/*
 

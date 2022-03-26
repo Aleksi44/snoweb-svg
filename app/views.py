@@ -162,8 +162,8 @@ class SvgDownloadView(View, SvgDetailMixin):
         content_svg = template.render({
             'self': svg,
             'theme': theme,
-            'width': 100,
-            'height': 100,
+            'width': '100%',
+            'height': '100%',
             'grid': False,
             'variant': request.session.get('variant', SVG_DEFAULT_VARIANT),
             'css': True,

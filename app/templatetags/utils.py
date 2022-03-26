@@ -27,8 +27,8 @@ def svg_preview_url(context, svg):
         content_svg = get_template(svg.path_entry).render({
             'self': svg,
             'theme': SVG_DEFAULT_THEME,
-            'width': 100,
-            'height': 100,
+            'width': '100%',
+            'height': '100%',
             'grid': False,
             'variant': SVG_DEFAULT_VARIANT,
             'css': True,
