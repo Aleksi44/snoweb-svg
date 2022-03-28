@@ -22,7 +22,7 @@ Snoweb SVG is a database of SVGs optimized and animated built in HTML and CSS.
 Features
 ********
 
-- Svg code in html and css
+- SVG code in HTML and CSS
 - No javascript required
 - Themes with css class or prefers-color-scheme
 - Variant manager with Glassmorphism
@@ -31,6 +31,10 @@ Features
 
 Find all Svg at `www.snoweb-svg.com <https://www.snoweb-svg.com/svg/>`_.
 
-Documentation available `here <https://snoweb-svg.readthedocs.io/en/latest/>`_.
+Documentation :
+
+- `HTML <https://snoweb-svg.readthedocs.io/en/latest/getting-started/html.html>`_
+- `Django <https://snoweb-svg.readthedocs.io/en/latest/getting-started/django.html>`_
+- `Wagtail <https://snoweb-svg.readthedocs.io/en/latest/getting-started/wagtail.html>`_
 
 Made with ❤ by `Snoweb <https://www.snoweb.io/fr/>`_.
