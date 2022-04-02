@@ -33,4 +33,4 @@ RUN npm run build
 
 USER snowebsvg
 
-CMD set -xe; gunicorn wsgi:application -k gevent --workers 3 --timeout 30 --env DJANGO_SETTINGS_MODULE=settings.production --bind 0.0.0.0:8000
+CMD set -xe; gunicorn wsgi:application -k gevent --workers 3 --timeout 30 --env DJANGO_SETTINGS_MODULE=settings.production --bind 0.0.0.0:8000 --name=snowebsvg
