@@ -137,7 +137,7 @@ class Svg(AbstractSvg):
 
     if settings.WAGTAIL_INSTALL:
         search_fields = [
-            index.SearchField('key_composer', partial_match=True),
+            index.AutocompleteField('key_composer'),
         ]
 
     class Meta:
