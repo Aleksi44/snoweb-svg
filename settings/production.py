@@ -6,7 +6,7 @@ from decouple import config
 
 DEBUG = False
 
-ADMINS = [('Snoweb', 'hello@snoweb.io')]
+ADMINS = [('Snoweb', 'hello@snoweb.fr')]
 
 SECRET_KEY = config('SECRET_KEY', default='debug')
 
