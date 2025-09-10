@@ -29,8 +29,6 @@ Features
 - Possible integration with Django and Wagtail
 - Animation on hover
 
-Find all Svg at `www.snoweb-svg.com <https://www.snoweb-svg.com/svg/>`_.
-
 Documentation :
 
 - `HTML <https://snoweb-svg.readthedocs.io/en/latest/getting-started/html.html>`_
